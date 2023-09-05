@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+</head>
+<body>
+    <h2>Registro de Usuario</h2>
+    <form action="nuevo_usuario.php" method="post">
+        <label for="id_User">ID:</label>
+        <input type="text" name="id_User" required><br><br>
+        
+        <label for="nom_User">Nombre:</label>
+        <input type="text" name="nom_User" required><br><br>
+        
+        <label for="ap_PatU">Apellido Paterno:</label>
+        <input type="text" name="ap_PatU" required><br><br>
+        
+        <label for="ap_MatU">Apellido Materno:</label>
+        <input type="text" name="ap_MatU" required><br><br>
+
+        <label for="tipo_User">Tipo de Usuario:</label>
+        <input type="text" name="tipo_User" required><br><br>
+
+        <label for="correo_User">Correo Electrónico:</label>
+        <input type="email" name="correo_User" required><br><br>
+
+        <label for="tel_User">Teléfono:</label>
+        <input type="tel" name="tel_User" required><br><br>
+
+        <label for="act_User">Estado de Actividad:</label>
+        <input type="text" name="act_User" required><br><br>
+
+        <label for="pass_User">Contraseña:</label>
+        <input type="password" name="pass_User" required><br><br>
+        
+        <input type="submit" value="Registrar">
+    </form>
+</body>
+</html>
