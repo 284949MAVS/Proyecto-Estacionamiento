@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Crear nuevo cliente</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body style="font-family: Roboto; background-color: #004A98;">
+  <header  style="font-family: Roboto; background-color: #004A98;">
+    <!-- place navbar here -->
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
+      
+        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="inicio.html" >Inicio </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
+          </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="consultar_usuario.html">Consultar Usuario</a>
+          </li>  
+          <li class="nav-item">
+            <a class="nav-link active" href="nuevo_cliente.html">Nuevo Cliente <span class="visually-hidden">(current)</span></a>
+          </li>
+        </ul>
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
+        
+        </div>
+        <br>
+        
+    </nav>
+  </header>
+  <main>
+    <div  style="border-radius: 45px; border: 5px solid whitesmoke;; width: 700px; height: 970px; position: absolute; top: 85%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
+    <div style=" position: absolute; top: 3%; left: 40%; transform: translate(-30%, -50%);"><h1 style="font-size: bold;">Crear nuevo cliente<i class="fa-solid fa-circle-check" ></i></h1></div>
+    <form style="align-items: center; position: absolute; top: 53%; left: 50%; transform: translate(-50%, -50%);" action="" method="post">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">ID Cliente</label>
+        <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador unico de 6 digitos" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Nombre(s)</label>
+        <input type="text" name="nom_Cliente" class="form-control" id="exampleInputPassword1" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Apellido paterno</label>
+        <input type="text" name="ap_Patc" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Apellido materno</label>
+        <input type="text" name="ap_Matc" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">RFC</label>
+        <input type="text" name="rfc_Cliente" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Direccion</label>
+        <input type="text" name="dir_Cliente" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Telefono</label>
+        <input type="text" name="tel_Cliente" pattern="[4]{3}[0-9]{3}[0-9]{4}" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Correo</label>
+        <input type="email" name="correo_Cliente" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">ID Credencial</label>
+        <input type="text" name="id_Credencial" class="form-control" id="" style="width: 500px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="tipo_Cliente" class="form-label">Tipo de cliente</label>
+        <select id="tipo_Cliente" class="form-select" name="tipo_User">
+          <option value="1">Administrador</option>
+          <option value="2">Academico</option>
+          <option value="3">Alumno</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+   </div>
+  </main>
+  <footer>
+    <!-- place footer here -->
+    <p class="placeholder-glow">
+      <span class="placeholder col-12"></span>
+      </p>
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
