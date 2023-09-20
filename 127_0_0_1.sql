@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2023 a las 01:15:12
+-- Tiempo de generación: 20-09-2023 a las 20:53:10
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,8 +28,7 @@ USE `estacionamientobd`;
 --
 -- Estructura de tabla para la tabla `cajones`
 --
--- Creación: 03-09-2023 a las 21:13:03
--- Última actualización: 03-09-2023 a las 22:47:13
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `cajones` (
@@ -53,8 +52,7 @@ INSERT INTO `cajones` (`id_Cajon`, `cve_Est`, `num_Cajon`, `tipo_Cajon`, `disp_C
 --
 -- Estructura de tabla para la tabla `clientes`
 --
--- Creación: 03-09-2023 a las 21:26:50
--- Última actualización: 03-09-2023 a las 22:59:24
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `clientes` (
@@ -83,8 +81,7 @@ INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_
 --
 -- Estructura de tabla para la tabla `contratos`
 --
--- Creación: 03-09-2023 a las 23:01:53
--- Última actualización: 03-09-2023 a las 23:07:42
+-- Creación: 20-09-2023 a las 18:44:28
 --
 
 CREATE TABLE `contratos` (
@@ -93,6 +90,7 @@ CREATE TABLE `contratos` (
   `auto_Cliente` mediumtext NOT NULL,
   `pago_Cliente` int(11) NOT NULL,
   `fechacont_Cliente` date NOT NULL,
+  `vigCon_cliente` date NOT NULL,
   `tipo_Cajon` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,17 +98,16 @@ CREATE TABLE `contratos` (
 -- Volcado de datos para la tabla `contratos`
 --
 
-INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `tipo_Cajon`) VALUES
-(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', 1),
-(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', 2);
+INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `vigCon_cliente`, `tipo_Cajon`) VALUES
+(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', '0000-00-00', 1),
+(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', '0000-00-00', 2);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `cortes_caja`
 --
--- Creación: 03-09-2023 a las 21:06:18
--- Última actualización: 03-09-2023 a las 22:25:05
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `cortes_caja` (
@@ -137,8 +134,7 @@ INSERT INTO `cortes_caja` (`num_Corte`, `id_User`, `inicio_Turno`, `fin_Turno`, 
 --
 -- Estructura de tabla para la tabla `credencial`
 --
--- Creación: 03-09-2023 a las 22:50:53
--- Última actualización: 03-09-2023 a las 22:51:27
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `credencial` (
@@ -159,8 +155,7 @@ INSERT INTO `credencial` (`id_Credencial`, `nom_Cliente`) VALUES
 --
 -- Estructura de tabla para la tabla `estacionamientos`
 --
--- Creación: 03-09-2023 a las 22:34:00
--- Última actualización: 03-09-2023 a las 22:36:15
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `estacionamientos` (
@@ -183,8 +178,7 @@ INSERT INTO `estacionamientos` (`cve_Est`, `tipo_Est`, `ubi_Est`, `lugares_Tot`)
 --
 -- Estructura de tabla para la tabla `tickets`
 --
--- Creación: 03-09-2023 a las 22:29:42
--- Última actualización: 03-09-2023 a las 22:39:05
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tickets` (
@@ -211,8 +205,7 @@ INSERT INTO `tickets` (`id_Ticket`, `cve_Est`, `id_User`, `hr_Ent`, `hr_Sal`, `n
 --
 -- Estructura de tabla para la tabla `tipos_cajones`
 --
--- Creación: 03-09-2023 a las 22:39:57
--- Última actualización: 03-09-2023 a las 22:40:34
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_cajones` (
@@ -233,8 +226,7 @@ INSERT INTO `tipos_cajones` (`id_Cajon`, `desc_Cajon`) VALUES
 --
 -- Estructura de tabla para la tabla `tipos_clientes`
 --
--- Creación: 03-09-2023 a las 22:49:44
--- Última actualización: 03-09-2023 a las 22:50:13
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_clientes` (
@@ -256,8 +248,7 @@ INSERT INTO `tipos_clientes` (`tipo_Cliente`, `desc_Cliente`) VALUES
 --
 -- Estructura de tabla para la tabla `tipos_estacionamientos`
 --
--- Creación: 03-09-2023 a las 22:33:48
--- Última actualización: 03-09-2023 a las 22:25:59
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_estacionamientos` (
@@ -278,8 +269,7 @@ INSERT INTO `tipos_estacionamientos` (`tipo_Est`, `desc_Esta`) VALUES
 --
 -- Estructura de tabla para la tabla `tipo_pago`
 --
--- Creación: 03-09-2023 a las 23:05:34
--- Última actualización: 03-09-2023 a las 23:05:58
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipo_pago` (
@@ -300,8 +290,7 @@ INSERT INTO `tipo_pago` (`pago_Cliente`, `desc_PCliente`) VALUES
 --
 -- Estructura de tabla para la tabla `tipo_usuario`
 --
--- Creación: 03-09-2023 a las 22:00:24
--- Última actualización: 03-09-2023 a las 22:21:03
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipo_usuario` (
@@ -322,8 +311,7 @@ INSERT INTO `tipo_usuario` (`tipo_User`, `desc_User`) VALUES
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
--- Creación: 03-09-2023 a las 22:16:09
--- Última actualización: 03-09-2023 a las 22:23:24
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `usuarios` (
