@@ -23,9 +23,9 @@
             echo "<tr>";
             echo "<td>" . $row["id_User"] . "</td>";
             echo "<td>" . $row["nom_User"] . "</td>";
-            echo "<td>" . $row["ap_PatU"] . "</td>";
-            echo "<td>" . $row["ap_MatU"] . "</td>";
-            echo "<td>" . $row["tipo_User"] . "</td>";
+            echo "<td>" . $row["ap_paterno"] . "</td>";
+            echo "<td>" . $row["ap_materno"] . "</td>";
+            echo "<td>" . $row["tipo_usuario"] . "</td>";
             echo "<td>" . $row["correo_User"] . "</td>";
             echo "<td>" . $row["tel_User"] . "</td>";
             echo "<td>" . $row["act_User"] . "</td>";

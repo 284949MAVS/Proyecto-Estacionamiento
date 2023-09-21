@@ -3,7 +3,7 @@ require_once "conexion.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
-    $id = $_POST["id"];
+    $id = $_POST["id_User"];
     $nuevoCorreo = $_POST["nuevo_correo"];
     $nuevoTipo = $_POST["nuevo_tipo"];
 

@@ -12,8 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $mysqli->query($query);
 
     if ($result->num_rows == 1) {
-        $_SESSION["username"] = $username;
-        header("Location: Inicio.html");
+        $row = $result->fetch_assoc();
+        
+        $nombre = $row["nom_User"];
+        $_SESSION["nom_User"] = $nombre;
+        header("Location: Inicio.php");
         exit();
     } else {
         echo "Usuario o contraseña incorrectos.";
