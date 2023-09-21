@@ -22,24 +22,27 @@
       <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
         <ul class="navbar-nav me-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="inicio.html" aria-current="page">Inicio </a>
+            <a class="nav-link" href="inicio.php" aria-current="page">Inicio </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
         </li> 
           <li class="nav-item">
-            <a class="nav-link active" href="consultar_usuario.html">Consultar Usuario <span class="visually-hidden">(current)</span></a>
+            <a class="nav-link active" href="consultar_usuarios.php">Consultar Usuario <span class="visually-hidden">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="nuevo_cliente.html" aria-current="page">Nuevo Cliente </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
+          </li> 
         </ul>
         <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
       </div>
       <br>
     </nav>
   </header>
-  <main>
+<main>
   <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
     <div style="position: absolute; top: 10%; left: 40%; transform: translate(-30%, -50%);">
         <h1 style="font-size: bold;">Consultar Usuarios<i class="fa-solid fa-circle-check"></i></h1>
@@ -58,7 +61,7 @@
     </form>
 
     <!-- Contenedor de la tabla, inicialmente oculto -->
-    <div id="tablaContainer" style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 150px; position: absolute; top: 125%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
+    <div id="tablaContainer" style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 190px; position: absolute; top: 125%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -71,6 +74,7 @@
                     <th>Teléfono</th>
                     <th>Act.</th>
                     <th>Contraseña</th>
+                    
                 
                 </tr>
             </thead>
@@ -96,8 +100,8 @@
                         echo "<td>" . $row["tel_User"] . "</td>";
                         echo "<td>" . $row["act_User"] . "</td>";
                         echo "<td>" . $row["pass_User"] . "</td>";
-                     
-                        echo "</tr>";
+                        
+                        
                     } else {
                         echo "No se encontró el usuario en la base de datos.";
                     }
@@ -106,18 +110,26 @@
                 }
                 ?>
             </tbody>
+            
         </table>
         <div style="text-align: center;">
-            <button class="btn btn-primary">Editar</button>
+          <form action="modificar_usuario.php" method="GET">
+            <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
+            <button type="submit" class="btn btn-primary">Editar</button>
+          </form>
+        </div> 
+        
+        <div style="text-align: center;">
+          <form action="eliminar_usuario.php" method="GET">
+            <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
             <button class="btn btn-danger">Eliminar</button>
+          </form>
         </div>
+        
     </div>
-    
-    </div>
-</div>
+  </div>
 
-      
-  </main>
+</main>
   <footer>
     <!-- Coloca el pie de página aquí -->
     <p class="placeholder-glow">

@@ -1,5 +1,4 @@
 
-
 <!doctype html>
 <html lang="en">
 
@@ -34,13 +33,13 @@
                 <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" href="consultar_usuario.html">Consultar Usuario</a>
+              <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario</a>
           </li> 
           <li class="nav-item">
             <a class="nav-link" href="nuevo_cliente.html">Nuevo Cliente</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="consultar_cliente.html">Consultar Cliente</a>
+            <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
           </li> 
          
         </ul>
@@ -93,7 +92,7 @@
 
     <!-- place navbar here -->
   </header>
-  <div><img src="imagenes/logosuaslp.png " alt="" ><img src="imagenes/inge.jpeg" width="1038px" height="133px" alt="" style=""></div>
+  <div><img src="imagenes/logosuaslp.png " alt="" width="600" height="133"><img src="imagenes/inge.jpeg" width="905px" height="133px" alt="" style=""></div>
   <br>
   <main>
     <br>

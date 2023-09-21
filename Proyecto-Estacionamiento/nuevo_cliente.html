@@ -25,17 +25,20 @@
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="inicio.html" >Inicio </a>
+                <a class="nav-link" href="inicio.php" >Inicio </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
           </li> 
             <li class="nav-item">
-              <a class="nav-link" href="consultar_usuario.html">Consultar Usuario</a>
+              <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario</a>
           </li>  
           <li class="nav-item">
             <a class="nav-link active" href="nuevo_cliente.html">Nuevo Cliente <span class="visually-hidden">(current)</span></a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
+          </li> 
         </ul>
         <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
         
@@ -86,7 +89,7 @@
       </div>
       <div class="mb-3">
         <label for="tipo_Cliente" class="form-label">Tipo de cliente</label>
-        <select id="tipo_Cliente" class="form-select" name="tipo_User">
+        <select id="tipo_Cliente" class="form-select" name="tipo_Cliente">
           <option value="1">Administrador</option>
           <option value="2">Academico</option>
           <option value="3">Alumno</option>
@@ -96,6 +99,7 @@
       <button type="submit" class="btn btn-primary">Agregar</button>
     </form>
    </div>
+   
   </main>
   <footer>
     <!-- place footer here -->
