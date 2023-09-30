@@ -10,6 +10,33 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+       
+    .form{
+           
+            justify-content: center;
+            align-items: center;
+           /* padding-right: 20%;*/
+           margin-left: 100px;
+           margin-right: 100px;
+
+
+    }
+    .form-control{
+      margin-left: 100px;
+           margin-right: 100px;
+    }
+    .btn{
+      margin-left: 100px;
+           margin-right: 100px;
+    }
+  </style>
 </head>
 
 <body style="font-family: Roboto; background-color: #004A98;">
@@ -41,27 +68,35 @@
       </div>
       <br>
     </nav>
+
   </header>
 <main>
-  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
-    <div style="position: absolute; top: 10%; left: 40%; transform: translate(-30%, -50%);">
-        <h1 style="font-size: bold;">Consultar Usuarios<i class="fa-solid fa-circle-check"></i></h1>
+  <br>
+  <div class="container">
+  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; background-color: whitesmoke;" class="form">
+    <div style="">
+        <h1 style="font-size: bold; text-align:center">Consultar Usuarios <i class="fa-solid fa-magnifying-glass"></i></i></h1>
     </div>
-    <form style="align-items: center; position: absolute; top: 53%; left: 50%; transform: translate(-50%, -50%);" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">ID de usuario</label>
+    <br>
+    <form style="align-items: center;" style="justify-content: center;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="mb-3" style="text-align: center;">
+            <label for="exampleInputEmail1" class="form-label" style="text-align: center;">ID de usuario</label>
             <input type="text" name="id_User" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 500px;" oninput="verificarCamposCompletos()">
         </div>
-        <!-- Otros campos del formulario aquí -->
-
-        <div style="position: absolute; top: 105%; left: 50%; transform: translate(-50%, -50%);">
-        <button type="submit" class="btn btn-primary" id="consultarButton" name="consultar" disabled>Consultar</button>
+         
+        <br>
+        
+        <button type="submit" class="btn btn-primary" id="consultarButton"   name="consultar" disabled>Consultar</button>
+        
 
         </div>
     </form>
-
+    </div>
+   
+    <br>
     <!-- Contenedor de la tabla, inicialmente oculto -->
-    <div id="tablaContainer" style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 190px; position: absolute; top: 125%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
+    <div class="container">
+    <div id="tablaContainer"  style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 190px;  background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -117,18 +152,20 @@
             <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
             <button type="submit" class="btn btn-primary">Editar</button>
           </form>
-        </div> 
-        
-        <div style="text-align: center;">
+
           <form action="eliminar_usuario.php" method="GET">
             <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
             <button class="btn btn-danger">Eliminar</button>
           </form>
+        </div> 
+        
+        <div style="text-align: center;">
+          
         </div>
         
     </div>
   </div>
-
+  </div>
 </main>
   <footer>
     <!-- Coloca el pie de página aquí -->

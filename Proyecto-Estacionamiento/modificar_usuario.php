@@ -38,21 +38,95 @@ if (isset($_GET["id"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        
+    h1 {
+        color: white;
+    }
+
+    .listausers{
+      color: white;
+      padding-left: 100px;
+    }
+
+    .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           
+        }
+    .form{
+           
+            justify-content: center;
+            align-items: center;
+           /* padding-right: 20%;*/
+           margin-left: 100px;
+           margin-right: 100px;
+
+    }
+    .btn{ 
+     background-color: red;
+
+    }
+
+    </style>
 </head>
 <body>
-    <h2>Modificar Usuario</h2>
-    
+    <header>
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
+      <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+      
+      <div><h1 style="color:whithe">Modificar Usuario</h1></div>
+      <a  class="listausers" href="usuarios.php" style="color:whithe">Ir a la lista de usuarios</a>
+      <br>
+    </nav>
+    </header>
+    <br>
+   
+    <div class="container">
     <form action="modificar_usuario.php" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <label for="nuevo_correo">Correo:</label>
-        <input type="text" id="nuevo_correo" name="nuevo_correo" value="<?php echo $correoUsuario; ?>"><br>
+        <input type="text" id="nuevo_correo" name="nuevo_correo" style="border-radius: 45px;" value="<?php echo $correoUsuario; ?>"><br>
+        <br>
         
         <label for="nuevo_tipo">Tipo:</label>
-        <input type="text" id="nuevo_tipo" name="nuevo_tipo" value="<?php echo $tipoUsuario; ?>"><br>
-        
+        <input type="text" id="nuevo_tipo" name="nuevo_tipo"style="border-radius: 45px;" value="<?php echo $tipoUsuario; ?>"><br>
+        <br>
         <input type="submit" value="Guardar Cambios">
+        <button type="button" class="btn btn-primary" id="btnCancelar">Cancelar</button>
     </form>
 
-    <a href="usuarios.php">Volver a la lista de usuarios</a>
+    
+
+    </div>
+
+    <footer>
+    <!-- Coloca el pie de página aquí -->
+    
+  </footer>
+
+  <!-- Bibliotecas de JavaScript de Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  <script>
+    var btnCancelar = document.getElementById('btnCancelar');
+
+    // Agrega un evento de clic al botón
+      btnCancelar.addEventListener('click', function() {
+    // Redirige a la página consultarusuario.php
+    window.location.href = 'consultar_usuarios.php';
+   });
+  </script>
+
 </body>
+
 </html>
