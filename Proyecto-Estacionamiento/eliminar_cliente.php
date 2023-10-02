@@ -5,9 +5,10 @@ if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
    
-    $query = "UPDATE cliente SET act_Cliente = 0 WHERE id_User = $id";
+    $query = "UPDATE cliente SET act_Cli = 0 WHERE id_Cliente = $id";
     if ($mysqli->query($query)) {
         echo "Usuario eliminado correctamente.";
+        Header("Location: consultar_clientes.php");
     } else {
         echo "Error al eliminar el usuario: " . $mysqli->error;
     }
