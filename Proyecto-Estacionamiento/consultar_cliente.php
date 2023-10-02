@@ -111,43 +111,54 @@
                 </tr>
             </thead>
             <tbody>
-            <?php
+<?php
 
 require "conexion.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id_Cliente"];
     $query = "SELECT * FROM clientes WHERE id_Cliente = $id";
     $result = $mysqli->query($query);
+    $clientes = array(); 
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row["id_Cliente"] . "</td>";
-            echo "<td>" . $row["nom_Cliente"] . "</td>";
-            echo "<td>" . $row["ap_Patc"] . "</td>";
-            echo "<td>" . $row["ap_Matc"] . "</td>";
-            echo "<td>" . $row["rfc_Cliente"] . "</td>";
-            echo "<td>" . $row["dir_Cliente"] . "</td>";
-            echo "<td>" . $row["tel_Cliente"] . "</td>";
-            echo "<td>" . $row["correo_Cliente"] . "</td>";
-            echo "<td>" . $row["id_Credencial"] . "</td>";
-            echo "<td>" . $row["tipo_Cliente"] . "</td>";
-            echo "<tr>";
+            $clientes[] = $row; 
         }
     } else {
         echo "ID no válido";
     }
-}
-
-$mysqli->close();
+    
+    $mysqli->close();
+    
+    foreach ($clientes as $cliente) {
+      echo "<tr>";
+      echo "<td>" . $cliente["id_Cliente"] . "</td>";
+      echo "<td>" . $cliente["nom_Cliente"] . "</td>";
+      echo "<td>" . $cliente["ap_Patc"] . "</td>";
+      echo "<td>" . $cliente["ap_Matc"] . "</td>";
+      echo "<td>" . $cliente["rfc_Cliente"] . "</td>";
+      echo "<td>" . $cliente["dir_Cliente"] . "</td>";
+      echo "<td>" . $cliente["tel_Cliente"] . "</td>";
+      echo "<td>" . $cliente["correo_Cliente"] . "</td>";
+      echo "<td>" . $cliente["id_Credencial"] . "</td>";
+      echo "<td>" . $cliente["tipo_Cliente"] . "</td>";
+      echo "<td>";
+      echo '<form action="editar_cliente.php" method="GET">';
+      echo '<input type="hidden" name="id" value="' . $cliente['id_Cliente'] . '">';
+      echo '<button type="submit" class="btn btn-primary">Editar</button>';
+      echo '</form>';
+      echo '<form action="eliminar_cliente.php" method="GET">';
+      echo '<input type="hidden" name="id" value="' . $cliente['id_Cliente'] . '">';
+      echo '<button class="btn btn-danger">Eliminar</button>';
+      echo '</form>';
+      echo "</td>";
+      echo "</tr>";
+  }
+}  
 ?>
 
             </tbody>
         </table>
-        <div style="text-align: center;">
-            <button class="btn btn-primary">Editar</button>
-            <button class="btn btn-danger">Eliminar</button>
-        </div>
     </div>
     
     </div>

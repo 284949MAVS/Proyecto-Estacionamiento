@@ -2,30 +2,31 @@
 require_once "conexion.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $id=$_POST["id_Cliente_Editar"];
+  $nuevoCorreo = $_POST["correo_Cliente"];
+  $nuevoTipo = $_POST["tipoCliente"];
+  $nuevaDir = $_POST["dir_Cliente"];
+
+  $query = "UPDATE clientes SET correo_Cliente = '$nuevoCorreo', tipo_Cliente = '$nuevoTipo', dir_Cliente = '$nuevaDir' WHERE id_Cliente='$id'";
   
-    $id = $_POST["id"];
-    $nuevoCorreo = $_POST["nuevo_correo"];
-    $nuevoTipo = $_POST["nuevo_tipo"];
-
-    $query = "UPDATE usuarios SET correo_User = '$nuevoCorreo', tipo_User = '$nuevoTipo' WHERE id_User = $id";
-    if ($mysqli->query($query)) {
-        echo "Usuario actualizado correctamente.";
-        Header("Location: consultar_usuarios.php");
-    } else {
-        echo "Error al actualizar el usuario: " . $mysqli->error;
-    }
+  if ($mysqli->query($query)) {
+      echo "Usuario actualizado correctamente.";
+      Header("Location: consultar_cliente.php");
+  } else {
+      echo "Error al actualizar el usuario: " . $mysqli->error;
+  }
 }
-
-
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $query = "SELECT correo_User, tipo_User FROM usuarios WHERE id_User = $id";
+    $query = "SELECT correo_Cliente, tipo_Cliente, dir_Cliente FROM clientes WHERE id_Cliente = $id";
+    echo "Query: $query"; 
     $result = $mysqli->query($query);
-
+    
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $correoUsuario = $row["correo_User"];
-        $tipoUsuario = $row["tipo_User"];
+        $correoCliente = $row["correo_Cliente"];
+        $tipoCliente = $row["tipo_Cliente"];
+        $dirCliente = $row["dir_Cliente"];
     } else {
         echo "Usuario no encontrado.";
         exit;
@@ -33,12 +34,13 @@ if (isset($_GET["id"])) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modificar Usuario</title>
+    <title>Modificar Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -81,26 +83,30 @@ if (isset($_GET["id"])) {
     <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
       <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
       
-      <div><h1 style="color:whithe">Modificar Usuario</h1></div>
-      <a  class="listausers" href="usuarios.php" style="color:whithe">Ir a la lista de usuarios</a>
+      <div><h1 style="color:whithe">Modificar Cliente</h1></div>
+      <a  class="listausers" href="usuarios.php" style="color:whithe">Ir a la lista de clientes</a>
       <br>
     </nav>
     </header>
     <br>
    
     <div class="container">
-    <form action="modificar_usuario.php" method="post">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <label for="nuevo_correo">Correo:</label>
-        <input type="text" id="nuevo_correo" name="nuevo_correo" style="border-radius: 45px;" value="<?php echo $correoUsuario; ?>"><br>
-        <br>
-        
-        <label for="nuevo_tipo">Tipo:</label>
-        <input type="text" id="nuevo_tipo" name="nuevo_tipo"style="border-radius: 45px;" value="<?php echo $tipoUsuario; ?>"><br>
-        <br>
-        <input type="submit" value="Guardar Cambios">
-        <button type="button" class="btn btn-primary" id="btnCancelar">Cancelar</button>
-    </form>
+    <form action="" method="post">
+    <input type="hidden" name="id_Cliente_Editar" value="<?php echo $id; ?>">
+
+    <label for="nuevo_correo">Dirección:</label>
+    <input type="text" id="dir_Cliente" name="dir_Cliente" style="border-radius: 45px;" value="<?php echo $dirCliente; ?>"><br>
+    <br>
+    <label for="nuevo_correo">Correo:</label>
+    <input type="text" id="correo_Cliente" name="correo_Cliente" style="border-radius: 45px;" value="<?php echo $correoCliente; ?>"><br>
+    <br>
+    
+    <label for="nuevo_tipo">Tipo:</label>
+    <input type="text" id="tipoCliente" name="tipoCliente"style="border-radius: 45px;" value="<?php echo $tipoCliente; ?>"><br>
+    <br>
+    <input type="submit" value="Guardar Cambios">
+    <button type="button" action="consultar_cliente" class="btn btn-primary" id="btnCancelar">Cancelar</button>
+</form>
 
     
 
@@ -124,7 +130,7 @@ if (isset($_GET["id"])) {
     // Agrega un evento de clic al botón
       btnCancelar.addEventListener('click', function() {
     // Redirige a la página consultarusuario.php
-    window.location.href = 'consultar_usuarios.php';
+    window.location.href = 'editar_cliente.php';
    });
   </script>
 
