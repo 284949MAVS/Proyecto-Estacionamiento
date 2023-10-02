@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-09-2023 a las 20:53:10
+-- Tiempo de generación: 02-10-2023 a las 06:50:53
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -52,7 +52,8 @@ INSERT INTO `cajones` (`id_Cajon`, `cve_Est`, `num_Cajon`, `tipo_Cajon`, `disp_C
 --
 -- Estructura de tabla para la tabla `clientes`
 --
--- Creación: 07-09-2023 a las 20:14:34
+-- Creación: 02-10-2023 a las 04:49:15
+-- Última actualización: 02-10-2023 a las 04:49:15
 --
 
 CREATE TABLE `clientes` (
@@ -65,16 +66,17 @@ CREATE TABLE `clientes` (
   `tel_Cliente` int(11) NOT NULL,
   `correo_Cliente` mediumtext NOT NULL,
   `id_Credencial` int(11) NOT NULL,
-  `tipo_Cliente` int(11) NOT NULL
+  `tipo_Cliente` int(11) NOT NULL,
+  `act_Cli` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_Cliente`, `dir_Cliente`, `tel_Cliente`, `correo_Cliente`, `id_Credencial`, `tipo_Cliente`) VALUES
-(308588, 'José Eduardo', 'Sánchez', 'Sifuentes', 'SSJE010416FDA', 'Socrates #485, colonia progreso', 12345678, 'A308588@alumnos.uaslp.mx', 928375767, 1),
-(987654, 'Lola', 'Perez', 'Ortiz', 'OPLO123456WE3', 'Av. Manuel Nava #223', 12345679, 'lola@gmail.com', 928375769, 2);
+INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_Cliente`, `dir_Cliente`, `tel_Cliente`, `correo_Cliente`, `id_Credencial`, `tipo_Cliente`, `act_Cli`) VALUES
+(308588, 'José Eduardo', 'Sánchez', 'Sifuentes', 'SSJE010416FDA', 'Socrates #485, colonia progreso', 12345678, 'A308588@alumnos.uaslp.mx', 928375767, 1, 0),
+(987654, 'Lola', 'Perez', 'Ortiz', 'OPLO123456WE3', 'Av. Manuel Nava #223', 12345679, 'lola@gmail.com', 928375769, 2, 0);
 
 -- --------------------------------------------------------
 
