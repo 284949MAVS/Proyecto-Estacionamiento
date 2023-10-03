@@ -12,21 +12,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tel_Cliente = $_POST["tel_Cliente"];
     $correo_Cliente = $_POST["correo_Cliente"];
     $id_Credencial = $_POST["id_Credencial"];
-    if($_POST["tipo_Cliente"]=='Adminstrativo'){
+    if($_POST["tipo_Cliente"]=='Administrativo'){
         $tipo_Cliente=1;
     }else if($_POST["tipo_Cliente"]=='Academico'){
         $tipo_Cliente=2;
     }else{
         $tipo_Cliente=3;
     }
+    $act_Cli = $_POST["act_Cli"];
+
     
     require_once "conexion.php";
 
    
     $query = "INSERT INTO clientes (id_Cliente, nom_Cliente, ap_Patc, ap_Matc, rfc_Cliente, dir_Cliente, tel_Cliente,
-    correo_Cliente, id_Credencial, tipo_Cliente) 
+    correo_Cliente, id_Credencial, tipo_Cliente, act_Cli) 
     VALUES ('$id_Cliente', '$nom_Cliente', '$ap_Patc', '$ap_Matc', '$rfc_Cliente',
-     '$dir_Cliente', '$tel_Cliente', '$correo_Cliente', '$id_Credencial', '$tipo_Cliente')";
+     '$dir_Cliente', '$tel_Cliente', '$correo_Cliente', '$id_Credencial', '$tipo_Cliente', '$act_Cli')";
 
     if ($mysqli->query($query) === TRUE) {
         header("Location: inicio.php");

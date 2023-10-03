@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     VALUES ('$id_User', '$nom_User', '$ap_PatU', '$ap_MatU', '$tipo_User', '$correo_User', '$tel_User', '$act_User', '$pass_User')";
 
     if ($mysqli->query($query) === TRUE) {
-        header("Location: inicio.html");
+        header("Location: inicio.php");
         exit();
     } else {
         echo "Error al registrar el usuario: " . $mysqli->error;

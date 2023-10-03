@@ -2,15 +2,20 @@
 <html lang="en">
 
 <head>
-  <title>Consulta Clientes</title>
+  <title>Consulta Usuarios</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  
   <style>
     .container {
             display: flex;
@@ -20,8 +25,7 @@
         }
        
     .form{
-
-           text-align:center;
+           
             justify-content: center;
             align-items: center;
            /* padding-right: 20%;*/
@@ -57,47 +61,52 @@
             <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
         </li> 
           <li class="nav-item">
-            <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario <span class="visually-hidden">(current)</span></a>
+            <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="nuevo_cliente.html" aria-current="page">Nuevo Cliente </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="consultar_cliente.php">Consultar Cliente</a>
+            <a class="nav-link active" href="consultar_cliente.php">Consultar Cliente <span class="visually-hidden">(current)</span></a>
           </li> 
         </ul>
         <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
       </div>
       <br>
     </nav>
+
   </header>
-  <main>
-    <br>
-    <div class="container">
-  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px;  background-color: whitesmoke;">
-    <div style="text-align:center">
-        <h1 style="font-size: bold; text-align:center">Consultar Clientes <i class="fa-solid fa-magnifying-glass"></i></h1>
+<main>
+  <br>
+  <div class="container">
+  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; background-color: whitesmoke;" class="form">
+    <div style="">
+        <h1 style="font-size: bold; text-align:center">Consultar Clientes <i class="fa-solid fa-magnifying-glass"></i></i></h1>
     </div>
     <br>
-    <form style="align-items: center; " action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="mb-3" style="text-align:center">
-            <label for="exampleInputEmail1" class="form-label" style=" text-align:center">ID de usuario</label>
+    <form style="align-items: center;" style="justify-content: center;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="mb-3" style="text-align: center;">
+            <label for="exampleInputEmail1" class="form-label" style="text-align: center;">ID de cliente</label>
             <input type="text" name="id_Cliente" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 500px;" oninput="verificarCamposCompletos()">
         </div>
-        <!-- Otros campos del formulario aquí -->
-
-        <button type="submit" class="btn btn-primary" id="consultarButton" name="consultar" disabled>Consultar</button>
+         
+        <br>
+        
+        <button type="submit" class="btn btn-primary" id="consultarButton"   name="consultar" disabled>Consultar</button>
+        
 
         </div>
     </form>
     </div>
-    <div class="container">
+   
+    <br>
     <!-- Contenedor de la tabla, inicialmente oculto -->
-    <div id="tablaContainer" style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 150px; position: absolute; top: 125%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
+    <div class="container">
+    <div id="tablaContainer"  style="border-radius: 45px; border: 5px solid whitesmoke; width: 1160px; height: 300px;  background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Cve</th>
+                <th>Cve</th>
                     <th>Nombre</th>
                     <th>Ap. paterno</th>
                     <th>Ap. materno</th>
@@ -107,58 +116,78 @@
                     <th>Correo</th>
                     <th>Credencial</th>
                     <th>Tipo</th>
+                    <th>Actividad</th>
+                    
                 
                 </tr>
             </thead>
             <tbody>
-<?php
+            <?php
+                if (isset($_POST["consultar"])) {
+               require "conexion.php";
 
-require "conexion.php";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = $_POST["id_Cliente"];
-    $query = "SELECT * FROM clientes WHERE id_Cliente = $id";
-    $result = $mysqli->query($query);
-    $clientes = array(); 
+                    $id = $_POST["id_Cliente"];
+                    $query = "SELECT * FROM clientes WHERE id_Cliente = $id";
+                    $result = $mysqli->query($query);
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $clientes[] = $row; 
-        }
-    } else {
-        echo "ID no válido";
-    }
-    
-    $mysqli->close();
-    
-    foreach ($clientes as $cliente) {
-      echo "<tr>";
-      echo "<td>" . $cliente["id_Cliente"] . "</td>";
-      echo "<td>" . $cliente["nom_Cliente"] . "</td>";
-      echo "<td>" . $cliente["ap_Patc"] . "</td>";
-      echo "<td>" . $cliente["ap_Matc"] . "</td>";
-      echo "<td>" . $cliente["rfc_Cliente"] . "</td>";
-      echo "<td>" . $cliente["dir_Cliente"] . "</td>";
-      echo "<td>" . $cliente["tel_Cliente"] . "</td>";
-      echo "<td>" . $cliente["correo_Cliente"] . "</td>";
-      echo "<td>" . $cliente["id_Credencial"] . "</td>";
-      echo "<td>" . $cliente["tipo_Cliente"] . "</td>";
-      echo "<td>";
-      echo '<form action="editar_cliente.php" method="GET">';
-      echo '<input type="hidden" name="id" value="' . $cliente['id_Cliente'] . '">';
-      echo '<button type="submit" class="btn btn-primary">Editar</button>';
-      echo '</form>';
-      echo '<form action="eliminar_cliente.php" method="GET">';
-      echo '<input type="hidden" name="id" value="' . $cliente['id_Cliente'] . '">';
-      echo '<button class="btn btn-danger">Eliminar</button>';
-      echo '</form>';
-      echo "</td>";
-      echo "</tr>";
-  }
-}  
-?>
+                    if ($result->num_rows == 1) {
+                        $row = $result->fetch_assoc();
+
+                        echo "<tr>";
+                        echo "<td>" . $row["id_Cliente"] . "</td>";
+                        echo "<td>" . $row["nom_Cliente"] . "</td>";
+                        echo "<td>" . $row["ap_Patc"] . "</td>";
+                        echo "<td>" . $row["ap_Matc"] . "</td>";
+                        echo "<td>" . $row["rfc_Cliente"] . "</td>";
+                        echo "<td>" . $row["dir_Cliente"] . "</td>";
+                        echo "<td>" . $row["tel_Cliente"] . "</td>";
+                        echo "<td>" . $row["correo_Cliente"] . "</td>";
+                        echo "<td>" . $row["id_Credencial"] . "</td>";
+                        echo "<td>" . $row["tipo_Cliente"] . "</td>";
+                        echo "<td>" . $row["act_Cli"] . "</td>";
+                        
+                        
+                    } else {
+                        echo "No se encontró el usuario en la base de datos.";
+                    }
+
+                    $mysqli->close();
+                }
+                ?>
 
             </tbody>
         </table>
+        <div style="text-align: center;">
+          <form action="editar_cliente.php" method="GET">
+            <input type="hidden" name="id" value="<?php echo $row['id_Cliente']; ?>">
+            <button type="submit" class="btn btn-primary">Editar</button>
+          </form>
+
+          <form action="eliminar_cliente.php" method="GET">
+  <input type="hidden" name="id" value="<?php echo $row['id_Cliente']; ?>">
+  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Eliminar</button>
+</form>
+
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Estás seguro de que deseas eliminar este cliente?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <a href="eliminar_cliente.php?id=<?php echo $row['id_Cliente']; ?>" class="btn btn-danger">Eliminar</a>
+      </div>
+    </div>
+  </div>
+</div>
+        </div> 
     </div>
     
     </div>
@@ -199,3 +228,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </body>
 
 </html>
+
+
+
+
+
+
+

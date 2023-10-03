@@ -74,7 +74,7 @@
   <main>
     <br>
     <div class="container">
-    <div  style="border-radius: 45px; border: 5px solid whitesmoke;; width: 700px; height: 800px;  background-color: whitesmoke;">
+    <div  style="border-radius: 45px; border: 5px solid whitesmoke;; width: 700px; height: 880px;  background-color: whitesmoke;">
     <div style="text-align: center; "><h1 style="font-size: bold;">Crear nuevo cliente <i class="fa-solid fa-circle-check" ></i></h1></div>
     <form style="align-items: center; " action="nuevo_cliente.php" method="post" class="form">
       <div class="mb-3">
@@ -116,9 +116,16 @@
       <div class="mb-3">
         <label for="tipo_Cliente" class="form-label">Tipo de cliente</label>
         <select id="tipo_Cliente" class="form-select" name="tipo_Cliente">
-          <option value="1">Administrador</option>
-          <option value="2">Academico</option>
-          <option value="3">Alumno</option>
+          <option value="Administrativo">Administrativo</option>
+          <option value="Academico">Academico</option>
+          <option value="Alumno">Alumno</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="disabledSelect" class="form-label">Estado de actividad</label>
+        <select id="tipo_User" class="form-select" name="act_Cli" style="width: 500px;">
+          <option value="1">Activo</option>
+          <option value="0">Inactivo</option>
         </select>
       </div>
       

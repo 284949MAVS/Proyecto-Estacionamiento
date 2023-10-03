@@ -84,7 +84,7 @@ if (isset($_GET["id"])) {
       <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
       
       <div><h1 style="color:whithe">Modificar Cliente</h1></div>
-      <a  class="listausers" href="usuarios.php" style="color:whithe">Ir a la lista de clientes</a>
+      <a  class="listausers" href="consultar_cliente.php" style="color:whithe">Regresar a la consulta de clientes</a>
       <br>
     </nav>
     </header>
@@ -130,7 +130,7 @@ if (isset($_GET["id"])) {
     // Agrega un evento de clic al botón
       btnCancelar.addEventListener('click', function() {
     // Redirige a la página consultarusuario.php
-    window.location.href = 'editar_cliente.php';
+    window.location.href = 'consultar_cliente.php';
    });
   </script>
 
