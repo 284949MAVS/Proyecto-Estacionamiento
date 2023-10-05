@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-10-2023 a las 06:50:53
+-- Tiempo de generación: 05-10-2023 a las 07:35:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -53,7 +53,6 @@ INSERT INTO `cajones` (`id_Cajon`, `cve_Est`, `num_Cajon`, `tipo_Cajon`, `disp_C
 -- Estructura de tabla para la tabla `clientes`
 --
 -- Creación: 02-10-2023 a las 04:49:15
--- Última actualización: 02-10-2023 a las 04:49:15
 --
 
 CREATE TABLE `clientes` (
@@ -83,7 +82,8 @@ INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_
 --
 -- Estructura de tabla para la tabla `contratos`
 --
--- Creación: 20-09-2023 a las 18:44:28
+-- Creación: 05-10-2023 a las 05:26:19
+-- Última actualización: 05-10-2023 a las 05:26:19
 --
 
 CREATE TABLE `contratos` (
@@ -93,6 +93,7 @@ CREATE TABLE `contratos` (
   `pago_Cliente` int(11) NOT NULL,
   `fechacont_Cliente` date NOT NULL,
   `vigCon_cliente` date NOT NULL,
+  `cont_Act` tinyint(1) NOT NULL,
   `tipo_Cajon` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,9 +101,9 @@ CREATE TABLE `contratos` (
 -- Volcado de datos para la tabla `contratos`
 --
 
-INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `vigCon_cliente`, `tipo_Cajon`) VALUES
-(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', '0000-00-00', 1),
-(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', '0000-00-00', 2);
+INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `vigCon_cliente`, `cont_Act`, `tipo_Cajon`) VALUES
+(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', '0000-00-00', 0, 1),
+(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', '0000-00-00', 0, 2);
 
 -- --------------------------------------------------------
 
