@@ -39,40 +39,57 @@ height: 30px;
 
 <body style="font-family: Roboto; background-color: #004A98;">
 <header style="font-family: Roboto; background-color: #004A98;">
-<!-- place navbar here -->
-<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
-
-<a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
-<button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-<div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-<ul class="navbar-nav me-auto mt-2 mt-lg-0">
-<li class="nav-item">
-<a class="nav-link" href="inicio.php" aria-current="page">Inicio</a>
-</li>
-<li class="nav-item">
-<a class="nav-link active" href="nuevo_usuario.html">Nuevo usuario <span class="visually-hidden">(current)</span> </a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="consultar_usuarios.php">Consultar Usuario</a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="nuevo_cliente.html">Nuevo Cliente </a>
-</li>
-<li class="nav-item">
-<a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
-</li>
-</ul>
-<a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
-
-</div>
-<br>
-
-</nav>
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
+                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cliente
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
+                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
+              </ul>
+            </li>
+    
+    
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Contrato
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
+              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
+            </ul>
+          </li>
+    
+        </ul>
+        </div>
+       
+        <br>
+    </nav>
+    
 </header>
 </main>
 <br>
-<div class="container" style="">
+<div class="container" >
 <div style="border-radius: 45px; border: 5px solid whitesmoke;width: 700px; height: 800px; background-color: whitesmoke;">
 <div style="text-align: center; "><h2 style="font-size: bold;">Crear nuevo usuario <i class="fa-solid fa-circle-check" ></i></h2></div>
 <form class="form" action="nuevo_usuario.php" method="post" style="justify-content: center;">

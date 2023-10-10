@@ -19,111 +19,119 @@
 <body>
   <header>
     
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
-      
-        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-                <a class="nav-link active" href="#" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
-            </li> 
-            <li class="nav-item">
-              <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario</a>
-          </li> 
-          <li class="nav-item">
-            <a class="nav-link" href="nuevo_cliente.html">Nuevo Cliente</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
-          </li> 
-          <li class="nav-item dropdown">
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+    <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+    <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" href="#" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+        </li>
+
+        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Contrato
+            Usuario
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="crear_contrato.php">Crear contrato</a></li>
-             <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
-           
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="eliminar_contrato.php">Eliminar contrato</a></li>
+            <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
+            <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
           </ul>
         </li>
-        </ul>
-        <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
-          require "conexion.php";
-          echo $_SESSION['nom_User'];
-        ?>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Cliente
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
+            <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
+          </ul>
+        </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Contrato
         </a>
-        
-        </div>
-       
-        <br>
-    </nav>
-    <style>
-            #logout-modal {
-          display: none;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.7);
-          z-index: 999;
-      }
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
+          <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
+        </ul>
+      </li>
 
-      .modal-content {
-          background: #fff;
-          width: 300px;
-          margin: 100px auto;
-          padding: 20px;
-          text-align: center;
-          border-radius: 5px;
-      }
-
-      #confirm-logout, #cancel-logout {
-          margin-top: 10px;
-          padding: 5px 10px;
-          cursor: pointer;
-      }
-   
-      #fecha {
-          font-size: 24px;
-          font-weight: bold;
-          color: #333;
-          text-align: center;
-      }
-
-
-      #hora {
-          font-size: 18px;
-          color: #666; 
-          text-align:center;
-      }
-      #fecha,
-    #hora {
-        display: inline; 
-    }
-
-    #fecha::after {
-        content: "\00a0"; 
-    }
-
-    </style>
-    <div id="logout-modal" class="modal">
-    <div class="modal-content">
-        <h2>Cerrar Sesión</h2>
-        <p>¿Estás seguro de que deseas cerrar sesión?</p>
-        <button id="confirm-logout">Cerrar Sesión</button>
-        <button id="cancel-logout">Cancelar</button>
+    </ul>
+    <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
+      require "conexion.php";
+      echo $_SESSION['nom_User'];
+    ?>
+    </a>
+    
     </div>
+   
+    <br>
+</nav>
+<style>
+        #logout-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+  }
+
+  .modal-content {
+      background: #fff;
+      width: 300px;
+      margin: 100px auto;
+      padding: 20px;
+      text-align: center;
+      border-radius: 5px;
+  }
+
+  #confirm-logout, #cancel-logout {
+      margin-top: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+  }
+
+  #fecha {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+  }
+
+
+  #hora {
+      font-size: 18px;
+      color: #666; 
+      text-align:center;
+  }
+  #fecha,
+#hora {
+    display: inline; 
+}
+
+#fecha::after {
+    content: "\00a0"; 
+}
+
+</style>
+<div id="logout-modal" class="modal">
+<div class="modal-content">
+    <h2>Cerrar Sesión</h2>
+    <p>¿Estás seguro de que deseas cerrar sesión?</p>
+    <button id="confirm-logout">Cerrar Sesión</button>
+    <button id="cancel-logout">Cancelar</button>
+</div>
 </div>
 
-    <!-- place navbar here -->
+<!-- place navbar here -->
+
   </header>
   <div>
     <img src="imagenes/logosuaslp.png" alt="" width="600" height="120">

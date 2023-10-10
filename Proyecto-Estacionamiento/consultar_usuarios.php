@@ -6,6 +6,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   
@@ -47,39 +52,63 @@
 
 <body style="font-family: Roboto; background-color: #004A98;">
   <header style="font-family: Roboto; background-color: #004A98;">
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
-      <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
-      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-          aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-      <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="inicio.php" aria-current="page">Inicio </a>
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
+                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cliente
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
+                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
+              </ul>
+            </li>
+    
+    
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Contrato
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
+              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
-        </li> 
-          <li class="nav-item">
-            <a class="nav-link active" href="consultar_usuarios.php">Consultar Usuario <span class="visually-hidden">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="nuevo_cliente.html" aria-current="page">Nuevo Cliente </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
-          </li> 
+    
         </ul>
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
-      </div>
-      <br>
+        
+        
+        </div>
+       
+        <br>
     </nav>
+    
+    
+    <!-- place navbar here -->
 
   </header>
 <main>
   <br>
   <div class="container">
-  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; background-color: whitesmoke;" class="form">
+  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 300px; background-color: whitesmoke;" class="form">
     <div style="">
         <h1 style="font-size: bold; text-align:center">Consultar Usuarios <i class="fa-solid fa-magnifying-glass"></i></i></h1>
     </div>
@@ -102,7 +131,7 @@
     <br>
     <!-- Contenedor de la tabla, inicialmente oculto -->
     <div class="container">
-    <div id="tablaContainer"  style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 190px;  background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
+    <div id="tablaContainer"  style="border-radius: 45px; border: 5px solid whitesmoke; width: 1000px; height: 210px;  background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -154,10 +183,38 @@
             
         </table>
         <div style="text-align: center;">
-          <form action="modificar_usuario.php" method="GET">
-            <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
-            <button type="submit" class="btn btn-primary">Editar</button>
-          </form>
+  
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo $row['id_User']; ?>">Editar Usuario</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop<?php echo $row['id_User']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Usuario</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                    <form action="modificar_usuario.php" method="post">
+                                      <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                      <label for="nuevo_correo">Correo:</label>
+                                      <input type="text" id="nuevo_correo" name="nuevo_correo" style="border-radius: 45px;" value="<?php echo $row["correo_User"] ?>"><br>
+                                      <br>
+                                      
+                                      <label for="nuevo_tipo">Tipo:</label>
+                                      <input type="text" id="nuevo_tipo" name="nuevo_tipo"style="border-radius: 45px;" value="<?php echo $row["tipo_User"] ?>"><br>
+                                      <br>
+                                      <input type="submit" class="btn btn-primary"value="Guardar Cambios">
+                                    </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
           <form action="eliminar_usuario.php" method="GET">
             <input type="hidden" name="id" value="<?php echo $row['id_User']; ?>">
@@ -192,13 +249,7 @@
   </div>
   </div>
 </main>
-  <footer>
-    <!-- Coloca el pie de página aquí -->
-    <p class="placeholder-glow">
-      <span class="placeholder col-12"></span>
-    </p>
-  </footer>
-
+  
   <!-- Bibliotecas de JavaScript de Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -221,6 +272,8 @@
     });
 </script>
 
+
 </body>
 
 </html>
+

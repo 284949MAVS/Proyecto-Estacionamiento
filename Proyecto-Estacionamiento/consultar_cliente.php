@@ -47,39 +47,63 @@
 
 <body style="font-family: Roboto; background-color: #004A98;">
   <header style="font-family: Roboto; background-color: #004A98;">
-    <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
-      <a class="navbar-brand" href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
-      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-          aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-      <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="inicio.php" aria-current="page">Inicio </a>
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
+                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cliente
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
+                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
+              </ul>
+            </li>
+    
+    
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Contrato
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
+              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
-        </li> 
-          <li class="nav-item">
-            <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="nuevo_cliente.html" aria-current="page">Nuevo Cliente </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="consultar_cliente.php">Consultar Cliente <span class="visually-hidden">(current)</span></a>
-          </li> 
+    
         </ul>
-        <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
-      </div>
-      <br>
+        
+        
+        </div>
+       
+        <br>
     </nav>
+    
+    
+    <!-- place navbar here -->
 
   </header>
 <main>
   <br>
   <div class="container">
-  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 500px; background-color: whitesmoke;" class="form">
+  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 300px; background-color: whitesmoke;" class="form">
     <div style="">
         <h1 style="font-size: bold; text-align:center">Consultar Clientes <i class="fa-solid fa-magnifying-glass"></i></i></h1>
     </div>
@@ -158,10 +182,42 @@
             </tbody>
         </table>
         <div style="text-align: center;">
-          <form action="editar_cliente.php" method="GET">
-            <input type="hidden" name="id" value="<?php echo $row['id_Cliente']; ?>">
-            <button type="submit" class="btn btn-primary">Editar</button>
-          </form>
+          
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo $row['id_Cliente']; ?>">Editar Cliente</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="staticBackdrop<?php echo $row['id_Cliente']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Cliente</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    
+                                    <form action="editar_cliente.php" method="post">
+                                      <input type="hidden" name="id_Cliente_Editar" value="<?php echo $id; ?>">
+                                      <label for="nuevo_correo">Dirección:</label>
+                                      <input type="text" id="dir_Cliente" name="dir_Cliente" style="border-radius: 45px;" value="<?php echo $row["dir_Cliente"] ?>"><br>
+                                      <br>
+                                      <label for="nuevo_correo">Correo:</label>
+                                      <input type="text" id="correo_Cliente" name="correo_Cliente" style="border-radius: 45px;" value="<?php echo $row["correo_Cliente"]; ?>"><br>
+                                      <br>
+                                      
+                                      <label for="nuevo_tipo">Tipo:</label>
+                                      <input type="text" id="tipoCliente" name="tipoCliente"style="border-radius: 45px;" value="<?php echo $row["tipo_Cliente"]; ?>"><br>
+                                      <br>
+                                      
+                                      <input type="submit" class="btn btn-primary" value="Guardar Cambios">
+                                    </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
           <form action="eliminar_cliente.php" method="GET">
   <input type="hidden" name="id" value="<?php echo $row['id_Cliente']; ?>">
@@ -196,12 +252,7 @@
 </div>
 <br>
   </main>
-  <footer>
-    <!-- Coloca el pie de página aquí -->
-    <p class="placeholder-glow">
-      <span class="placeholder col-12"></span>
-    </p>
-  </footer>
+ 
 
   <!-- Bibliotecas de JavaScript de Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

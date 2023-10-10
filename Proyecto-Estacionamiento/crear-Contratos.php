@@ -16,45 +16,65 @@
 <body style="font-family: Roboto; background-color: #004A98;">
 <header style="font-family: Roboto; background-color: #004A98;">
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
-        <a class="navbar-brand" href="#"><img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU"
-                    class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+        <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+            aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio.php" aria-current="page">Inicio </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="nuevo_usuario.html">Nuevo usuario</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="consultar_usuarios.php">Consultar Usuario</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="nuevo_cliente.html" aria-current="page">Nuevo Cliente </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="consultar_cliente.php">Consultar Cliente</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="crear_Contratos.php">Crear Contrato<span
-                                class="visually-hidden">(current)</span></a>
-                </li>
+          <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
+                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Cliente
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
+                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
+              </ul>
+            </li>
+    
+    
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Contrato
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
+              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
             </ul>
-            <a class="navbar-brand" href="#"><i class="fa-solid fa-circle-user"> Usuario</i></a>
+          </li>
+    
+        </ul>
+        
+        
         </div>
+       
         <br>
     </nav>
+    
+    
+    <!-- place navbar here -->
 </header>
 <main>
     <!-- div contenedor del primer formulario -->
     <div
-            style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 170px; position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
-        <form
+            style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 250px; position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
+            <div style="text-align: center; "><h1 style="font-size: bold;">Crear Contrato <i class="fa-solid fa-circle-check" ></i></h1></div>
+            <br>
+            <form
                 style="align-items: center; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);"
                 action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="mb-3">
@@ -74,13 +94,13 @@
     </div>
 
     <!-- div contenedor del segundo formulario (inicialmente oculto) -->
-    <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 560px; position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; display: none;"
+    <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 700px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; display: none;"
             id="segundoFormulario">
         <form
                 style="align-items: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);"
                 action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">ID de Contrato</label>
+                <label for="exampleInputEmail1" class="form-label">ID de Cliente</label>
                 <input type="number" name="id_Cliente" class="form-control" id="exampleInputEmail1"
                        aria-describedby="emailHelp" style="width: 500px;" >
             </div>
@@ -96,9 +116,21 @@
                 <div id="mensajeError" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Fecha del Contrato</label>
+                <label for="exampleInputEmail1" class="form-label">Fecha de inicio del contrato</label>
                 <input type="date" name="fechacont_Cliente" class="form-control" id=""
                        style="width: 500px;">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Fecha de fin de contrato</label>
+                <input type="date" name="vigCon_Cliente" class="form-control" id=""
+                       style="width: 500px;">
+            </div>
+            <div class="mb-3">
+                <label for="disabledSelect" class="form-label">Estado de actividad</label>
+                <select id="cont_Act" class="form-select" name="cont_Act" style="width: 500px;">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Tipo de Cajon 1-Exclusivo 2-Libre</label>
@@ -107,7 +139,7 @@
                 <div id="mensajeError1" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
             </div>
             <!-- Botón "Crear" -->
-            <div style="position: absolute; top: 110%; left: 50%; transform: translate(-50%, -50%);">
+            <div style="position: absolute; top: 105%; left: 50%; transform: translate(-50%, -50%);">
                 <button type="submit" class="btn btn-primary" id="crearButton" name="crear">Crear</button>
             </div>
         </form>
