@@ -120,6 +120,7 @@
     content: "\00a0"; 
 }
 
+
 </style>
 <div id="logout-modal" class="modal">
 <div class="modal-content">
@@ -133,41 +134,72 @@
 <!-- place navbar here -->
 
   </header>
-  <div>
-    <img src="imagenes/logosuaslp.png" alt="" width="600" height="120">
-    <span id="fecha">   </span>
-    <span id="hora"></span>
-</div>
-<br>
   <main>
     <br>
     <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de zona universitaria</h1>
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="https://infocomp.ingenieria.uaslp.mx/cominf/public/imagenes/mapa.jpg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://pr0.nicelocal.com.mx/BveK7J8dLmuS0DNbMwcWnQ/587x440,q85/4px-BW84_n0QJGVPszge3NRBsKw-2VcOifrJIjPYFYkOtaCZxxXQ2QWjJ2n10EVOc4ttQZX-b7NB0AxD2Fqrpz2MCJwPkaR04-WOcfFku213Vlu6Wpk5TQ" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="https://potosinoticias.com/wp-content/uploads/2019/01/Zona_Universitaria_Poniente.jpg" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
+    <div class="row row-cols-1 row-cols-md-4 g-6">
+  <div class="col mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <img src="\Proyecto-Estacionamiento\imagenes\encender.png" class="card-img-top" width="auto" height="240" id="iniciarTurno">
+        <h5 class="card-title text-center">Iniciar turno</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <img src="\Proyecto-Estacionamiento\imagenes\apagar.png" class="card-img-top" width="auto" height="240" id="terminarTurno">
+        <h5 class="card-title text-center">Terminar turno</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de iniciar turno-->
+<div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+          <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <div class="modal-body">
+  ¿Hola <?php echo $_SESSION['nom_User']; ?> Estás seguro de que quieres iniciar turno a las <span id="hora-accion"></span>?
+</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirmarAccion">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal de terminar turno -->
+<div class="modal fade" id="confirmacionModal2" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close2">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ¿Hola <?php echo $_SESSION['nom_User'];
+    ?> Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar2">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="confirmarAccion2">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   </main>
   <footer>
@@ -200,7 +232,7 @@
         url: "cerrar_sesion.php",
         type: "POST",
         success: function (response) {
-            window.location.href = "login.html";
+            window.location.href = "login.php";
         }
     });
 });
@@ -209,33 +241,109 @@
 </script>
 
 <script>
+var horaActual = '';
+
 function mostrarFechaHora() {
-    var fechaElemento = document.getElementById("fecha");
-    var horaElemento = document.getElementById("hora");
     var fechaHoraActual = new Date();
 
-    var diasSemana = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
-    var diaSemana = diasSemana[fechaHoraActual.getDay()];
-
-    var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    var mes = meses[fechaHoraActual.getMonth()];
-
-    var dia = fechaHoraActual.getDate();
-    var año = fechaHoraActual.getFullYear();
     var hora = fechaHoraActual.getHours();
     var minuto = fechaHoraActual.getMinutes();
     var segundo = fechaHoraActual.getSeconds();
 
-    var formatoFecha = diaSemana + " " + dia + " de " + mes + " del " + año;
-    var formatoHora = hora + ":" + (minuto < 10 ? "0" : "") + minuto + ":" + (segundo < 10 ? "0" : "") + segundo;
 
-    fechaElemento.textContent = formatoFecha;
-    horaElemento.textContent = "Hora: " + formatoHora;
+    horaActual = hora + ":" + (minuto < 10 ? "0" : "") + minuto + ":" + (segundo < 10 ? "0" : "") + segundo;
+
+
+    document.getElementById("hora-accion").textContent = horaActual;
 }
 
 mostrarFechaHora();
 
 setInterval(mostrarFechaHora, 1000);
+</script>
+
+<script>
+  document.getElementById("iniciarTurno").addEventListener("click", function() {
+    $("#confirmacionModal").modal("show");
+
+    document.getElementById("close").addEventListener("click", function() {
+
+$("#confirmacionModal").modal("hide");
+});
+    document.getElementById("confirmarAccion").addEventListener("click", function() {
+
+      $("#confirmacionModal").modal("hide");
+    });
+    document.getElementById("cancelar").addEventListener("click", function() {
+
+$("#confirmacionModal").modal("hide");
+});
+  });
+
+  document.getElementById("terminarTurno").addEventListener("click", function() {
+    $("#confirmacionModal2").modal("show");   
+    
+    document.getElementById("close2").addEventListener("click", function() {
+
+$("#confirmacionModal2").modal("hide");
+
+});
+
+    document.getElementById("confirmarAccion2").addEventListener("click", function() {
+
+      $("#confirmacionModal2").modal("hide");
+
+    });
+  document.getElementById("cancelar2").addEventListener("click", function() {
+
+$("#confirmacionModal2").modal("hide");
+
+});
+  });
+</script>
+
+<script>
+document.getElementById("confirmarAccion").addEventListener("click", function() {
+  
+    fetch('inicio.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ hora: horaActual }),
+    })
+    .then(response => response.json())
+    .then(data => {
+  
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    $("#confirmacionModal").modal("hide");
+});
+</script>
+
+<script>
+document.getElementById("confirmarAccion").addEventListener("click", function() {
+  
+    fetch('inicio.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ hora: horaActual }),
+    })
+    .then(response => response.json())
+    .then(data => {
+  
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+    $("#confirmacionModal2").modal("hide");
+});
 </script>
 
 </body>

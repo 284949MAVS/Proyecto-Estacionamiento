@@ -1,50 +1,26 @@
 <?php
 include('conexion.php');
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_cliente = $_POST["id_cliente"];
-    $fecha = $_POST["fecha"];
-    $auto = $_POST["auto"];
-    $pago = $_POST["pago"];
-    $tipo = $_POST["tipo"];
-    
-    $query = "INSERT INTO contratos (id_cliente, auto_cliente, pago_cliente, fechacont_Cliente, tipo_Cajon) VALUES ('$id_cliente', '$auto', '$pago', '$fecha', '$tipo')";
-    
+    $idCliente = $_POST['id_Cliente'];
+    $autoCliente = $_POST['auto_Cliente'];
+    $tipoPago = $_POST['tipoPago'];
+    $fechaInicioContrato = $_POST['fechacont_Cliente'];
+    $fechaFinContrato = $_POST['vigCon_Cliente'];
+    $estadoActividad = $_POST['cont_Act'];
+    $tipoCajon = $_POST['tipoCajon'];
+
+    $query = "INSERT INTO contratos (id_Cliente, auto_Cliente, pago_Cliente, fechacont_Cliente, vigCon_cliente, cont_Act, tipo_Cajon) 
+              VALUES ('$idCliente', '$autoCliente', '$tipoPago', '$fechaInicioContrato', '$fechaFinContrato', '$estadoActividad', '$tipoCajon')";
+        
     if ($mysqli->query($query) === TRUE) {
         echo "Contrato dado de alta correctamente.";
+        Header("Location: crear-Contratos.php");
     } else {
         echo "Error al dar de alta el contrato: " . $mysqli->error;
     }
 }
 
-$mysqli ->close();
-?>
+$mysqli->close();
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Alta de Contrato</title>
-</head>
-<body>
-    <h1>Alta de Contrato</h1>
-    <form method="post" action="">
-        <label>ID del Cliente:</label>
-        <input type="text" name="id_cliente" required><br>
-        
-        <label>Auto del cliente:</label>
-        <input type="text" name="auto" required><br>
-        
-        <label>Fecha del contrato:</label>
-        <input type="date" name="fecha" required><br>
-        
-        <label>Pago del cliente:</label>
-        <input type="number" name="pago" required><br>
-        
-        <label>Tipo de cajon:</label>
-        <input type="number" name="tipo" required><br>
-        
-        <input type="submit" value="Guardar Contrato">
-    </form>
-</body>
-</html>
+?>
