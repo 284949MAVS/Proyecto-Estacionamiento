@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-10-2023 a las 07:35:29
+-- Tiempo de generación: 16-10-2023 a las 06:25:16
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -83,7 +83,6 @@ INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_
 -- Estructura de tabla para la tabla `contratos`
 --
 -- Creación: 05-10-2023 a las 05:26:19
--- Última actualización: 05-10-2023 a las 05:26:19
 --
 
 CREATE TABLE `contratos` (
