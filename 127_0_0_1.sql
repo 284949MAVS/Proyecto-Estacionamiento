@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-10-2023 a las 06:25:16
+-- Tiempo de generación: 16-10-2023 a las 06:35:48
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -115,8 +115,8 @@ INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Clie
 CREATE TABLE `cortes_caja` (
   `num_Corte` int(11) NOT NULL COMMENT 'Número de corte de caja',
   `id_User` int(11) NOT NULL COMMENT 'Identificador unico de usuario',
-  `inicio_Turno` date NOT NULL COMMENT 'Inicio de turno de trabajo',
-  `fin_Turno` date NOT NULL COMMENT 'Fin de turno de trabajo',
+  `inicio_Turno` datetime NOT NULL COMMENT 'Inicio de turno de trabajo',
+  `fin_Turno` datetime NOT NULL COMMENT 'Fin de turno de trabajo',
   `autos_Salida` int(11) NOT NULL COMMENT 'Total de autos que han salido',
   `tickets_Canc` int(11) NOT NULL COMMENT 'Tickets cancelados durante el turno',
   `efectivo` float NOT NULL COMMENT 'Cantidad pagada en efectivo durante el turno',
@@ -129,7 +129,7 @@ CREATE TABLE `cortes_caja` (
 --
 
 INSERT INTO `cortes_caja` (`num_Corte`, `id_User`, `inicio_Turno`, `fin_Turno`, `autos_Salida`, `tickets_Canc`, `efectivo`, `depos`, `total_Corte`) VALUES
-(90, 123456, '2023-09-01', '2023-09-01', 100, 5, 4570, 3, 6000);
+(90, 123456, '2023-09-01 00:00:00', '2023-09-01 00:00:00', 100, 5, 4570, 3, 6000);
 
 -- --------------------------------------------------------
 
