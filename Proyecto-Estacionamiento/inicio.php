@@ -19,7 +19,7 @@
 <body>
   <header>
     
-  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #004A98;"> 
     <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
         aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
@@ -135,79 +135,9 @@
 
   </header>
   <main>
-    <br>
-    <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de zona universitaria</h1>
-    <div class="row row-cols-1 row-cols-md-4 g-6">
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\imagenes\encender.png" class="card-img-top" width="auto" height="240" id="iniciarTurno">
-        <h5 class="card-title text-center">Iniciar turno</h5>
-      </div>
-    </div>
-  </div>
-
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\imagenes\apagar.png" class="card-img-top" width="auto" height="240" id="terminarTurno">
-        <h5 class="card-title text-center">Terminar turno</h5>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de iniciar turno-->
-<div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-  ¿Hola <?php echo $_SESSION['nom_User']; ?> Estás seguro de que quieres iniciar turno a las <span id="hora-accion"></span>?
-</div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="confirmarAccion">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Modal de terminar turno -->
-<div class="modal fade" id="confirmacionModal2" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close2">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿Hola <?php echo $_SESSION['nom_User'];
-    ?> Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar2">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="confirmarAccion2">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
   </main>
-  <footer>
-    <!-- place footer here -->
-    <p class="placeholder-glow">
-        <span class="placeholder col-12"></span>
-        </p>
-  </footer>
+  
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
@@ -217,6 +147,7 @@
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script>
   $(document).ready(function () {
     $("#open-modal").click(function () {
@@ -262,90 +193,9 @@ mostrarFechaHora();
 setInterval(mostrarFechaHora, 1000);
 </script>
 
-<script>
-  document.getElementById("iniciarTurno").addEventListener("click", function() {
-    $("#confirmacionModal").modal("show");
 
-    document.getElementById("close").addEventListener("click", function() {
-
-$("#confirmacionModal").modal("hide");
-});
-    document.getElementById("confirmarAccion").addEventListener("click", function() {
-
-      $("#confirmacionModal").modal("hide");
-    });
-    document.getElementById("cancelar").addEventListener("click", function() {
-
-$("#confirmacionModal").modal("hide");
-});
-  });
-
-  document.getElementById("terminarTurno").addEventListener("click", function() {
-    $("#confirmacionModal2").modal("show");   
-    
-    document.getElementById("close2").addEventListener("click", function() {
-
-$("#confirmacionModal2").modal("hide");
-
-});
-
-    document.getElementById("confirmarAccion2").addEventListener("click", function() {
-
-      $("#confirmacionModal2").modal("hide");
-
-    });
-  document.getElementById("cancelar2").addEventListener("click", function() {
-
-$("#confirmacionModal2").modal("hide");
-
-});
-  });
-</script>
-
-<script>
-document.getElementById("confirmarAccion").addEventListener("click", function() {
-  
-    fetch('inicio.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ hora: horaActual }),
-    })
-    .then(response => response.json())
-    .then(data => {
-  
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-    $("#confirmacionModal").modal("hide");
-});
-</script>
-
-<script>
-document.getElementById("confirmarAccion").addEventListener("click", function() {
-  
-    fetch('inicio.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ hora: horaActual }),
-    })
-    .then(response => response.json())
-    .then(data => {
-  
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-    $("#confirmacionModal2").modal("hide");
-});
-</script>
 
 </body>
+
 
 </html>

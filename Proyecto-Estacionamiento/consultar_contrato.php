@@ -188,8 +188,8 @@ $mysqli->close();
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
-<header style="font-family: Roboto; background-color: #004A98;">
-  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+<header style="font-family: Roboto;">
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #004A98;"> 
         <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
@@ -245,17 +245,18 @@ $mysqli->close();
 
 <br>
 </head>
-<body style="font-family: Roboto; background-color: #004A98;">
+<body style="font-family: Roboto; ">
 
 <div class="container">
 
 <form method="post" action="">
 
-    <label style="color: white;">ID del Cliente:</label>
+    <label style="color: black;">ID del Cliente:</label>
 
     <input type="text" name="id_cliente"pattern="[0-9]{6}" title="Proporcione un identificador unico de 6 digitos" value="<?php echo $id_cliente; ?>" required>
 
     <input type="submit" value="Buscar">
+    
 
 </form>
 
@@ -334,8 +335,8 @@ $mysqli->close();
           </div>
      </div>
 
+  </div>
 </div>
-
  
 
     <?php endif; ?>

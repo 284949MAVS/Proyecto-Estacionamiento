@@ -16,38 +16,30 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <style>
-    .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-           
-        }
-       
-    .form{
-           
-            justify-content: center;
-            align-items: center;
-           /* padding-right: 20%;*/
-           margin-left: 100px;
-           margin-right: 100px;
+    .table-no-border tr, .table-no-border td {
+      border: none;
+    }
 
-
+    .btn-group {
+      display: flex;
+      gap: 10px;
     }
-    .form-control{
-      margin-left: 100px;
-           margin-right: 100px;
-    }
-    .btn{
-      margin-left: 100px;
-           margin-right: 100px;
-    }
+    .table-container {
+  margin: 0 auto;
+  text-align: center;
+}
   </style>
+
 </head>
 
-<body style="font-family: Roboto; background-color: #004A98;">
-  <header style="font-family: Roboto; background-color: #004A98;">
-  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);"> 
+<body style="font-family: Roboto;">
+  <header style="font-family: Roboto;">
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #004A98;"> 
         <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
@@ -101,157 +93,180 @@
 
   </header>
 <main>
-  <br>
-  <div class="container">
-  <div style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 300px; background-color: whitesmoke;" class="form">
-    <div style="">
-        <h1 style="font-size: bold; text-align:center">Consultar Clientes <i class="fa-solid fa-magnifying-glass"></i></i></h1>
-    </div>
-    <br>
-    <form style="align-items: center;" style="justify-content: center;" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-        <div class="mb-3" style="text-align: center;">
-            <label for="exampleInputEmail1" class="form-label" style="text-align: center;">ID de cliente</label>
-            <input type="text" name="id_Cliente" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 500px;" oninput="verificarCamposCompletos()">
-        </div>
-         
-        <br>
-        
-        <button type="submit" class="btn btn-primary" id="consultarButton"   name="consultar" disabled>Consultar</button>
-        
+<br>
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
 
-        </div>
-    </form>
-    </div>
-   
-    <br>
-    <!-- Contenedor de la tabla, inicialmente oculto -->
-    <div class="container">
-    <div id="tablaContainer"  style="border-radius: 45px; border: 5px solid whitesmoke; width: 1160px; height: 300px;  background-color: whitesmoke; <?php echo isset($_POST['consultar']) ? 'display:block;' : 'display:none;'; ?>">
-        <table class="table table-striped">
-            <thead>
+<div class="container">
+<h1 style="font-size: bold; text-align: center;">Consultar Clientes <i class="fa-solid fa-magnifying-glass"></i></h1>
+</div> 
+
+<div class="container text-center">
+    <div class="row justify-content-center">  
+          <br>
+          <div class="table"> <!-- Agrega un contenedor responsive para la tabla -->
+            <table class="table table-no-border table-striped" id="table">
+              <thead>
                 <tr>
-                <th>Cve</th>
-                    <th>Nombre</th>
-                    <th>Ap. paterno</th>
-                    <th>Ap. materno</th>
-                    <th>RFC</th>
-                    <th>Direcciom</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    <th>Credencial</th>
-                    <th>Tipo</th>
-                    <th>Actividad</th>
-                    
-                
+                  <th>Cve</th>
+                  <th>Nombre</th>
+                  <th>Ap. paterno</th>
+                  <th>Ap. materno</th>
+                  <th>RFC</th>
+                  <th>Dirección</th>
+                  <th>Tel</th>
+                  <th>Correo</th>
+                  <th>Credencial</th>
+                  <th>Tipo</th>
+                  <th>Act</th>
+                  <th>Acciones</th>
                 </tr>
-            </thead>
-            <tbody>
-            <?php
-                if (isset($_POST["consultar"])) {
-               require "conexion.php";
+              </thead>
+              <tbody>
+                <?php
+                require "conexion.php";
+                $query = "SELECT * FROM clientes";
+                $result = $mysqli->query($query);
 
-                    $id = $_POST["id_Cliente"];
-                    $query = "SELECT * FROM clientes WHERE id_Cliente = $id";
-                    $result = $mysqli->query($query);
-
-                    if ($result->num_rows == 1) {
-                        $row = $result->fetch_assoc();
-
-                        echo "<tr>";
-                        echo "<td>" . $row["id_Cliente"] . "</td>";
-                        echo "<td>" . $row["nom_Cliente"] . "</td>";
-                        echo "<td>" . $row["ap_Patc"] . "</td>";
-                        echo "<td>" . $row["ap_Matc"] . "</td>";
-                        echo "<td>" . $row["rfc_Cliente"] . "</td>";
-                        echo "<td>" . $row["dir_Cliente"] . "</td>";
-                        echo "<td>" . $row["tel_Cliente"] . "</td>";
-                        echo "<td>" . $row["correo_Cliente"] . "</td>";
-                        echo "<td>" . $row["id_Credencial"] . "</td>";
-                        echo "<td>" . $row["tipo_Cliente"] . "</td>";
-                        echo "<td>" . $row["act_Cli"] . "</td>";
-                        
-                        
-                    } else {
-                        echo "No se encontró el usuario en la base de datos.";
-                    }
-
-                    $mysqli->close();
+                while ($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row["id_Cliente"] . "</td>";
+                  echo "<td>" . $row["nom_Cliente"] . "</td>";
+                  echo "<td>" . $row["ap_Patc"] . "</td>";
+                  echo "<td>" . $row["ap_Matc"] . "</td>";
+                  echo "<td>" . $row["rfc_Cliente"] . "</td>";
+                  echo "<td><div class='text-truncate' style='max-width: 100px;'>" . $row["dir_Cliente"] . "</div></td>";
+                  echo "<td>" . $row["tel_Cliente"] . "</td>";
+                  echo "<td><div class='text-truncate' style='max-width: 100px;'>" . $row["correo_Cliente"] . "</div></td>";
+                  echo "<td>" . $row["id_Credencial"] . "</td>";
+                  echo "<td>" . $row["tipo_Cliente"] . "</td>";
+                  echo "<td>" . $row["act_Cli"] . "</td>";
+                  echo "<td>
+                        <div class='btn-group' role='group' aria-label='Acciones'>
+                          <button type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#staticBackdrop{$row['id_Cliente']}'><i class='fas fa-edit'></i></button>
+                          <button type='button' class='btn btn-danger' data-toggle='modal' data-target='#confirmDeleteModal{$row['id_Cliente']}'><i class='fas fa-trash-alt'></i></button>
+                        </div>
+                        </td>";
                 }
                 ?>
-
-            </tbody>
-        </table>
-        <div style="text-align: center;">
-          
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo $row['id_Cliente']; ?>">Editar Cliente</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop<?php echo $row['id_Cliente']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Cliente</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    
-                                    <form action="editar_cliente.php" method="post">
-                                      <input type="hidden" name="id_Cliente_Editar" value="<?php echo $id; ?>">
-                                      <label for="nuevo_correo">Dirección:</label>
-                                      <input type="text" id="dir_Cliente" name="dir_Cliente" style="border-radius: 45px;" value="<?php echo $row["dir_Cliente"] ?>"><br>
-                                      <br>
-                                      <label for="nuevo_correo">Correo:</label>
-                                      <input type="text" id="correo_Cliente" name="correo_Cliente" style="border-radius: 45px;" value="<?php echo $row["correo_Cliente"]; ?>"><br>
-                                      <br>
-                                      
-                                      <label for="nuevo_tipo">Tipo:</label>
-                                      <input type="text" id="tipoCliente" name="tipoCliente"style="border-radius: 45px;" value="<?php echo $row["tipo_Cliente"]; ?>"><br>
-                                      <br>
-                                      
-                                      <input type="submit" class="btn btn-primary" value="Guardar Cambios">
-                                    </form>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-          <form action="eliminar_cliente.php" method="GET">
-  <input type="hidden" name="id" value="<?php echo $row['id_Cliente']; ?>">
-  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Eliminar</button>
-</form>
-
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿Estás seguro de que deseas eliminar este cliente?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a href="eliminar_cliente.php?id=<?php echo $row['id_Cliente']; ?>" class="btn btn-danger">Eliminar</a>
-      </div>
+              </tbody>
+            </table>
+          </div>
     </div>
   </div>
-</div>
-        </div> 
-    </div>
-    
-    </div>
-</div>
-
-</div>
-<br>
-  </main>
+  
+  <?php
+  $result->data_seek(0); // Reiniciar el puntero de resultados
+  while ($row = $result->fetch_assoc()) {
+    echo "<div class='modal fade' id='staticBackdrop{$row['id_Cliente']}' tabindex='-1' role='dialog' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h1 class='modal-title fs-5' id='staticBackdropLabel'>Actualizar Cliente</h1>
+                  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                  <form action='editar_cliente.php' method='post'>
+                    <input type='hidden' name='id_Cliente_Editar' value='{$row['id_Cliente']}'>
+                    <label for='nuevo_dir_Cliente'>Dirección:</label>
+                    <input type='text' id='nuevo_dir_Cliente' name='nuevo_dir_Cliente' style='border-radius: 45px;' value='{$row["dir_Cliente"]}'><br>
+                    <br>
+                    <label for='nuevo_correo_Cliente'>Correo:</label>
+                    <input type='text' id='nuevo_correo_Cliente' name='nuevo_correo_Cliente' style='border-radius: 45px;' value='{$row["correo_Cliente"]}'><br>
+                    <br>
+                    <label for='nuevo_tipoCliente'>Tipo:</label>
+                    <input type='text' id='nuevo_tipoCliente' name='nuevo_tipoCliente' style='border-radius: 45px;' value='{$row["tipo_Cliente"]}'><br>
+                    <br>
+                    <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
+                  </form>
+                </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-danger' data-bs-dismiss='modal'>Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>";
+  
+    echo "<div class='modal fade' id='confirmDeleteModal{$row['id_Cliente']}' tabindex='-1' role='dialog' aria-labelledby='confirmDeleteModalLabel' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title' id='confirmDeleteModalLabel'>Confirmar Eliminación</h5>
+                  <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                  </button>
+                </div>
+                <div class='modal-body'>
+                  ¿Estás seguro de que deseas eliminar este cliente?
+                </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>
+                  <a href='eliminar_cliente.php?id={$row['id_Cliente']}' class='btn btn-danger'>Eliminar</a>
+                </div>
+              </div>
+            </div>
+          </div>";
+  }
+  ?>
+       
+      
+  <?php
+  $result->data_seek(0); // Reiniciar el puntero de resultados
+  while ($row = $result->fetch_assoc()) {
+    echo "<div class='modal fade' id='staticBackdrop{$row['id_Cliente']}' tabindex='-1' role='dialog' aria-labelledby='staticBackdropLabel' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h1 class='modal-title fs-5' id='staticBackdropLabel'>Actualizar Cliente</h1>
+                  <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                </div>
+                <div class='modal-body'>
+                  <form action='editar_cliente.php' method='post'>
+                    <input type='hidden' name='id_Cliente_Editar' value='{$row['id_Cliente']}'>
+                    <label for='nuevo_dir_Cliente'>Dirección:</label>
+                    <input type='text' id='nuevo_dir_Cliente' name='nuevo_dir_Cliente' style='border-radius: 45px;' value='{$row["dir_Cliente"]}'><br>
+                    <br>
+                    <label for='nuevo_correo_Cliente'>Correo:</label>
+                    <input type='text' id='nuevo_correo_Cliente' name='nuevo_correo_Cliente' style='border-radius: 45px;' value='{$row["correo_Cliente"]}'><br>
+                    <br>
+                    <label for='nuevo_tipoCliente'>Tipo:</label>
+                    <input type='text' id='nuevo_tipoCliente' name='nuevo_tipoCliente' style='border-radius: 45px;' value='{$row["tipo_Cliente"]}'><br>
+                    <br>
+                    <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
+                  </form>
+                </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-danger' data-bs-dismiss='modal'>Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>";
+  
+    echo "<div class='modal fade' id='confirmDeleteModal{$row['id_Cliente']}' tabindex='-1' role='dialog' aria-labelledby='confirmDeleteModalLabel' aria-hidden='true'>
+            <div class='modal-dialog' role='document'>
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <h5 class='modal-title' id='confirmDeleteModalLabel'>Confirmar Eliminación</h5>
+                  <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                    <span aria-hidden='true'>&times;</span>
+                  </button>
+                </div>
+                <div class='modal-body'>
+                  ¿Estás seguro de que deseas eliminar este cliente?
+                </div>
+                <div class='modal-footer'>
+                  <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>
+                  <a href='eliminar_cliente.php?id={$row['id_Cliente']}' class='btn btn-danger'>Eliminar</a>
+                </div>
+              </div>
+            </div>
+          </div>";
+  }
+  ?>
+</main>
  
 
   <!-- Bibliotecas de JavaScript de Bootstrap -->

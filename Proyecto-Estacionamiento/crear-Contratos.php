@@ -35,10 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
-<body style="font-family: Roboto; background-color: #004A98;">
-<header style="font-family: Roboto; background-color: #004A98;">
+<body style="font-family: Roboto; ">
+<header style="font-family: Roboto; ">
     <!-- Barra de navegación -->
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: rgb(37, 96, 245);">
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color:#004A98; ">
         <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;"></a>
         <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
@@ -84,31 +84,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </nav>
 </header>
 <main>
+<br>
     <!-- div contenedor del primer formulario -->
-    <div
-        style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 250px; position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke;">
-        <div style="text-align: center; "><h1 style="font-size: bold;">Crear Contrato <i class="fa-solid fa-circle-check"></i></h1></div>
-        <br>
-        <form
-            style="align-items: center; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%);"
-            action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">ID de cliente</label>
-                <input type="number" name="id_Cliente" pattern="[0-9]{6}" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" style="width: 500px;" oninput="verificarCamposCompletos()">
-            </div>
-            <!-- Mensaje de error para ID de cliente -->
-            <div id="mensajeErrorID" style="color: red; display: none;">Debe ingresar un ID válido</div>
-            <!-- Botón "Buscar" -->
-            <div style="position: absolute; top: 120%; left: 50%; transform: translate(-50%, -50%);">
-                <button type="sumbit" class="btn btn-primary" id="consultarButton" name="consultar" onclick="mostrarSegundoFormulario()">Buscar</button>
-            </div>
-        </form>
+    <div class="container" style="border-radius: 45px whitesmoke;width: 700px; height: 250px; background-color: whitesmoke;">
+    <div style="text-align: center;">
+        <h1>Crear Contrato <i class="fa-solid fa-circle-check"></i></h1>
     </div>
+    <br>
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <div class="mb-3">
+            <label for="idCliente" class="form-label">ID de cliente</label>
+            <input type="number" name="id_Cliente" pattern="[0-9]{6}" class="form-control" id="idCliente" aria-describedby="emailHelp">
+        </div>
+        <!-- Mensaje de error para ID de cliente -->
+        <div id="mensajeErrorID" style="color: red; display: none;">Debe ingresar un ID válido</div>
+        <!-- Botón "Buscar" -->
+        <div style="text-align: center;">
+            <button type="submit" class="btn btn-primary" id="consultarButton" name="consultar">Buscar</button>
+        </div>
+    </form>
+</div>
+
 
     <!-- div contenedor del segundo formulario (inicialmente oculto) -->
     <div
-        style="border-radius: 45px; border: 5px solid whitesmoke; width: 700px; height: 700px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php if (!$existeContrato) { echo 'display: none;'; } ?>"
+        style=" border: 5px solid whitesmoke; width: 700px; height: 700px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php if (!$existeContrato) { echo 'display: none;'; } ?>"
         id="segundoFormulario">
         <form
             style="align-items: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);"
