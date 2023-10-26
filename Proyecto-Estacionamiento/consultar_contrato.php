@@ -1,45 +1,5 @@
 <?php
 include('conexion.php');
-
-
-$id_cliente = '';
-$info_contrato = [];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_cliente = $_POST["id_cliente"];
-
-    $consulta_contrato = "SELECT * FROM contratos WHERE id_cliente = '$id_cliente'";
-    $resultado_contrato = $mysqli->query($consulta_contrato);
-
-    if ($resultado_contrato->num_rows > 0) {
-        $info_contrato = $resultado_contrato->fetch_assoc();
-    }
-}
-
-$mysqli->close();
-?>
-
-<?php
-    include('conexion.php');
-    if(isset($_GET['id_contrato'])){
-    $id_contrato = $_GET["id_contrato"];
-
-    $consulta_contrato = "SELECT * FROM contratos WHERE id_Cliente = '$id_contrato'";
-    $resultado_contrato = $mysqli->query($consulta_contrato);
-
-    if ($resultado_contrato->num_rows > 0) {
-        $info_contrato = $resultado_contrato->fetch_assoc();
-    } else {
-        echo "No se encontró el contrato con el ID.";
-        exit;
-    }
-}
-
-    $mysqli->close();
-?>
-
-<?php
-include('conexion.php');
 if (isset($_POST['actualizar'])){
     $id_contrato = $_POST["id_contrato"];
     $nuevo_auto = $_POST["nuevo_auto"];
@@ -74,34 +34,39 @@ if (isset($_POST['actualizar'])){
 }
 
 $mysqli->close();
+
+?>
+<?php
+include('conexion.php');
+
+$consulta_contrato = "SELECT * FROM contratos";
+$resultado_contrato = $mysqli->query($consulta_contrato);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Consultar Contrato</title>
+    <title>Consultar Contrato</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
- 
-
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
- 
-
-  <!-- Bootstrap CSS v5.2.1 -->
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
- 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
 
+  <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <style>
 
         .container {
@@ -245,128 +210,108 @@ $mysqli->close();
 
 <br>
 </head>
-<body style="font-family: Roboto; ">
 
-<div class="container">
+<body style="font-family: Roboto;">
+  
+<script>
+    $(document).ready( function () {
+    $('#table').DataTable();
+} );
+</script>
 
-<form method="post" action="">
+    <div class="container2">
+        <h2 style="text-align:center">Información de Contratos</h2>
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr>
+                    <th>ID Cliente</th>
+                    <th>Características del vehículo</th>
+                    <th>Tipo de pago</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($info_contrato = $resultado_contrato->fetch_assoc()): ?>
+                    <tr>
+                        <td><?php echo $info_contrato['id_Cliente']; ?></td>
+                        <td><?php echo $info_contrato['auto_Cliente']; ?></td>
+                        <td><?php echo $info_contrato['pago_Cliente']; ?></td>
+                        <td>
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal<?php echo $info_contrato['id_Cliente']; ?>"><i class='fas fa-edit'></i></button>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal<?php echo $info_contrato['id_Cliente']; ?>"><i class='fas fa-trash-alt'></i></button>
+                        </td>
+                    </tr>
 
-    <label style="color: black;">ID del Cliente:</label>
-
-    <input type="text" name="id_cliente"pattern="[0-9]{6}" title="Proporcione un identificador unico de 6 digitos" value="<?php echo $id_cliente; ?>" required>
-
-    <input type="submit" value="Buscar">
-    
-
-</form>
-
-</div>
-
-<div class="container2" id="container" style="display=none" >
-    
-    <?php if (!empty($info_contrato)): ?>
-
-    <h2 style="text-align:center">Información del Contrato</h2>
-
-    <p >ID Cliente: <?php echo $id_cliente; ?></p>
-
-    <p>Modelo del vehículo: <?php echo $info_contrato['auto_Cliente']; ?></p>
-
-    <p>Tipo de pago: <?php echo $info_contrato['pago_Cliente']; ?></p>
-
- 
-
- 
-
-     <div class="button-container">
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop<?php echo $info_contrato['id_Cliente']; ?>">Modificar Contrato</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop<?php echo $info_contrato['id_Cliente']; ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Actualizar Contrato</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    
-                                    <form method="post" action="consultar_contrato.php">
+                    <!-- Modal para editar contrato -->
+                    <div class="modal fade" id="editarModal<?php echo $info_contrato['id_Cliente']; ?>" tabindex="-1" role="dialog" aria-labelledby="editarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="editarModalLabel">Editar Contrato</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="">
                                         <label>ID del Contrato a Editar:</label>
-                                        <input type="text" name="id_contrato" value="<?php echo $info_contrato["id_Cliente"]; ?>" readonly><br>
+                                        <input type="text" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>" readonly><br>
                                         <label>Nuevo Auto del Cliente:</label>
                                         <input type="text" name="nuevo_auto" value="<?php echo $info_contrato['auto_Cliente']; ?>"><br>
                                         <label>Nuevo Pago del Cliente:</label>
                                         <input type="number" name="nuevo_pago" value="<?php echo $info_contrato['pago_Cliente']; ?>"><br>
                                         <label>Nueva Vigencia (meses):</label>
                                         <input type="date" name="nueva_vigencia" value="<?php echo $info_contrato['fechacont_Cliente']; ?>"><br>
-                                        <input type="hidden" name="id_actividad" value="<?php echo $actividad['id']; ?>">
+                                        <input type="hidden" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>">
                                         <input type="submit" class="btn btn-primary" name="actualizar" value="Actualizar">
                                     </form>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-
-          <form action="eliminar_contrato.php" method="GET">
-            <input type="hidden" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>">
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDeleteModal">Eliminar Contrato</button>
-          </form>
-          
-          <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true"><div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
-                    <div class="modal-body">
-                        ¿Estás seguro de que deseas eliminar este contrato?
+
+                    <!-- Modal para eliminar contrato -->
+                    <div class="modal fade" id="eliminarModal<?php echo $info_contrato['id_Cliente']; ?>" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eliminarModalLabel">Confirmar Eliminación</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    ¿Estás seguro de que deseas eliminar este contrato?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <a href="eliminar_contrato.php?id_contrato=<?php echo $info_contrato['id_Cliente']; ?>" class="btn btn-danger">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <a onclick="location.href='eliminar_contrato.php?id_contrato=<?php echo $info_contrato['id_Cliente']; ?>'" class="btn btn-danger">Eliminar</a>
-                    </div>
-                </div>
-          </div>
-     </div>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
 
-  </div>
-</div>
- 
-
-    <?php endif; ?>
-
-
-
-  </main>
-
+    
   <footer>
 
-    <!-- place footer here -->
+<!-- place footer here -->
 
-  </footer>
+</footer>
 
-  <!-- Bootstrap JavaScript Libraries -->
+<!-- Bootstrap JavaScript Libraries -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
 
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
 
-  </script>
-
- 
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-
-    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-
-  </script>
+</script>
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+
+integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+
+</script>
 </body>
 </html>
