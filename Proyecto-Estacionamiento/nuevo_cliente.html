@@ -114,19 +114,19 @@
           </div>
           <div class="form-row">
             <label for="nom_Cliente">Nombre(s):</label>
-            <input type="text" name="nom_Cliente" class="form-control" id="nom_Cliente" required>
+            <input type="text" name="nom_Cliente" class="form-control" pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" id="nom_Cliente" required>
           </div>
           <div class="form-row">
             <label for="ap_Patc">Apellido paterno:</label>
-            <input type="text" name="ap_Patc" class="form-control" id="ap_Patc" required>
+            <input type="text" name="ap_Patc" class="form-control" pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" id="ap_Patc" required>
           </div>
           <div class="form-row">
             <label for="ap_Matc">Apellido materno:</label>
-            <input type="text" name="ap_Matc" class="form-control" id="ap_Matc" required>
+            <input type="text" name="ap_Matc" class="form-control" pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" id="ap_Matc" required>
           </div>
           <div class="form-row">
             <label for="rfc_Cliente">RFC:</label>
-            <input type="text" name="rfc_Cliente" class="form-control" id="rfc_Cliente" required>
+            <input type="text" name="rfc_Cliente" class="form-control" pattern="^[A-Z&Ñ]{4}\d{6}([A-Z\d]{3})?$" title="Proporcione un RFC válido" id="rfc_Cliente" required>
           </div>
           <div class="form-row">
             <label for="dir_Cliente">Dirección:</label>
@@ -134,11 +134,11 @@
           </div>
           <div class="form-row">
             <label for="tel_Cliente">Teléfono:</label>
-            <input type="text" name="tel_Cliente" pattern="[4]{3}[0-9]{3}[0-9]{4}" class="form-control" id="tel_Cliente" required>
+            <input type="text" name="tel_Cliente" pattern="\d{10}" title="El número debe contener 10 dígitos" class="form-control" id="tel_Cliente" required>
           </div>
           <div class="form-row">
             <label for="correo_Cliente">Correo:</label>
-            <input type="email" name="correo_Cliente" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control" id="correo_Cliente" required>
+            <input type="email" name="correo_Cliente" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"  class="form-control" title="Proporcione un formato válido de correo electrónico: xxxx@dom.example" id="correo_Cliente" required>
           </div>
           <div class="form-row">
             <label for="id_Credencial">ID Credencial:</label>

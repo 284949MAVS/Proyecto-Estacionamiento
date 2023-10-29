@@ -113,30 +113,30 @@ integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+f
       </div>
       <div class="form-row">
         <label for="nom_User">Nombre(s)</label>
-        <input type="text" name="nom_User" class="form-control" id="nom_User" required>
+        <input type="text" name="nom_User" pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" class="form-control" id="nom_User" required>
       </div>
       <div class="form-row">
         <label for="ap_PatU">Apellido paterno</label>
-        <input type="text" name="ap_PatU" class="form-control" id="ap_PatU" required>
+        <input type="text" name="ap_PatU"  pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" class="form-control" id="ap_PatU" required>
       </div>
       <div class="form-row">
         <label for="ap_MatU">Apellido materno</label>
-        <input type="text" name="ap_MatU" class="form-control" id="ap_MatU" required>
+        <input type="text" name="ap_MatU" pattern="^[A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*(?: [A-ZÁÉÍÓÚÜÑ][a-záéíóúüñ]*)?$" title="Ingresar solamente letras y/o espacios" class="form-control" id="ap_MatU" required>
       </div>
       <div class="form-row">
         <label for="tipo_User">Tipo de usuario</label>
-        <select id="tipo_User" class="form-select" name="tipo_Use" required>
+        <select id="tipo_User" class="form-select" name="tipo_User" required>
           <option value="1">Administrador</option>
           <option value="2">Trabajador</option>
         </select>
       </div>
       <div class="form-row">
         <label for="correo_User">Correo</label>
-        <input type="email" name="correo_User" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control" id="correo_User" required>
+        <input type="email" name="correo_User" title="Proporcione un formato válido de correo electrónico: xxxx@dom.example" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}" class="form-control" id="correo_User" required>
       </div>
       <div class="form-row">
         <label for="tel_User">Teléfono</label>
-        <input type="text" name="tel_User" pattern="[4]{3}[0-9]{3}[0-9]{4}" class="form-control" id="tel_User" required>
+        <input type="text" name="tel_User" title="El número debe contener 10 dígitos" pattern="\d{10}" class="form-control" id="tel_User" required>
       </div>
       <div class="form-row">
         <label for="act_User">Estado de actividad</label>
@@ -147,7 +147,7 @@ integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+f
       </div>
       <div class="form-row">
         <label for="pass_User">Contraseña</label>
-        <input type="password" name="pass_User" title="La contraseña debe contener: mínimo 12 caracteres y 1 número" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{12,}$" class="form-control" id="pass_User" required>
+        <input type="password" name="pass_User" title="La contraseña debe tener 12 caracteres incluidos letras, un número y un caracter especial" pattern="^(?=.*\d)(?=.*[!@#$%^&*])[\w!@#$%^&*]{12}$" class="form-control" id="pass_User" required>
       </div>
       <div class="form-row">
         <button type="submit" class="btn btn-primary">Agregar</button>

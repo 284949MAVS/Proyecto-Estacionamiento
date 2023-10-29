@@ -8,7 +8,7 @@ $existeContrato = false;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_cliente = $_POST["id_Cliente"];
 
-    $consulta_contrato = "SELECT * FROM contratos WHERE id_Cliente = '$id_cliente'";
+    $consulta_contrato = "SELECT * FROM clientes WHERE id_Cliente = '$id_cliente'";
     $resultado_contrato = $mysqli->query($consulta_contrato);
 
     if ($resultado_contrato->num_rows > 0) {
@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <div class="mb-3">
             <label for="idCliente" class="form-label">ID de cliente</label>
-            <input type="number" name="id_Cliente" pattern="[0-9]{6}" class="form-control" id="idCliente" aria-describedby="emailHelp">
+            <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador de 6 dígitos" class="form-control" id="idCliente" required>
         </div>
         <!-- Mensaje de error para ID de cliente -->
         <div id="mensajeErrorID" style="color: red; display: none;">Debe ingresar un ID válido</div>
@@ -115,25 +115,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             action="crear_contrato.php" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">ID de Cliente</label>
-                <input type="number" name="id_Cliente" class="form-control" id="exampleInputEmail1"
+                <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_Cliente" required
                     aria-describedby="emailHelp" style="width: 500px;">
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Auto del Cliente</label>
-                <input type="text" name="auto_Cliente" class="form-control" style="width: 500px;">
+                <input type="text" name="auto_Cliente" class="form-control" style="width: 500px;" id="auto_Cliente" required>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Tipo de Pago 1-Nomina 2-Deposito</label>
-                <input type="number" name="tipoPago" min="1" max="2" class="form-control" id="tipoPago" style="width: 500px;">
+                <label for="exampleInputEmail1" class="form-label">Tipo de Pago: 1-Nomina 2-Deposito</label>
+                <input type="text" name="tipoPago" pattern="[12]" title="El tipo de pago solo puede ser: 1 Nómina  2 Depósito" class="form-control" style="width: 500px;" id="tipoPago" required>
                 <div id="mensajeError" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Fecha de inicio del contrato</label>
-                <input type="date" name="fechacont_Cliente" class="form-control" style="width: 500px;">
+                <input type="date" name="fechacont_Cliente" class="form-control" style="width: 500px;" id="fechacont_Cliente" required>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Fecha de fin de contrato</label>
-                <input type="date" name="vigCon_Cliente" class="form-control" style="width: 500px;">
+                <input type="date" name="vigCon_Cliente" class="form-control" style="width: 500px;" id="vigCon_Cliente" required>
             </div>
             <div class="mb-3">
                 <label for="disabledSelect" class="form-label">Estado de actividad</label>
@@ -143,8 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Tipo de Cajon 1-Exclusivo 2-Libre</label>
-                <input type="number" name="tipoCajon" min="1" max="2" class="form-control" id="tipoCajon"
+                <label for="exampleInputEmail1" class="form-label">Tipo de Cajon: 1-Exclusivo 2-Libre</label>
+                <input type="text" name="tipoCajon" class="form-control" title="El tipo de cajón solamente puede cambiar a exclusivo" pattern="[12]" id="tipoCajon" required
                     style="width: 500px;">
                 <div id="mensajeError1" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
             </div>

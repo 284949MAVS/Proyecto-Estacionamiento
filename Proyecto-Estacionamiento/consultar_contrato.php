@@ -256,8 +256,8 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
                                         <input type="text" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>" readonly><br>
                                         <label>Nuevo Auto del Cliente:</label>
                                         <input type="text" name="nuevo_auto" value="<?php echo $info_contrato['auto_Cliente']; ?>"><br>
-                                        <label>Nuevo Pago del Cliente:</label>
-                                        <input type="number" name="nuevo_pago" value="<?php echo $info_contrato['pago_Cliente']; ?>"><br>
+                                        <label>Tipo de Pago del Cliente:</label>
+                                        <input type="text" pattern="[12]" title="El tipo de pago solamente puede ser: 1 Nómina  2 Depósito" name="nuevo_pago" value="<?php echo $info_contrato['pago_Cliente']; ?> "><br>
                                         <label>Nueva Vigencia (meses):</label>
                                         <input type="date" name="nueva_vigencia" value="<?php echo $info_contrato['fechacont_Cliente']; ?>"><br>
                                         <input type="hidden" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>">

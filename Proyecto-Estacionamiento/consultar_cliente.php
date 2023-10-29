@@ -172,13 +172,13 @@
                   <form action='editar_cliente.php' method='post'>
                     <input type='hidden' name='id_Cliente_Editar' value='{$row['id_Cliente']}'>
                     <label for='nuevo_dir_Cliente'>Dirección:</label>
-                    <input type='text' id='nuevo_dir_Cliente' name='nuevo_dir_Cliente' style='border-radius: 45px;' value='{$row["dir_Cliente"]}'><br>
+                    <input type='text' id='nuevo_dir_Cliente' name='dir_Cliente' style='border-radius: 45px;' value='{$row["dir_Cliente"]}'><br>
                     <br>
                     <label for='nuevo_correo_Cliente'>Correo:</label>
-                    <input type='text' id='nuevo_correo_Cliente' name='nuevo_correo_Cliente' style='border-radius: 45px;' value='{$row["correo_Cliente"]}'><br>
+                    <input type='text' id='nuevo_correo_Cliente' name='correo_Cliente' style='border-radius: 45px;' pattern=\"[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}\" title=\"Proporcione un formato válido de correo electrónico: xxxx@dom.example\" value='{$row["correo_Cliente"]}'><br>
                     <br>
                     <label for='nuevo_tipoCliente'>Tipo:</label>
-                    <input type='text' id='nuevo_tipoCliente' name='nuevo_tipoCliente' style='border-radius: 45px;' value='{$row["tipo_Cliente"]}'><br>
+                    <input type='text' id='nuevo_tipoCliente' name='tipoCliente' style='border-radius: 45px;' pattern=\"[123]\" title=\"El tipo de usuario solo puede ser: 1 Estudiante  2 Docente  3 Administrativo\" value='{$row["tipo_Cliente"]}'><br>
                     <br>
                     <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
                   </form>

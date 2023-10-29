@@ -169,9 +169,9 @@
     echo "        <form action=\"modificar_usuario.php\" method=\"post\">";
     echo "          <input type=\"hidden\" name=\"id\" value=\"{$row['id_User']}\">";
     echo "          <label for=\"nuevo_correo\">Correo:</label>";
-    echo "          <input type=\"text\" id=\"nuevo_correo\" name=\"nuevo_correo\" style=\"border-radius: 45px;\" value=\"{$row['correo_User']}\"><br><br>";
+    echo "          <input type=\"text\" id=\"nuevo_correo\" name=\"nuevo_correo\" style=\"border-radius: 45px;\" pattern=\"[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}\" title=\"Proporcione un formato válido de correo electrónico: xxxx@dom.example\"  value=\"{$row['correo_User']}\"><br><br>";
     echo "          <label for=\"nuevo_tipo\">Tipo:</label>";
-    echo "          <input type=\"text\" id=\"nuevo_tipo\" name=\"nuevo_tipo\" style=\"border-radius: 45px;\" value=\"{$row['tipo_User']}\"><br><br>";
+    echo "          <input type=\"text\" id=\"nuevo_tipo\" name=\"nuevo_tipo\" style=\"border-radius: 45px;\" pattern=\"[12]\" title=\"El tipo de usuario solo puede ser: 1 Administrador  2 Trabajador\"  value=\"{$row['tipo_User']}\"><br><br>";
     echo "          <input type=\"submit\" class=\"btn btn-primary\" value=\"Guardar Cambios\">";
     echo "        </form>";
     echo "      </div>";
