@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: Inicio.php");
         exit();
     } else {
-        echo "Usuario o contraseña incorrectos.";
+        header("Location: loginPague.php?error=incorrecto");
     }
 
     $mysqli->close();
