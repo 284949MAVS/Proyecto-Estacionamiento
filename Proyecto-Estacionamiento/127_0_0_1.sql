@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2023 a las 01:15:12
+-- Tiempo de generación: 01-11-2023 a las 05:21:26
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -28,8 +28,7 @@ USE `estacionamientobd`;
 --
 -- Estructura de tabla para la tabla `cajones`
 --
--- Creación: 03-09-2023 a las 21:13:03
--- Última actualización: 03-09-2023 a las 22:47:13
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `cajones` (
@@ -53,8 +52,7 @@ INSERT INTO `cajones` (`id_Cajon`, `cve_Est`, `num_Cajon`, `tipo_Cajon`, `disp_C
 --
 -- Estructura de tabla para la tabla `clientes`
 --
--- Creación: 03-09-2023 a las 21:26:50
--- Última actualización: 03-09-2023 a las 22:59:24
+-- Creación: 02-10-2023 a las 04:49:15
 --
 
 CREATE TABLE `clientes` (
@@ -67,24 +65,26 @@ CREATE TABLE `clientes` (
   `tel_Cliente` int(11) NOT NULL,
   `correo_Cliente` mediumtext NOT NULL,
   `id_Credencial` int(11) NOT NULL,
-  `tipo_Cliente` int(11) NOT NULL
+  `tipo_Cliente` int(11) NOT NULL,
+  `act_Cli` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_Cliente`, `dir_Cliente`, `tel_Cliente`, `correo_Cliente`, `id_Credencial`, `tipo_Cliente`) VALUES
-(308588, 'José Eduardo', 'Sánchez', 'Sifuentes', 'SSJE010416FDA', 'Socrates #485, colonia progreso', 12345678, 'A308588@alumnos.uaslp.mx', 928375767, 1),
-(987654, 'Lola', 'Perez', 'Ortiz', 'OPLO123456WE3', 'Av. Manuel Nava #223', 12345679, 'lola@gmail.com', 928375769, 2);
+INSERT INTO `clientes` (`id_Cliente`, `nom_Cliente`, `ap_Patc`, `ap_Matc`, `rfc_Cliente`, `dir_Cliente`, `tel_Cliente`, `correo_Cliente`, `id_Credencial`, `tipo_Cliente`, `act_Cli`) VALUES
+(165734, 'Roberto', 'Llanas', 'Márquez', 'LWUT927461RT2', 'Niño Artillero #900', 1928374587, 'rober@hotmail.com', 928375767, 1, 0),
+(308588, 'José Eduardo', 'Sánchez', 'Sifuentes', 'SSJE010416FDA', 'Socrates #485, colonia progreso', 12345678, 'A308588@alumnos.uaslp.mx', 928375767, 1, 0),
+(746352, 'Lola Jimena', 'Vaca', 'Domínguez', 'ASDF283459QW1', 'Manuel Nava #200', 2147483647, 'ljvd@outlook.com', 928375769, 1, 1),
+(987654, 'Lola', 'Perez', 'Ortiz', 'OPLO123456WE3', 'Av. Manuel Nava #223', 12345679, 'lola@gmail.com', 928375769, 2, 0);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `contratos`
 --
--- Creación: 03-09-2023 a las 23:01:53
--- Última actualización: 03-09-2023 a las 23:07:42
+-- Creación: 05-10-2023 a las 05:26:19
 --
 
 CREATE TABLE `contratos` (
@@ -93,6 +93,8 @@ CREATE TABLE `contratos` (
   `auto_Cliente` mediumtext NOT NULL,
   `pago_Cliente` int(11) NOT NULL,
   `fechacont_Cliente` date NOT NULL,
+  `vigCon_cliente` date NOT NULL,
+  `cont_Act` tinyint(1) NOT NULL,
   `tipo_Cajon` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -100,45 +102,47 @@ CREATE TABLE `contratos` (
 -- Volcado de datos para la tabla `contratos`
 --
 
-INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `tipo_Cajon`) VALUES
-(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', 1),
-(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', 2);
+INSERT INTO `contratos` (`id_Contrato`, `id_Cliente`, `auto_Cliente`, `pago_Cliente`, `fechacont_Cliente`, `vigCon_cliente`, `cont_Act`, `tipo_Cajon`) VALUES
+(1, 308588, 'Mazda 3, color rojo', 1, '2023-09-03', '0000-00-00', 0, 1),
+(2, 987654, 'Toyota Tacoma color verde', 2, '2023-09-03', '0000-00-00', 0, 2),
+(3, 746352, 'Nissan Tsuru, Negro', 2, '2023-10-29', '2024-10-29', 0, 1),
+(7, 165734, 'Ford Raptor, Café', 2, '2023-10-29', '2024-10-29', 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `cortes_caja`
 --
--- Creación: 03-09-2023 a las 21:06:18
--- Última actualización: 03-09-2023 a las 22:25:05
+-- Creación: 01-11-2023 a las 04:20:45
+-- Última actualización: 01-11-2023 a las 04:20:45
 --
 
 CREATE TABLE `cortes_caja` (
   `num_Corte` int(11) NOT NULL COMMENT 'Número de corte de caja',
   `id_User` int(11) NOT NULL COMMENT 'Identificador unico de usuario',
-  `inicio_Turno` date NOT NULL COMMENT 'Inicio de turno de trabajo',
-  `fin_Turno` date NOT NULL COMMENT 'Fin de turno de trabajo',
+  `inicio_Turno` datetime NOT NULL COMMENT 'Inicio de turno de trabajo',
+  `fin_Turno` datetime NOT NULL COMMENT 'Fin de turno de trabajo',
   `autos_Salida` int(11) NOT NULL COMMENT 'Total de autos que han salido',
   `tickets_Canc` int(11) NOT NULL COMMENT 'Tickets cancelados durante el turno',
   `efectivo` float NOT NULL COMMENT 'Cantidad pagada en efectivo durante el turno',
   `depos` int(11) NOT NULL COMMENT 'Total de comprobantes de pago de mes durante el turno',
-  `total_Corte` float NOT NULL COMMENT 'Cantidad total acumulada durante el corte.'
+  `total_Corte` float NOT NULL COMMENT 'Cantidad total acumulada durante el corte.',
+  `corte_Act` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cortes_caja`
 --
 
-INSERT INTO `cortes_caja` (`num_Corte`, `id_User`, `inicio_Turno`, `fin_Turno`, `autos_Salida`, `tickets_Canc`, `efectivo`, `depos`, `total_Corte`) VALUES
-(90, 123456, '2023-09-01', '2023-09-01', 100, 5, 4570, 3, 6000);
+INSERT INTO `cortes_caja` (`num_Corte`, `id_User`, `inicio_Turno`, `fin_Turno`, `autos_Salida`, `tickets_Canc`, `efectivo`, `depos`, `total_Corte`, `corte_Act`) VALUES
+(90, 123456, '2023-09-01 00:00:00', '2023-09-01 00:00:00', 100, 5, 4570, 3, 6000, 0);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `credencial`
 --
--- Creación: 03-09-2023 a las 22:50:53
--- Última actualización: 03-09-2023 a las 22:51:27
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `credencial` (
@@ -151,6 +155,7 @@ CREATE TABLE `credencial` (
 --
 
 INSERT INTO `credencial` (`id_Credencial`, `nom_Cliente`) VALUES
+(827463521, 'Leonardo Mendoza'),
 (928375767, 'Lionel Messi'),
 (928375769, 'Cristiano Ronaldo');
 
@@ -159,8 +164,7 @@ INSERT INTO `credencial` (`id_Credencial`, `nom_Cliente`) VALUES
 --
 -- Estructura de tabla para la tabla `estacionamientos`
 --
--- Creación: 03-09-2023 a las 22:34:00
--- Última actualización: 03-09-2023 a las 22:36:15
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `estacionamientos` (
@@ -183,8 +187,7 @@ INSERT INTO `estacionamientos` (`cve_Est`, `tipo_Est`, `ubi_Est`, `lugares_Tot`)
 --
 -- Estructura de tabla para la tabla `tickets`
 --
--- Creación: 03-09-2023 a las 22:29:42
--- Última actualización: 03-09-2023 a las 22:39:05
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tickets` (
@@ -211,8 +214,7 @@ INSERT INTO `tickets` (`id_Ticket`, `cve_Est`, `id_User`, `hr_Ent`, `hr_Sal`, `n
 --
 -- Estructura de tabla para la tabla `tipos_cajones`
 --
--- Creación: 03-09-2023 a las 22:39:57
--- Última actualización: 03-09-2023 a las 22:40:34
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_cajones` (
@@ -233,8 +235,7 @@ INSERT INTO `tipos_cajones` (`id_Cajon`, `desc_Cajon`) VALUES
 --
 -- Estructura de tabla para la tabla `tipos_clientes`
 --
--- Creación: 03-09-2023 a las 22:49:44
--- Última actualización: 03-09-2023 a las 22:50:13
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_clientes` (
@@ -256,8 +257,7 @@ INSERT INTO `tipos_clientes` (`tipo_Cliente`, `desc_Cliente`) VALUES
 --
 -- Estructura de tabla para la tabla `tipos_estacionamientos`
 --
--- Creación: 03-09-2023 a las 22:33:48
--- Última actualización: 03-09-2023 a las 22:25:59
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipos_estacionamientos` (
@@ -278,8 +278,7 @@ INSERT INTO `tipos_estacionamientos` (`tipo_Est`, `desc_Esta`) VALUES
 --
 -- Estructura de tabla para la tabla `tipo_pago`
 --
--- Creación: 03-09-2023 a las 23:05:34
--- Última actualización: 03-09-2023 a las 23:05:58
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipo_pago` (
@@ -300,8 +299,7 @@ INSERT INTO `tipo_pago` (`pago_Cliente`, `desc_PCliente`) VALUES
 --
 -- Estructura de tabla para la tabla `tipo_usuario`
 --
--- Creación: 03-09-2023 a las 22:00:24
--- Última actualización: 03-09-2023 a las 22:21:03
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `tipo_usuario` (
@@ -322,8 +320,7 @@ INSERT INTO `tipo_usuario` (`tipo_User`, `desc_User`) VALUES
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
--- Creación: 03-09-2023 a las 22:16:09
--- Última actualización: 03-09-2023 a las 22:23:24
+-- Creación: 07-09-2023 a las 20:14:34
 --
 
 CREATE TABLE `usuarios` (
@@ -344,7 +341,9 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_User`, `nom_User`, `ap_PatU`, `ap_MatU`, `tipo_User`, `correo_User`, `tel_User`, `act_User`, `pass_User`) VALUES
 (123456, 'Carlos', 'Martinez', 'Solis', 2, 'carlos@gmail.com', 9876543210, 1, 'zxcvbn098765'),
-(193782, 'Pedro', 'Lopez', 'Perez', 1, 'juan@gmail.com', 4444462012, 1, 'qwerty123456');
+(123458, 'Lalo', 'Sifuentes', 'Castro', 1, 'eduardo15@gmail.com', 1234567891, 0, 'cvbnmkuyqw3$'),
+(193782, 'Pedro', 'Lopez', 'Perez', 1, 'juan@gmail.com', 4444462012, 1, 'qwerty123456'),
+(313131, 'Rogelio', 'Guerra', 'Cruz', 1, '123@ada.com', 3456789098, 0, 'asdfghjklq1!');
 
 --
 -- Índices para tablas volcadas
@@ -454,7 +453,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `cortes_caja`
@@ -508,7 +507,7 @@ ALTER TABLE `tipo_usuario`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_User` int(8) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único de usuario', AUTO_INCREMENT=312310;
+  MODIFY `id_User` int(8) NOT NULL AUTO_INCREMENT COMMENT 'Identificador único de usuario', AUTO_INCREMENT=313132;
 
 --
 -- Restricciones para tablas volcadas
@@ -560,6 +559,507 @@ ALTER TABLE `tickets`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_usuarios_tipo_usuario` FOREIGN KEY (`tipo_User`) REFERENCES `tipo_usuario` (`tipo_User`) ON DELETE CASCADE ON UPDATE CASCADE;
+--
+-- Base de datos: `phpmyadmin`
+--
+CREATE DATABASE IF NOT EXISTS `phpmyadmin` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `phpmyadmin`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__bookmark`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__bookmark` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `dbase` varchar(255) NOT NULL DEFAULT '',
+  `user` varchar(255) NOT NULL DEFAULT '',
+  `label` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `query` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Bookmarks';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__central_columns`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__central_columns` (
+  `db_name` varchar(64) NOT NULL,
+  `col_name` varchar(64) NOT NULL,
+  `col_type` varchar(64) NOT NULL,
+  `col_length` text DEFAULT NULL,
+  `col_collation` varchar(64) NOT NULL,
+  `col_isNull` tinyint(1) NOT NULL,
+  `col_extra` varchar(255) DEFAULT '',
+  `col_default` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Central list of columns';
+
+--
+-- Volcado de datos para la tabla `pma__central_columns`
+--
+
+INSERT INTO `pma__central_columns` (`db_name`, `col_name`, `col_type`, `col_length`, `col_collation`, `col_isNull`, `col_extra`, `col_default`) VALUES
+('estacionamientobd', 'auto_Cliente', 'mediumtext', '', 'utf8mb4_general_ci', 0, ',', ''),
+('estacionamientobd', 'fechacont_Cliente', 'date', '', '', 0, ',', ''),
+('estacionamientobd', 'id_Cliente', 'int', '11', '', 0, ',', ''),
+('estacionamientobd', 'id_Contrato', 'int', '11', '', 0, 'auto_increment,', ''),
+('estacionamientobd', 'pago_Cliente', 'int', '11', '', 0, ',', ''),
+('estacionamientobd', 'tipo_Cajon', 'int', '11', '', 0, ',', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__column_info`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__column_info` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `column_name` varchar(64) NOT NULL DEFAULT '',
+  `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `mimetype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
+  `transformation` varchar(255) NOT NULL DEFAULT '',
+  `transformation_options` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation` varchar(255) NOT NULL DEFAULT '',
+  `input_transformation_options` varchar(255) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Column information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__designer_settings`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__designer_settings` (
+  `username` varchar(64) NOT NULL,
+  `settings_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__export_templates`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__export_templates` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `export_type` varchar(10) NOT NULL,
+  `template_name` varchar(64) NOT NULL,
+  `template_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved export templates';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__favorite`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__favorite` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Favorite tables';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__history`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__history` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db` varchar(64) NOT NULL DEFAULT '',
+  `table` varchar(64) NOT NULL DEFAULT '',
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sqlquery` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='SQL history for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__navigationhiding`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__navigationhiding` (
+  `username` varchar(64) NOT NULL,
+  `item_name` varchar(64) NOT NULL,
+  `item_type` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Hidden items of navigation tree';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__pdf_pages`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__pdf_pages` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `page_nr` int(10) UNSIGNED NOT NULL,
+  `page_descr` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='PDF relation pages for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__recent`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+-- Última actualización: 01-11-2023 a las 04:19:54
+--
+
+CREATE TABLE `pma__recent` (
+  `username` varchar(64) NOT NULL,
+  `tables` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Recently accessed tables';
+
+--
+-- Volcado de datos para la tabla `pma__recent`
+--
+
+INSERT INTO `pma__recent` (`username`, `tables`) VALUES
+('root', '[{\"db\":\"estacionamientobd\",\"table\":\"cortes_caja\"},{\"db\":\"estacionamientobd\",\"table\":\"usuarios\"},{\"db\":\"estacionamientobd\",\"table\":\"contratos\"},{\"db\":\"estacionamientobd\",\"table\":\"clientes\"},{\"db\":\"estacionamientobd\",\"table\":\"tipos_clientes\"},{\"db\":\"estacionamientobd\",\"table\":\"credencial\"},{\"db\":\"estacionamientobd\",\"table\":\"tipo_usuario\"},{\"db\":\"estacionamientobd\",\"table\":\"cajones\"},{\"db\":\"estacionamientobd\",\"table\":\"estacionamientos\"}]');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__relation`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__relation` (
+  `master_db` varchar(64) NOT NULL DEFAULT '',
+  `master_table` varchar(64) NOT NULL DEFAULT '',
+  `master_field` varchar(64) NOT NULL DEFAULT '',
+  `foreign_db` varchar(64) NOT NULL DEFAULT '',
+  `foreign_table` varchar(64) NOT NULL DEFAULT '',
+  `foreign_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Relation table';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__savedsearches`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__savedsearches` (
+  `id` int(5) UNSIGNED NOT NULL,
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `search_name` varchar(64) NOT NULL DEFAULT '',
+  `search_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Saved searches';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_coords`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__table_coords` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `pdf_page_number` int(11) NOT NULL DEFAULT 0,
+  `x` float UNSIGNED NOT NULL DEFAULT 0,
+  `y` float UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table coordinates for phpMyAdmin PDF output';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_info`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__table_info` (
+  `db_name` varchar(64) NOT NULL DEFAULT '',
+  `table_name` varchar(64) NOT NULL DEFAULT '',
+  `display_field` varchar(64) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Table information for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__table_uiprefs`
+--
+-- Creación: 07-09-2023 a las 20:06:56
+--
+
+CREATE TABLE `pma__table_uiprefs` (
+  `username` varchar(64) NOT NULL,
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `prefs` text NOT NULL,
+  `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__tracking`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__tracking` (
+  `db_name` varchar(64) NOT NULL,
+  `table_name` varchar(64) NOT NULL,
+  `version` int(10) UNSIGNED NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `schema_snapshot` text NOT NULL,
+  `schema_sql` text DEFAULT NULL,
+  `data_sql` longtext DEFAULT NULL,
+  `tracking` set('UPDATE','REPLACE','INSERT','DELETE','TRUNCATE','CREATE DATABASE','ALTER DATABASE','DROP DATABASE','CREATE TABLE','ALTER TABLE','RENAME TABLE','DROP TABLE','CREATE INDEX','DROP INDEX','CREATE VIEW','ALTER VIEW','DROP VIEW') DEFAULT NULL,
+  `tracking_active` int(1) UNSIGNED NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Database changes tracking for phpMyAdmin';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__userconfig`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+-- Última actualización: 01-11-2023 a las 04:18:00
+--
+
+CREATE TABLE `pma__userconfig` (
+  `username` varchar(64) NOT NULL,
+  `timevalue` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `config_data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User preferences storage for phpMyAdmin';
+
+--
+-- Volcado de datos para la tabla `pma__userconfig`
+--
+
+INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
+('root', '2023-11-01 04:18:00', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\",\"NavigationWidth\":231}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__usergroups`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__usergroups` (
+  `usergroup` varchar(64) NOT NULL,
+  `tab` varchar(64) NOT NULL,
+  `allowed` enum('Y','N') NOT NULL DEFAULT 'N'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='User groups with configured menu items';
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pma__users`
+--
+-- Creación: 07-09-2023 a las 20:06:55
+--
+
+CREATE TABLE `pma__users` (
+  `username` varchar(64) NOT NULL,
+  `usergroup` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Users and their assignments to user groups';
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `pma__central_columns`
+--
+ALTER TABLE `pma__central_columns`
+  ADD PRIMARY KEY (`db_name`,`col_name`);
+
+--
+-- Indices de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `db_name` (`db_name`,`table_name`,`column_name`);
+
+--
+-- Indices de la tabla `pma__designer_settings`
+--
+ALTER TABLE `pma__designer_settings`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_user_type_template` (`username`,`export_type`,`template_name`);
+
+--
+-- Indices de la tabla `pma__favorite`
+--
+ALTER TABLE `pma__favorite`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `username` (`username`,`db`,`table`,`timevalue`);
+
+--
+-- Indices de la tabla `pma__navigationhiding`
+--
+ALTER TABLE `pma__navigationhiding`
+  ADD PRIMARY KEY (`username`,`item_name`,`item_type`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  ADD PRIMARY KEY (`page_nr`),
+  ADD KEY `db_name` (`db_name`);
+
+--
+-- Indices de la tabla `pma__recent`
+--
+ALTER TABLE `pma__recent`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__relation`
+--
+ALTER TABLE `pma__relation`
+  ADD PRIMARY KEY (`master_db`,`master_table`,`master_field`),
+  ADD KEY `foreign_field` (`foreign_db`,`foreign_table`);
+
+--
+-- Indices de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `u_savedsearches_username_dbname` (`username`,`db_name`,`search_name`);
+
+--
+-- Indices de la tabla `pma__table_coords`
+--
+ALTER TABLE `pma__table_coords`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`pdf_page_number`);
+
+--
+-- Indices de la tabla `pma__table_info`
+--
+ALTER TABLE `pma__table_info`
+  ADD PRIMARY KEY (`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__table_uiprefs`
+--
+ALTER TABLE `pma__table_uiprefs`
+  ADD PRIMARY KEY (`username`,`db_name`,`table_name`);
+
+--
+-- Indices de la tabla `pma__tracking`
+--
+ALTER TABLE `pma__tracking`
+  ADD PRIMARY KEY (`db_name`,`table_name`,`version`);
+
+--
+-- Indices de la tabla `pma__userconfig`
+--
+ALTER TABLE `pma__userconfig`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indices de la tabla `pma__usergroups`
+--
+ALTER TABLE `pma__usergroups`
+  ADD PRIMARY KEY (`usergroup`,`tab`,`allowed`);
+
+--
+-- Indices de la tabla `pma__users`
+--
+ALTER TABLE `pma__users`
+  ADD PRIMARY KEY (`username`,`usergroup`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pma__bookmark`
+--
+ALTER TABLE `pma__bookmark`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__column_info`
+--
+ALTER TABLE `pma__column_info`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__export_templates`
+--
+ALTER TABLE `pma__export_templates`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__history`
+--
+ALTER TABLE `pma__history`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__pdf_pages`
+--
+ALTER TABLE `pma__pdf_pages`
+  MODIFY `page_nr` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `pma__savedsearches`
+--
+ALTER TABLE `pma__savedsearches`
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Base de datos: `test`
+--
+CREATE DATABASE IF NOT EXISTS `test` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `test`;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
