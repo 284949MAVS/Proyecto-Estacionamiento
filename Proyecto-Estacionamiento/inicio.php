@@ -126,7 +126,7 @@
 <div class="modal-content">
     <h2>Cerrar Sesión</h2>
     <p>¿Estás seguro de que deseas cerrar sesión?</p>
-    <button id="confirm-logout">Cerrar Sesión</button>
+    <a href="loginPague.php" id="confirm-logout" class="btn btn-primary">Cerrar Sesión</a>
     <button id="cancel-logout">Cancelar</button>
 </div>
 </div>
