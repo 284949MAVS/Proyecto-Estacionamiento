@@ -13,11 +13,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        
+        if($row["tipo_User"]==1){
         $nombre = $row["nom_User"];
         $_SESSION["nom_User"] = $nombre;
         header("Location: Inicio.php");
         exit();
+        }else{
+        $nombre = $row["nom_User"];
+        $_SESSION["nom_User"] = $nombre;
+        header("Location: inicio_caseta.php"); 
+        }
     } else {
         header("Location: loginPague.php?error=incorrecto");
     }

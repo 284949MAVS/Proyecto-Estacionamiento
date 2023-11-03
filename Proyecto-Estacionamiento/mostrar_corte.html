@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interfaz de Cortes de Caja en Tiempo Real</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container text-center mt-8">
+    <h1>Corte de Caja en Tiempo Real</h1>
+    <div id="corteCaja" class="mt-10">
+        <form>
+            <div class="form-group">
+                <label for="num_Corte">Numero de corte:</label>
+                <input type="text" class="form-control" id="num_Corte" readonly>
+            </div>
+            <div class="form-group">
+                <label for="id_User">ID:</label>
+                <input type="text" class="form-control" id="id" readonly>
+            </div>
+            <div class="form-group">
+                <label for="inicioTurno">Inicio de Turno:</label>
+                <input type="text" class="form-control" id="inicioTurno" readonly>
+            </div>
+            <div class="form-group">
+                <label for="autosSalida">Autos Salida:</label>
+                <input type="text" class="form-control" id="autosSalida" readonly>
+            </div>
+            <div class="form-group">
+                <label for="ticketsCancelados">Tickets Cancelados:</label>
+                <input type="text" class="form-control" id="ticketsCancelados" readonly>
+            </div>
+            <div class="form-group">
+                <label for="efectivo">Efectivo:</label>
+                <input type="text" class="form-control" id="efectivo" readonly>
+            </div>
+            <div class="form-group">
+                <label for="depositos">Depósitos:</label>
+                <input type="text" class="form-control" id="depositos" readonly>
+            </div>
+            <div class="form-group">
+                <label for="totalCorte">Total de Corte:</label>
+                <input type="text" class="form-control" id="totalCorte" readonly>
+            </div>
+            <div class="form-group">
+                <label for="corteActivo">Corte Activo:</label>
+                <input type="text" class="form-control" id="corteActivo" readonly>
+            </div>
+        </form>
+    </div>
+</div>
+    <script>
+        function actualizarInterfaz() {
+            $.ajax({
+                url: "mostrar_corte_caja.php",
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    var corteActivo = data.find(function (corte) {
+                        return corte.corte_Act === "1";
+                    });
+
+                    if (corteActivo) {
+                        $("#num_Corte").val(corteActivo.num_Corte);
+                        $("#id").val(corteActivo.id_User);
+                        $("#inicioTurno").val(corteActivo.inicio_Turno);
+                        $("#finTurno").val(corteActivo.fin_Turno);
+                        $("#autosSalida").val(corteActivo.autos_Salida);
+                        $("#ticketsCancelados").val(corteActivo.tickets_Canc);
+                        $("#efectivo").val(corteActivo.efectivo);
+                        $("#depositos").val(corteActivo.depos);
+                        $("#totalCorte").val(corteActivo.total_Corte);
+                        $("#corteActivo").val(corteActivo.corte_Act);
+                    } else {
+                        alert("No hay corte de caja activo en este momento.");
+                    }
+                },
+                error: function() {
+                    console.error("Error al obtener los datos de la base de datos.");
+                }
+            });
+        }
+
+        setInterval(actualizarInterfaz, 5000);
+        actualizarInterfaz();
+    </script>
+</body>
+</html>
