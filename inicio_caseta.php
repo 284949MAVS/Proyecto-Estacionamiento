@@ -13,6 +13,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+</head>
 </head>
 
 <body>
@@ -22,7 +29,7 @@
         <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img" alt="..." style="width: 60px ;" style="border: 0cm;"></a>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
         aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-    <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
         <li class="nav-item">
             <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
@@ -32,11 +39,12 @@
             Corte de caja
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja Actual</a></li> 
+            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja actual</a></li> 
             <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
           </ul>
         </li>
     </ul>
+
     <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
       require "conexion.php";
       echo $_SESSION['nom_User'];
@@ -109,29 +117,14 @@
 
 <!-- place navbar here -->
 
-  </header>
+</header>
   <main>
     <br>
     <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de zona universitaria</h1>
     <div class="row row-cols-1 row-cols-md-4 g-6">
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\Proyecto-Estacionamiento\imagenes\encender.png" class="card-img-top" width="auto" height="240" id="iniciarTurno">
-        <h5 class="card-title text-center">Iniciar turno</h5>
-      </div>
-    </div>
-  </div>
 
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\Proyecto-Estacionamiento\imagenes\apagar.png" class="card-img-top" width="auto" height="240" id="terminarTurno">
-        <h5 class="card-title text-center">Terminar turno</h5>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
 <!-- Modal de iniciar turno-->
 <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
@@ -178,6 +171,41 @@
 
 
   </main>
+
+    <div class="container text-center mt-3 reloj-container">
+        <p class="reloj-digital" id="reloj">
+            <span id="fecha"></span><br>
+            <span id="hora-actual"></span>
+        </p>
+    </div>
+    <div class="container text-center mt-3">
+        <button class="btn btn-primary" id="iniciarTurno">Iniciar Turno</button>
+        <button class="btn btn-danger" id="terminarTurno">Terminar Turno</button>
+    </div>
+
+    <!-- Tarjeta "Estacionamientos Activos" con ícono de coche -->
+    <div class="container text-center mt-5">
+        <div class="card" style="background-color: #f5f5f5;">
+            <div class="card-body">
+                <h5 class="card-title">Estacionamientos Activos</h5>
+                <p class="card-text">Número de estacionamientos ocupados: <span id="estacionamientos-activos">0</span></p>
+                <i class="fas fa-car fa-2x" style="margin-right: 10px;"></i> <!-- Ícono de coche de Font Awesome más pequeño (2x) -->
+                <i class="fas fa-car fa-2x"></i> <!-- Segundo ícono de coche -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tarjeta "Tarifas" con ícono de tarifa -->
+    <div class="container text-center mt-3">
+        <div class="card" style="background-color: #f5f5f5;">
+            <div class="card-body">
+                <h5 class="card-title">Tarifas</h5>
+                <p class="card-text">Tarifa por hora: $5.00</p>
+                <i class="fas fa-dollar-sign fa-2x" style="margin-right: 10px;"></i> <!-- Ícono de tarifa de Font Awesome más pequeño (2x) -->
+                <i class="fas fa-dollar-sign fa-2x"></i> <!-- Segundo ícono de tarifa -->
+            </div>
+        </div>
+    </div>
   
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -188,6 +216,8 @@
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  
   <script>
   $(document).ready(function () {
     $("#open-modal").click(function () {
@@ -203,7 +233,7 @@
         url: "cerrar_sesion.php",
         type: "POST",
         success: function (response) {
-            window.location.href = "login.php";
+            window.location.href = "loginPague.php";
         }
     });
 });
@@ -317,6 +347,44 @@ document.getElementById("confirmarAccion").addEventListener("click", function() 
 });
 
 </script>
+
+
+
+    <!-- Agregar enlaces a los archivos JavaScript de Bootstrap y jQuery -->
+    
+    <style>
+        .reloj-digital {
+            font-size: 36px; /* Tamaño de fuente más pequeño para el reloj */
+            color: #333; /* Color de texto */
+            text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.6); /* Sombra de texto */
+        }
+
+        .reloj-container {
+            background-color: #f5f5f5; /* Color de fondo del contenedor del reloj */
+            padding: 10px; /* Espaciado interior más pequeño del contenedor del reloj */
+            border-radius: 10px; /* Bordes redondeados del contenedor del reloj */
+        }
+    </style>
+
+    <script>
+        // Función para mostrar la fecha y la hora actual
+        function mostrarHora() {
+            const fecha = new Date();
+            const dia = fecha.getDate();
+            const mes = fecha.toLocaleDateString('es-ES', { month: 'long' }); // Obtener el mes en formato completo
+            const año = fecha.getFullYear();
+            const hora = fecha.getHours().toString().padStart(2, '0');
+            const minutos = fecha.getMinutes().toString().padStart(2, '0');
+            const segundos = fecha.getSeconds().toString().padStart(2, '0');
+            const fechaActual = `${dia} de ${mes} de ${año}`;
+            const horaActual = `${hora}:${minutos}:${segundos}`;
+            document.getElementById("fecha").innerText = fechaActual;
+            document.getElementById("hora-actual").innerText = horaActual;
+        }
+
+        // Actualizar la hora cada segundo
+        setInterval(mostrarHora, 1000);
+    </script>
 
 </body>
 

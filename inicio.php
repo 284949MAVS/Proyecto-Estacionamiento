@@ -163,7 +163,7 @@
         url: "cerrar_sesion.php",
         type: "POST",
         success: function (response) {
-            window.location.href = "login.php";
+            window.location.href = "loginPague.php";
         }
     });
 });
