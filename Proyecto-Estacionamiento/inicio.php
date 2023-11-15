@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -61,11 +60,7 @@
       </li>
 
     </ul>
-    <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
-      require "conexion.php";
-      echo $_SESSION['nom_User'];
-    ?>
-    </a>
+    <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
     
     </div>
    
@@ -126,7 +121,7 @@
 <div class="modal-content">
     <h2>Cerrar Sesión</h2>
     <p>¿Estás seguro de que deseas cerrar sesión?</p>
-    <button id="confirm-logout">Cerrar Sesión</button>
+    <a href="loginPague.php" id="confirm-logout" class="btn btn-primary">Cerrar Sesión</a>
     <button id="cancel-logout">Cancelar</button>
 </div>
 </div>
@@ -192,7 +187,6 @@ mostrarFechaHora();
 
 setInterval(mostrarFechaHora, 1000);
 </script>
-
 
 
 </body>

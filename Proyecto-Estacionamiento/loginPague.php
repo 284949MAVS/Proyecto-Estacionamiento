@@ -14,7 +14,6 @@
     </style>
 </head>
 <body>
-
     <div class="container text-white">
         <br><br>
         <p class="placeholder-glow">
@@ -24,7 +23,6 @@
             <h1>Sistema de Estacionamiento Zona Universitaria</h1>
         </div>
     </div>
-
     <div class="container">
         <br><br><br>
         <div class="d-flex justify-content-center align-items-center">
@@ -61,7 +59,6 @@
             </div>
         </div> 
     </div>
-
     
     <script>
         const queryString = window.location.search;
@@ -69,5 +66,6 @@
             document.getElementById("error-message").style.display = "block";
         }
     </script>
+    
 </body>
 </html>

@@ -2,7 +2,6 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  
     $username = $_POST["username"];
     $password = $_POST["password"];
 
@@ -13,18 +12,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        if($row["tipo_User"]==1){
         $nombre = $row["nom_User"];
         $_SESSION["nom_User"] = $nombre;
-        header("Location: Inicio.php");
-        exit();
-        }else{
-        $nombre = $row["nom_User"];
-        $_SESSION["nom_User"] = $nombre;
-        header("Location: inicio_caseta.php"); 
+
+        if ($row["tipo_User"] == 1) {
+            header("Location: Inicio.php");
+        } else {
+            header("Location: inicio_caseta.php");
         }
+
+        exit(); 
     } else {
         header("Location: loginPague.php?error=incorrecto");
+        exit(); 
     }
 
     $mysqli->close();

@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
+<?php
 include('conexion.php');
 if (isset($_POST['actualizar'])){
     $id_contrato = $_POST["id_contrato"];
@@ -117,7 +127,7 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
 
         .container2 {
 
-        width: 50%; /* Puedes ajustar el ancho según tus necesidades */
+        width: 80%; /* Puedes ajustar el ancho según tus necesidades */
 
         margin: 0 auto; /* Esto centrará el contenedor horizontalmente */
 
@@ -220,8 +230,9 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
 </script>
 
     <div class="container2">
-        <h2 style="text-align:center">Información de Contratos</h2>
-        <table class="table table-striped" id="table">
+      <div class="table-responsive">
+        <h2 style="text-align:center">Contratos</h2>
+        <table class="table table-striped" id="table" style="width: 100%;">
             <thead>
                 <tr>
                     <th>ID Cliente</th>
@@ -289,6 +300,7 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
                 <?php endwhile; ?>
             </tbody>
         </table>
+      </div>  
     </div>
 
     
@@ -313,5 +325,36 @@ integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/j
 integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
 
 </script>
+
+<script>
+  $(document).ready(function () {
+    var dataTable = $('#table').DataTable();
+
+    // Crea el botón personalizado con clases de Bootstrap y estilos personalizados
+    var customButton = $('<a href="crear-Contratos.php" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear contrato</a>');
+
+    // Agrega el botón antes del cuadro de búsqueda
+    $('.dataTables_filter').prepend(customButton);
+
+    // Agrega eventos de mouse al botón personalizado
+    customButton.on({
+      mouseenter: function () {
+        // Cambia el color al pasar el mouse sobre el botón
+        $(this).css('background-color', '#007bff');
+        $(this).css('color', '#fff');
+      },
+      mouseleave: function () {
+        // Restaura los colores originales al salir del botón
+        $(this).css('background-color', '#fff');
+        $(this).css('color', '#007bff');
+      }
+    });
+
+    // Inicializa DataTable
+    dataTable.DataTable();
+  });
+</script>
+
+
 </body>
 </html>

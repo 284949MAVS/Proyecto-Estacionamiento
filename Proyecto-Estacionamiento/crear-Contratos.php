@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
+
+<?php
 include('conexion.php');
 
 $id_cliente = '';
@@ -14,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado_contrato->num_rows > 0) {
         $info_contrato = $resultado_contrato->fetch_assoc();
         $existeContrato = true;
+    }
+    else{
     }
 }
     

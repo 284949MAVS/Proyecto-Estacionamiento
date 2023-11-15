@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,12 +109,14 @@
     $('#table').DataTable();
 } );
 </script>
+
 <div class="container">
-    <h1 style="font-size: bold; text-align: center;">Consultar Usuarios <i class="fa-solid fa-magnifying-glass"></i></h1>
+    <h1 style="font-size: bold; text-align: center;">Usuarios <i class="fa-solid fa-magnifying-glass"></i></h1>
   </div>
   <br>
   <!-- Contenedor de la tabla, centrado y con el título arriba -->
   <div class="container text-center">
+  <div class="table-responsive">
     <table class="table table-no-border table-striped" style="margin: 0 auto;" id="table">
       <thead>
         <tr>
@@ -150,7 +162,8 @@
         ?>
       </tbody>
     </table>
-  </div>
+    </div>
+</div>
   <!-- Modales de edición y eliminación -->
   <?php
   require "conexion.php";
@@ -225,6 +238,35 @@
             consultarButton.disabled = true;
         }
     });
+</script>
+
+<script>
+  $(document).ready(function () {
+    var dataTable = $('#table').DataTable();
+
+    // Crea el botón personalizado con clases de Bootstrap y estilos personalizados
+    var customButton = $('<a href="nuevo_usuario.html" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear usuario</a>');
+
+    // Agrega el botón antes del cuadro de búsqueda
+    $('.dataTables_filter').prepend(customButton);
+
+    // Agrega eventos de mouse al botón personalizado
+    customButton.on({
+      mouseenter: function () {
+        // Cambia el color al pasar el mouse sobre el botón
+        $(this).css('background-color', '#007bff');
+        $(this).css('color', '#fff');
+      },
+      mouseleave: function () {
+        // Restaura los colores originales al salir del botón
+        $(this).css('background-color', '#fff');
+        $(this).css('color', '#007bff');
+      }
+    });
+
+    // Inicializa DataTable
+    dataTable.DataTable();
+  });
 </script>
 
 
