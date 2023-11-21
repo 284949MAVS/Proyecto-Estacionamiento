@@ -13,30 +13,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+</head>
 </head>
 
 <body>
   <header>
     
-  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #004A98;"> 
-    <a class="navbar-brand"  href="#"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img-thumbnail" alt="..." style="width: 50px ;" style="border: 0cm;"></a>
+  <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #042E5D;"> 
+        <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img" alt="..." style="width: 60px ;" style="border: 0cm;"></a>
     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
         aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
-    <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" href="#" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Corte de caja
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja Actual</a></li> 
+            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja actual</a></li> 
             <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
           </ul>
         </li>
+        <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
+            Simulacion entrada
+          </a>
     </ul>
+
     <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
       require "conexion.php";
       echo $_SESSION['nom_User'];
@@ -109,29 +120,14 @@
 
 <!-- place navbar here -->
 
-  </header>
+</header>
   <main>
     <br>
     <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de zona universitaria</h1>
     <div class="row row-cols-1 row-cols-md-4 g-6">
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\Proyecto-Estacionamiento\imagenes\encender.png" class="card-img-top" width="auto" height="240" id="iniciarTurno">
-        <h5 class="card-title text-center">Iniciar turno</h5>
-      </div>
-    </div>
-  </div>
 
-  <div class="col mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <img src="\Proyecto-Estacionamiento\Proyecto-Estacionamiento\imagenes\apagar.png" class="card-img-top" width="auto" height="240" id="terminarTurno">
-        <h5 class="card-title text-center">Terminar turno</h5>
-      </div>
-    </div>
-  </div>
-</div>
+
+
 
 <!-- Modal de iniciar turno-->
 <div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
@@ -165,7 +161,7 @@
         </button>
       </div>
       <div class="modal-body">
-        ¿Hola <?php echo $_SESSION['nom_User'];
+        ¿Hola <?php echo $_SESSION['nom_User'] ;
     ?> Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
       </div>
       <div class="modal-footer">
@@ -178,6 +174,225 @@
 
 
   </main>
+
+    <div class="container text-center mt-3 reloj-container">
+        <p class="reloj-digital" id="reloj">
+            <span id="fecha"></span><br>
+            <span id="hora-actual"></span>
+        </p>
+    </div>
+    <div class="container text-center mt-3">
+        <button class="btn btn-primary" id="iniciarTurno">Iniciar Turno</button>
+        <button class="btn btn-danger" id="terminarTurno">Terminar Turno</button>
+    </div>
+
+<!-- Tarjeta "Estacionamientos Activos" con ícono de coche -->
+<div class="container text-center mt-5">
+    <div class="row">
+        <!-- DUI -->
+        <div class="col-md-3">
+            <div class="card" style="background-color: #f5f5f5;">
+                <div class="card-body">
+                    <h5 class="card-title">DUI</h5>
+                    <button class="btn btn-primary" data-toggle="modal" id="duiModalBtn" data-target="#duiModal">Ver Estacionamiento</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pozo 3 -->
+        <div class="col-md-3">
+            <div class="card" style="background-color: #f5f5f5;">
+                <div class="card-body">
+                    <h5 class="card-title">Pozo 3</h5>
+                    <button class="btn btn-primary" data-toggle="modal" id="pozo3ModalBtn" data-target="#pozo3Modal">Ver Estacionamiento</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ingenieria -->
+        <div class="col-md-3">
+            <div class="card" style="background-color: #f5f5f5;">
+                <div class="card-body">
+                    <h5 class="card-title">Ingenieria</h5>
+                    <button class="btn btn-primary" id="ingenieriaModalBtn"data-toggle="modal" data-target="#ingenieriaModal">Ver Estacionamiento</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Habitat -->
+        <div class="col-md-3">
+            <div class="card" style="background-color: #f5f5f5;">
+                <div class="card-body">
+                    <h5 class="card-title">Habitad</h5>
+                    <button class="btn btn-primary" id="habitadModalBtn"data-toggle="modal" data-target="#habitatModal">Ver Estacionamiento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modales -->
+<!-- DUI Modal -->
+<div class="modal fade" id="duiModal" tabindex="-1" role="dialog" aria-labelledby="duiModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="duiModalLabel">Estacionamiento DUI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Cajones Disponibles</h6>
+                <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
+                <p>Académicos: <span id="acadCajonesDUI">15</span></p>
+
+                <h6>Entradas y Salidas</h6>
+                <table class="table" id="duiModalBody">
+                    <thead>
+                        <tr>
+                        <th>Fecha y Hora</th>
+                            <th>Nombre</th>
+                            <th>Tipo Cliente</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pozo 3 Modal -->
+<div class="modal fade" id="pozo3Modal" tabindex="-1" role="dialog" aria-labelledby="pozo3ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pozo3ModalLabel">Estacionamiento Pozo 3</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Cajones Disponibles</h6>
+                <p>Administrativos: <span id="adminCajonesPozo3">10</span></p>
+                <p>Académicos: <span id="acadCajonesPozo3">15</span></p>
+
+                <h6>Entradas y Salidas</h6>
+                <table class="table" id="pozo3ModalBody">
+                    <thead>
+                        <tr>
+                            <th>Fecha y Hora</th>
+                            <th>Nombre</th>
+                            <th>Tipo Cliente</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Aquí se agregarán las filas dinámicamente con jQuery -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Ingenieria Modal -->
+<div class="modal fade" id="ingenieriaModal" tabindex="-1" role="dialog" aria-labelledby="ingenieriaModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-xg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="duiModalLabel">Estacionamiento Ingenieria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Cajones Disponibles</h6>
+                <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
+                <p>Académicos: <span id="acadCajonesDUI">15</span></p>
+
+                <h6>Entradas y Salidas</h6>
+                <table class="table"  id="ingenieriaModalBody">
+                    <thead>
+                        <tr>
+                        <th>Fecha y Hora</th>
+                            <th>Nombre</th>
+                            <th>Tipo Cliente</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Habitat Modal -->
+<div class="modal fade" id="habitatModal" tabindex="-1" role="dialog" aria-labelledby="habitatModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="duiModalLabel">Estacionamiento Habitad</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>Cajones Disponibles</h6>
+                <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
+                <p>Académicos: <span id="acadCajonesDUI">15</span></p>
+
+                <h6>Entradas y Salidas</h6>
+                <table class="table" id="habitatModalBody">
+                    <thead>
+                        <tr>
+                        <th>Fecha y Hora</th>
+                            <th>Nombre</th>
+                            <th>Tipo Cliente</th>
+                            <th>Operación</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Tarjeta "Tarifas" con ícono de tarifa -->
+    <div class="container text-center mt-3">
+        <div class="card" style="background-color: #f5f5f5;">
+            <div class="card-body">
+                <h5 class="card-title">Tarifas</h5>
+                <p class="card-text">Tarifa por hora: $5.00</p>
+                <i class="fas fa-dollar-sign fa-2x" style="margin-right: 10px;"></i> <!-- Ícono de tarifa de Font Awesome más pequeño (2x) -->
+                <i class="fas fa-dollar-sign fa-2x"></i> <!-- Segundo ícono de tarifa -->
+            </div>
+        </div>
+    </div>
   
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -188,6 +403,8 @@
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  
   <script>
   $(document).ready(function () {
     $("#open-modal").click(function () {
@@ -203,7 +420,7 @@
         url: "cerrar_sesion.php",
         type: "POST",
         success: function (response) {
-            window.location.href = "login.php";
+            window.location.href = "loginPague.php";
         }
     });
 });
@@ -232,90 +449,254 @@ mostrarFechaHora();
 
 setInterval(mostrarFechaHora, 1000);
 </script>
-
 <script>
-  document.getElementById("iniciarTurno").addEventListener("click", function() {
-    $("#confirmacionModal").modal("show");
+$(document).ready(function () {
 
-    document.getElementById("close").addEventListener("click", function() {
+    function abrirModal(modalId) {
+        $("#" + modalId).modal("show");
+    }
 
-$("#confirmacionModal").modal("hide");
-});
-    document.getElementById("confirmarAccion").addEventListener("click", function() {
+    function cerrarModal(modalId) {
+        $("#" + modalId).modal("hide");
+    }
 
-      $("#confirmacionModal").modal("hide");
+    $("#iniciarTurno").click(function () {
+        var horaActual = new Date().toLocaleTimeString();
+        $("#hora-accion").text(horaActual);
+
+        abrirModal("confirmacionModal");
     });
-    document.getElementById("cancelar").addEventListener("click", function() {
 
-$("#confirmacionModal").modal("hide");
-});
-  });
+    $("#confirmarAccion").click(function () {
+      
+        var idUsuario = <?php echo $_SESSION['id_User']; ?>;
 
-  document.getElementById("terminarTurno").addEventListener("click", function() {
-    $("#confirmacionModal2").modal("show");   
-    
-    document.getElementById("close2").addEventListener("click", function() {
+        
+        var fechaHora = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-$("#confirmacionModal2").modal("hide");
-
-});
-
-    document.getElementById("confirmarAccion2").addEventListener("click", function() {
-
-      $("#confirmacionModal2").modal("hide");
-
+      
+        $.ajax({
+            url: 'iniciofecha.php',
+            type: 'POST',
+            data: {
+                id_User: idUsuario,
+                inicio_Turno: fechaHora
+            },
+            success: function (response) {
+                console.log('Registro de inicio de turno insertado correctamente.');
+            
+                cerrarModal("confirmacionModal");
+            },
+            error: function (error) {
+                console.log('Error al insertar el registro de inicio de turno: ', error);
+            }
+        });
     });
-  document.getElementById("cancelar2").addEventListener("click", function() {
 
-$("#confirmacionModal2").modal("hide");
+    $("#terminarTurno").click(function () {
+        var horaActual = new Date().toLocaleTimeString();
+        $("#hora-accion").text(horaActual);
+ 
+        abrirModal("confirmacionModal2");
+    });
 
+    $("#confirmarAccion2").click(function () {
+
+        var idUsuario = <?php echo $_SESSION['id_User']; ?>;
+
+        var fechaHora = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+        $.ajax({
+            url: 'finfecha.php',
+            type: 'POST',
+            data: {
+                id_User: idUsuario,
+                fin_Turno: fechaHora
+            },
+            success: function (response) {
+                console.log('Registro de terminar turno insertado correctamente.');
+
+                cerrarModal("confirmacionModal2");
+            },
+            error: function (error) {
+                console.log('Error al insertar el registro de terminar turno: ', error);
+            }
+        });
+    });
 });
-  });
+
 </script>
+
+
+    <!-- Agregar enlaces a los archivos JavaScript de Bootstrap y jQuery -->
+    
+    <style>
+        .reloj-digital {
+            font-size: 36px; /* Tamaño de fuente más pequeño para el reloj */
+            color: #333; /* Color de texto */
+            text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.6); /* Sombra de texto */
+        }
+
+        .reloj-container {
+            background-color: #f5f5f5; /* Color de fondo del contenedor del reloj */
+            padding: 10px; /* Espaciado interior más pequeño del contenedor del reloj */
+            border-radius: 10px; /* Bordes redondeados del contenedor del reloj */
+        }
+    </style>
+
+    <script>
+        // Función para mostrar la fecha y la hora actual
+        function mostrarHora() {
+            const fecha = new Date();
+            const dia = fecha.getDate();
+            const mes = fecha.toLocaleDateString('es-ES', { month: 'long' }); // Obtener el mes en formato completo
+            const año = fecha.getFullYear();
+            const hora = fecha.getHours().toString().padStart(2, '0');
+            const minutos = fecha.getMinutes().toString().padStart(2, '0');
+            const segundos = fecha.getSeconds().toString().padStart(2, '0');
+            const fechaActual = `${dia} de ${mes} de ${año}`;
+            const horaActual = `${hora}:${minutos}:${segundos}`;
+            document.getElementById("fecha").innerText = fechaActual;
+            document.getElementById("hora-actual").innerText = horaActual;
+        }
+
+        // Actualizar la hora cada segundo
+        setInterval(mostrarHora, 1000);
+    </script>
 
 <script>
 $(document).ready(function() {
-  $("#confirmarAccion").on("click", function() {
-    var fechaHora = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    var intervalId;
 
-    $.ajax({
-      type: "POST",
-      url: "corte_caja.php",
-      data: { hora: fechaHora },
-      success: function(response) {
-        alert("Hora guardada en la base de datos");
-        $("#confirmacionModal").modal("hide");
-      },
-      error: function() {
-        alert("Error al guardar la hora en la base de datos");
-      }
-    });
-  });
-});
-</script>
+$('#duiModal').on('show.bs.modal', function() {
+    cargarHistorial('historial_dui.php', 'duiModalBody');
 
-
-<script>
-document.getElementById("confirmarAccion").addEventListener("click", function() {
-    var fechaHora = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-    fetch('corte_caja.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ hora: fechaHora }),
-    })
-    .then(response => response.json())
-    .then(data => {
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-    $("#confirmacionModal2").modal("hide");
+    intervalId = setInterval(function() {
+        cargarHistorial('historial_dui.php', 'duiModalBody');
+    }, 5000);
 });
 
+$('#duiModal').on('hidden.bs.modal', function() {
+    clearInterval(intervalId);
+});
+
+    $('#pozo3Modal').on('show.bs.modal', function() {
+        cargarHistorial('historial_pozo3.php', 'pozo3ModalBody');
+        intervalId = setInterval(function() {
+        cargarHistorial('historial_pozo3.php', 'pozo3ModalBody');
+    }, 5000);
+    });
+
+    $('#pozo3Modal').on('hidden.bs.modal', function() {
+    clearInterval(intervalId);
+});
+
+    $('#ingenieriaModal').on('show.bs.modal', function() {
+        cargarHistorial('historial_ingenieria.php', 'ingenieriaModalBody');
+        intervalId = setInterval(function() {
+        cargarHistorial('historial_ingenieria.php', 'ingenieriaModalBody');
+    }, 5000);
+    });
+    $('#ingenieriaModal').on('hidden.bs.modal', function() {
+    clearInterval(intervalId);
+    });
+
+
+    $('#habitatModal').on('show.bs.modal', function() {
+        cargarHistorial('historial_habitat.php', 'habitatModalBody');
+        intervalId = setInterval(function() {
+        cargarHistorial('historial_habitat.php', 'habitatModalBody');
+    }, 5000);
+    });
+
+    $('#habitatModal').on('hidden.bs.modal', function() {
+    clearInterval(intervalId);
+    });
+
+
+    // Función para cargar el historial usando AJAX
+    function cargarHistorial(url, modalBodyId) {
+        // Realiza la petición AJAX
+        $.ajax({
+            type: 'GET',
+            url: url, // Ruta a tu archivo PHP que obtiene el último historial específico
+            dataType: 'json',
+            success: function(data) {
+                // Actualiza dinámicamente el contenido del cuerpo del modal
+                $('#' + modalBodyId).html('');
+
+                if (data.length > 0) {
+                    $.each(data, function(index, entry) {
+                        var operacionTexto = '';
+                        var tipoCliente = '';
+                            switch (entry.operacion) {
+                                case '1':
+                                    operacionTexto = '<i class="fa-solid fa-arrow-right-to-bracket" style="color: #36812c;"></i> Entrada';
+                                    break;
+                                case '2':
+                                    operacionTexto = '<i class="fa-solid fa-arrow-right-from-bracket" style="color: #cb0606;"></i> Salida';
+                                    break;
+                                case '3':
+                                    operacionTexto = '<i class="fa-solid fa-xmark" style="color: #ff1900;"></i> Error';
+                                    break;
+                                default:
+                                    operacionTexto = 'Desconocido';
+                            }
+
+                            switch(entry.tipo_cliente){
+                                case '1':
+                                    tipoCliente = 'Alumno';
+                                    break;
+                                case '2':
+                                    tipoCliente = 'Docente';
+                                    break;
+                                case '3':
+                                    tipoCliente = 'Administrativo';
+                                    break;
+                                default:
+                                    tipoCliente = 'Desconocido';
+                            }
+                        $('#' + modalBodyId).append(`
+                            <tr>
+                                <td>${entry.fecha_entrada}</td>
+                                <td>${entry.nombre}</td>
+                                <td>${tipoCliente}</td>
+                                <td>${operacionTexto}</td>
+                            </tr>
+                        `);
+                    });
+                } else {
+                    $('#' + modalBodyId).append('<tr><td colspan="4">No hay registros</td></tr>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al cargar el historial:', error);
+            }
+        });
+    }
+});
+
+    $(document).ready(function () {
+        $("#duiModalBtn").click(function () {
+            $("#duiModal").modal("show");
+
+        });
+
+        $("#pozo3ModalBtn").click(function () {
+            $("#pozo3Modal").modal("show");
+
+        });
+
+        $("#ingenieriaModalBtn").click(function () {
+            $("#ingenieriaModal").modal("show");
+
+        });
+
+        $("#habitadModalBtn").click(function () {
+            $("#habitatModal").modal("show");
+
+        });
+    });
 </script>
 
 </body>

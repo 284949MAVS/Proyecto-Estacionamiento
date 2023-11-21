@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
         $nombre = $row["nom_User"];
+        $id =$row["id_User"];
         $_SESSION["nom_User"] = $nombre;
-
+        $_SESSION["id_User"]= $id;
         if ($row["tipo_User"] == 1) {
             header("Location: Inicio.php");
         } else {
