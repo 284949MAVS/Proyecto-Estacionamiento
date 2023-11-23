@@ -56,39 +56,26 @@ if (!isset($_SESSION['nom_User'])) {
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link dropdown" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
             </li>
     
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <li class="nav-item active">
+              <a class="nav-link" href="consultar_usuarios.php"  role="button" >
                 Usuario
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
-                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
-              </ul>
             </li>
-    
+
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link" href="consultar_cliente.php"  role="button" >
                 Cliente
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
-                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
-              </ul>
             </li>
-    
-    
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Contrato
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
-              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
-            </ul>
-          </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="consultar_contrato.php"  role="button" >
+                Contrato
+              </a>
+            </li>
     
         </ul>
         
@@ -111,8 +98,19 @@ if (!isset($_SESSION['nom_User'])) {
 </script>
 
 <div class="container">
-    <h1 style="font-size: bold; text-align: center;">Usuarios <i class="fa-solid fa-magnifying-glass"></i></h1>
-  </div>
+    <h1 style="font-size: bold; text-align: center;">Consultar Usuarios <i class="fa-solid fa-magnifying-glass"></i></h1>
+</div>
+
+<!-- Breadcrumbs -->
+<div class="container-fluid mt-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Consultar Usuarios</li>
+        </ol>
+      </nav>
+</div>
+
   <br>
   <!-- Contenedor de la tabla, centrado y con el título arriba -->
   <div class="container text-center">
@@ -245,7 +243,7 @@ if (!isset($_SESSION['nom_User'])) {
     var dataTable = $('#table').DataTable();
 
     // Crea el botón personalizado con clases de Bootstrap y estilos personalizados
-    var customButton = $('<a href="nuevo_usuario.html" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear usuario</a>');
+    var customButton = $('<a href="crear_Usuario.php" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear usuario</a>');
 
     // Agrega el botón antes del cuadro de búsqueda
     $('.dataTables_filter').prepend(customButton);

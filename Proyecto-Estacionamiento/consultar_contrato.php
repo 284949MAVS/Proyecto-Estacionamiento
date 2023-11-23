@@ -57,7 +57,6 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
 <html>
 <head>
     <title>Consultar Contrato</title>
-    <title>Consultar Contrato</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -171,39 +170,26 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link dropdown" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
             </li>
     
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link" href="consultar_usuarios.php"  role="button" >
                 Usuario
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
-                <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
-              </ul>
             </li>
-    
+
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link" href="consultar_cliente.php"  role="button" >
                 Cliente
               </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
-                <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
-              </ul>
             </li>
-    
-    
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Contrato
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
-              <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
-            </ul>
-          </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="consultar_contrato.php"  role="button" >
+                Contrato
+              </a>
+            </li>
     
         </ul>
         
@@ -229,9 +215,22 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
 } );
 </script>
 
+<div class="container">
+<h1 style="font-size: bold; text-align: center;">Consultar Contratos <i class="fa-solid fa-magnifying-glass"></i></h1>
+</div> 
+
+<!-- Breadcrumbs -->
+<div class="container-fluid mt-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Consultar Contratos</li>
+        </ol>
+      </nav>
+</div>
+
     <div class="container2">
       <div class="table-responsive">
-        <h2 style="text-align:center">Contratos</h2>
         <table class="table table-striped" id="table" style="width: 100%;">
             <thead>
                 <tr>

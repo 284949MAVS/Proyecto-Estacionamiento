@@ -25,8 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($resultado_contrato->num_rows > 0) {
         $info_contrato = $resultado_contrato->fetch_assoc();
         $existeContrato = true;
+        $act_Cli = $info_contrato['act_Cli'];
     }
     else{
+        // Puedes manejar el caso donde no hay resultados (contrato no encontrado)
     }
 }
     
@@ -58,46 +60,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+                    <a class="nav-link dropdown" href="inicio.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Usuario
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li>
-                        <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
-                    </ul>
-                </li>
+              <a class="nav-link" href="consultar_usuarios.php"  aria-current="page" >
+                Usuario<span class="visually-hidden">(current)</span>
+              </a>
+            </li>
 
-   
-                <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cliente
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
-            <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
-          </ul>
-        </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="consultar_cliente.php"  aria-current="page" >
+                Cliente<span class="visually-hidden">(current)</span>
+              </a>
+            </li>
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Contrato
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
-                        <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
-                    </ul>
-                </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="consultar_contrato.php"  aria-current="page" >
+                Contrato<span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+                    
+            
             </ul>
-        </div>
-        <br>
-    </nav>
+                
+        </li>
+            
+    </ul>
+        
+</div>       
+<br>   
+</nav>
 </header>
 <main>
 <br>
+
+    <!-- Breadcrumbs -->
+<div class="container-fluid mt-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="inicio.php">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="consultar_contrato.php"> Consultar Contratos</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Crear Contrato</li>
+        </ol>
+      </nav>
+</div>
+
     <!-- div contenedor del primer formulario -->
     <div class="container" style="border-radius: 45px whitesmoke;width: 700px; height: 250px; background-color: whitesmoke;">
     <div style="text-align: center;">
@@ -107,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <div class="mb-3">
             <label for="idCliente" class="form-label">ID de cliente</label>
-            <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador de 6 dígitos" class="form-control" id="idCliente" required>
+            <input input type="" name="id_Cliente" value="<?php echo htmlspecialchars($id_cliente); ?>" pattern="[0-9]{6}" title="Proporcione un identificador de 6 dígitos" class="form-control" id="idCliente" required>
         </div>
         <!-- Mensaje de error para ID de cliente -->
         <div id="mensajeErrorID" style="color: red; display: none;">Debe ingresar un ID válido</div>
@@ -121,14 +129,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <!-- div contenedor del segundo formulario (inicialmente oculto) -->
     <div
-        style=" border: 5px solid whitesmoke; width: 700px; height: 700px; position: absolute; top: 100%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php if (!$existeContrato) { echo 'display: none;'; } ?>"
-        id="segundoFormulario">
+        style="border: 5px solid whitesmoke; width: 700px; height: 700px; position: absolute; top: 130%; left: 50%; transform: translate(-50%, -50%); background-color: whitesmoke; <?php if (!$existeContrato) { echo 'display: none;'; } ?>"
+        id="segundoFormulario" >
         <form
             style="align-items: center; position: absolute; top: 45%; left: 50%; transform: translate(-50%, -50%);"
             action="crear_contrato.php" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">ID de Cliente</label>
-                <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_Cliente" required
+                <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_Cliente" required value="<?php echo htmlspecialchars($id_cliente); ?>" readonly
                     aria-describedby="emailHelp" style="width: 500px;">
             </div>
             <div class="mb-3">
@@ -207,8 +215,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 <script>
+    const actCliValue = "<?php echo $act_Cli; ?>";
     function mostrarSegundoFormulario() {
-        var idCliente = document.getElementById("exampleInputEmail1").value;
+        var idCliente = document.getElementById("idCliente").value; 
 
         if (idCliente && idCliente.length === 6) {
             console.log("Haciendo la solicitud AJAX...");
@@ -218,10 +227,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 data: { idCliente: idCliente },
                 dataType: "json",
                 success: function (data) {
-                    if (data.existeContrato) {
+                    if (data.existeContrato && actCliValue === "0") { 
                         document.getElementById("segundoFormulario").style.display = "block";
                     } else {
-                        alert("No se encontró un contrato para el ID de cliente.");
+                        alert("Ya se encontró un contrato activo para el ID de cliente o act_Cli no es igual a 0.");
                     }
                 },
                 error: function (xhr, status, error) {

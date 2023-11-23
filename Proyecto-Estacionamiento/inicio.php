@@ -29,35 +29,22 @@
         </li>
 
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Usuario
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="nuevo_usuario.html">Nuevo usuario</a></li> 
-            <li><a class="dropdown-item" href="consultar_usuarios.php">Consultar Usuario</a></li>
-          </ul>
+              <a class="nav-link" href="consultar_usuarios.php"  role="button" >
+                Usuario
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="consultar_cliente.php"  role="button" >
+                Cliente
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="consultar_contrato.php"  role="button" >
+                Contrato
+              </a>
         </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Cliente
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="nuevo_cliente.html">Nuevo Cliente</a></li> 
-            <li><a class="dropdown-item" href="consultar_cliente.php">Consultar Cliente</a></li>
-          </ul>
-        </li>
-
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Contrato
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="crear-Contratos.php">Crear contrato</a></li>
-          <li><a class="dropdown-item" href="consultar_contrato.php">Consultar Contrato</a></li>
-        </ul>
-      </li>
 
     </ul>
     <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
