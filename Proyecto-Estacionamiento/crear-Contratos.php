@@ -144,10 +144,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="text" name="auto_Cliente" class="form-control" style="width: 500px;" id="auto_Cliente" required>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Tipo de Pago: 1-Nomina 2-Deposito</label>
-                <input type="text" name="tipoPago" pattern="[12]" title="El tipo de pago solo puede ser: 1 Nómina  2 Depósito" class="form-control" style="width: 500px;" id="tipoPago" required>
-                <div id="mensajeError" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
+                <label for="tipoPago" class="form-label">Tipo de Pago: 1-Nomina 2-Deposito</label>
+                <select name="tipoPago" class="form-select" id="tipoPago" required style="width: 500px;">
+                    <option value="1">Nómina</option>
+                    <option value="2">Depósito</option>
+                </select>
             </div>
+
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Fecha de inicio del contrato</label>
                 <input type="date" name="fechacont_Cliente" class="form-control" style="width: 500px;" id="fechacont_Cliente" required>
@@ -164,11 +167,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
             <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Tipo de Cajon: 1-Exclusivo 2-Libre</label>
-                <input type="text" name="tipoCajon" class="form-control" title="El tipo de cajón solamente puede cambiar a exclusivo" pattern="[12]" id="tipoCajon" required
-                    style="width: 500px;">
-                <div id="mensajeError1" style="color: red; display: none;">Debe elegir entre 1 y 2</div>
+                <label for="tipoCajon" class="form-label">Tipo de Cajon: 1-Exclusivo 2-Libre</label>
+                <select name="tipoCajon" class="form-select" id="tipoCajon" required style="width: 500px;">
+                   <option value="1">Exclusivo</option>
+                   <option value="2">Libre</option>
+                </select>
             </div>
+
             <!-- Botón "Crear" -->
             <div style="position: absolute; top: 105%; left: 50%; transform: translate(-50%, -50%);">
                 <button type="submit" class="btn btn-primary" id="crearButton" name="crear">Crear</button>

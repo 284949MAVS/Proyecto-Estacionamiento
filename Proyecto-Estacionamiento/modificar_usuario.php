@@ -6,8 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST["id"];
     $nuevoCorreo = $_POST["nuevo_correo"];
     $nuevoTipo = $_POST["nuevo_tipo"];
+    $nuevoTel = $_POST["nuevo_tel"];
+    $nuevaAct = $_POST["nueva_act"];
 
-    $query = "UPDATE usuarios SET correo_User = '$nuevoCorreo', tipo_User = '$nuevoTipo' WHERE id_User = $id";
+    $query = "UPDATE usuarios SET correo_User = '$nuevoCorreo', tipo_User = '$nuevoTipo', tel_User = '$nuevoTel', act_User = '$nuevaAct' WHERE id_User = $id";
     if ($mysqli->query($query)) {
         echo "Usuario actualizado correctamente.";
         Header("Location: consultar_usuarios.php");

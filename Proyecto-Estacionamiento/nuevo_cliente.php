@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tel_Cliente = $_POST["tel_Cliente"];
     $correo_Cliente = $_POST["correo_Cliente"];
     $id_Credencial = $_POST["id_Credencial"];
-    if($_POST["tipo_Cliente"]=='Administrativo'){
+    if($_POST["tipo_Cliente"]=='Alumno'){
         $tipo_Cliente=1;
     }else if($_POST["tipo_Cliente"]=='Academico'){
         $tipo_Cliente=2;

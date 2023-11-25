@@ -153,7 +153,7 @@ integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+f
         <label for="act_User">Estado de actividad</label>
         <select id="act_User" class="form-select" name="act_User" required>
           <option value="1">Activo</option>
-          <option value="2">Inactivo</option>
+          <option value="0">Inactivo</option>
         </select>
       </div>
       <div class="form-row">

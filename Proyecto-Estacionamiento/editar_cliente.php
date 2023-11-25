@@ -6,8 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $nuevoCorreo = $_POST["correo_Cliente"];
   $nuevoTipo = $_POST["tipoCliente"];
   $nuevaDir = $_POST["dir_Cliente"];
+  $nuevoTel = $_POST["nuevo_tel_Cliente"];
+  $nuevaAct = $_POST["nueva_act_Cliente"];
 
-  $query = "UPDATE clientes SET correo_Cliente = '$nuevoCorreo', tipo_Cliente = '$nuevoTipo', dir_Cliente = '$nuevaDir' WHERE id_Cliente='$id'";
+  $query = "UPDATE clientes SET correo_Cliente = '$nuevoCorreo', tipo_Cliente = '$nuevoTipo', dir_Cliente = '$nuevaDir', tel_Cliente = '$nuevoTel', act_Cli = '$nuevaAct' WHERE id_Cliente='$id'";
   
   if ($mysqli->query($query)) {
       echo "Usuario actualizado correctamente.";

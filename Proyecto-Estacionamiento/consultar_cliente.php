@@ -111,7 +111,7 @@ if (!isset($_SESSION['nom_User'])) {
 </div>
 
 
-    <div class="container text-center">
+    <div class="container-fluid text-center">
     <div class="row justify-content-center">  
         <br>
         <div class="table-responsive"> <!-- Utiliza la clase table-responsive -->
@@ -149,8 +149,30 @@ if (!isset($_SESSION['nom_User'])) {
                         echo "<td>" . $row["tel_Cliente"] . "</td>";
                         echo "<td><div class='text-truncate' style='max-width: 100px;'>" . $row["correo_Cliente"] . "</div></td>";
                         echo "<td>" . $row["id_Credencial"] . "</td>";
-                        echo "<td>" . $row["tipo_Cliente"] . "</td>";
-                        echo "<td>" . $row["act_Cli"] . "</td>";
+                        echo "<td>";
+                        if ($row["tipo_Cliente"] == 1) {
+                          echo "Alumno";
+                        } 
+                        elseif ($row["tipo_Cliente"] == 2) {
+                          echo "Académico";
+                        }
+                        elseif ($row["tipo_Cliente"] == 3) {
+                          echo "Administrativo";
+                        }
+                         else {
+                          echo "Otro";
+                        }
+                        echo "</td>";
+
+                        
+                        echo "<td>";
+                        if ($row["act_Cli"] == 1) {
+                          echo "Activo";
+                        } 
+                        else {
+                          echo "Inactivo";
+                        }
+                        echo "</td>";
                         echo "<td>
                                 <div class='btn-group' role='group' aria-label='Acciones'>
                                     <button type='button' class='btn btn-success' data-bs-toggle='modal' data-bs-target='#staticBackdrop{$row['id_Cliente']}'><i class='fas fa-edit'></i></button>
@@ -181,12 +203,31 @@ if (!isset($_SESSION['nom_User'])) {
                     <label for='nuevo_dir_Cliente'>Dirección:</label>
                     <input type='text' id='nuevo_dir_Cliente' name='dir_Cliente' style='border-radius: 45px;' value='{$row["dir_Cliente"]}'><br>
                     <br>
+
+                    <label for=\"nuevo_tel_Cliente\">Teléfono:</label>;
+                    <input type=\"text\" id=\"nuevo_tel_Cliente\" name=\"nuevo_tel_Cliente\" style=\"border-radius: 45px;\" pattern=\"\d{10}\" title=\"Proporcione un número de teléfono válido de 10 dígito\"  value=\"{$row['tel_Cliente']}\"><br>
+                    <br>
+    
+
                     <label for='nuevo_correo_Cliente'>Correo:</label>
                     <input type='text' id='nuevo_correo_Cliente' name='correo_Cliente' style='border-radius: 45px;' pattern=\"[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}\" title=\"Proporcione un formato válido de correo electrónico: xxxx@dom.example\" value='{$row["correo_Cliente"]}'><br>
                     <br>
-                    <label for='nuevo_tipoCliente'>Tipo:</label>
-                    <input type='text' id='nuevo_tipoCliente' name='tipoCliente' style='border-radius: 45px;' pattern=\"[123]\" title=\"El tipo de usuario solo puede ser: 1 Estudiante  2 Docente  3 Administrativo\" value='{$row["tipo_Cliente"]}'><br>
+
+                    <label for='nuevo_tipoCliente'>Tipo: </label>
+                    <select id='nuevo_tipoCliente' name='tipoCliente' style='border-radius: 45px;'>
+                    <option value='1' " . ($row["tipo_Cliente"] == 1 ? "selected" : "") . ">Alumno</option>
+                    <option value='2' " . ($row["tipo_Cliente"] == 2 ? "selected" : "") . ">Académico</option>
+                    <option value='3' " . ($row["tipo_Cliente"] == 3 ? "selected" : "") . ">Administrativo</option>
+                    </select><br>
                     <br>
+
+
+                    <label for='nueva_act_Cliente'>Actividad: </label> 
+                    <select id='nueva_act_Cliente' name='nueva_act_Cliente' style='border-radius: 45px;'>
+                    <option value='1' " . ($row['act_Cli'] == 1 ? "selected" : "") . ">Activo</option>
+                    <option value='0' " . ($row['act_Cli'] == 0 ? "selected" : "") . ">Inactivo</option>
+                    </select><br><br>
+
                     <input type='submit' class='btn btn-primary' value='Guardar Cambios'>
                   </form>
                 </div>
@@ -303,7 +344,7 @@ if (!isset($_SESSION['nom_User'])) {
     var dataTable = $('#table').DataTable();
 
     // Crea el botón personalizado con clases de Bootstrap y estilos personalizados
-    var customButton = $('<a href="crear_Cliente.php" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear contrato</a>');
+    var customButton = $('<a href="crear_Cliente.php" class="btn btn-primary" style="background-color: #fff; color: #007bff;">Crear cliente</a>');
 
     // Agrega el botón antes del cuadro de búsqueda
     $('.dataTables_filter').prepend(customButton);

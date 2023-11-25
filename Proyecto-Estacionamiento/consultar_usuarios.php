@@ -142,10 +142,29 @@ if (!isset($_SESSION['nom_User'])) {
           echo "<td>" . $row["nom_User"] . "</td>";
           echo "<td>" . $row["ap_PatU"] . "</td>";
           echo "<td>" . $row["ap_MatU"] . "</td>";
-          echo "<td>" . $row["tipo_User"] . "</td>";
+          echo "<td>";
+
+          if ($row["tipo_User"] == 1) {
+              echo "Administrador";
+          } elseif ($row["tipo_User"] == 2) {
+              echo "Trabajador";
+          } else {
+              echo "Otro";
+          }
+          
+          echo "</td>";
           echo "<td>" . $row["correo_User"] . "</td>";
           echo "<td>" . $row["tel_User"] . "</td>";
-          echo "<td>" . $row["act_User"] . "</td>";
+          echo "<td>";
+          
+          if ($row["act_User"] == 1) {
+            echo "Activo";
+          } elseif ($row["act_User"] == 0) {
+            echo "Inactivo";
+          } else {
+            echo "Otro";
+          }
+          echo "</td>";
           echo "<td>" . $row["pass_User"] . "</td>";
           echo "<td class='btn-group'>
             <button type=\"button\" class=\"btn btn-success\" data-bs-toggle=\"modal\" data-bs-target=\"#staticBackdrop{$row['id_User']}\"><i class='fas fa-edit'></i></button>
@@ -181,8 +200,22 @@ if (!isset($_SESSION['nom_User'])) {
     echo "          <input type=\"hidden\" name=\"id\" value=\"{$row['id_User']}\">";
     echo "          <label for=\"nuevo_correo\">Correo:</label>";
     echo "          <input type=\"text\" id=\"nuevo_correo\" name=\"nuevo_correo\" style=\"border-radius: 45px;\" pattern=\"[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zAZ0-9_]+)*[.][a-zA-Z]{1,5}\" title=\"Proporcione un formato válido de correo electrónico: xxxx@dom.example\"  value=\"{$row['correo_User']}\"><br><br>";
-    echo "          <label for=\"nuevo_tipo\">Tipo:</label>";
-    echo "          <input type=\"text\" id=\"nuevo_tipo\" name=\"nuevo_tipo\" style=\"border-radius: 45px;\" pattern=\"[12]\" title=\"El tipo de usuario solo puede ser: 1 Administrador  2 Trabajador\"  value=\"{$row['tipo_User']}\"><br><br>";
+    
+    echo "          <label for=\"nuevo_tel\">Teléfono:</label>";
+    echo "          <input type=\"text\" id=\"nuevo_tel\" name=\"nuevo_tel\" style=\"border-radius: 45px;\" pattern=\"\d{10}\" title=\"Proporcione un número de teléfono válido de 10 dígito\"  value=\"{$row['tel_User']}\"><br><br>";
+    
+    echo "         <label for='nuevo_tipo'>Tipo: </label> ";
+    echo "         <select id='nuevo_tipo' name='nuevo_tipo' style='border-radius: 45px;'>";
+    echo "           <option value='1' " . ($row['tipo_User'] == 1 ? "selected" : "") . ">Administrador</option>";
+    echo "           <option value='2' " . ($row['tipo_User'] == 2 ? "selected" : "") . ">Trabajador</option>";
+    echo "         </select><br><br>";
+
+    echo "         <label for='nueva_act'>Actividad: </label> ";
+    echo "         <select id='nueva_act' name='nueva_act' style='border-radius: 45px;'>";
+    echo "           <option value='1' " . ($row['act_User'] == 1 ? "selected" : "") . ">Activo</option>";
+    echo "           <option value='0' " . ($row['act_User'] == 0 ? "selected" : "") . ">Inactivo</option>";
+    echo "         </select><br><br>";
+    
     echo "          <input type=\"submit\" class=\"btn btn-primary\" value=\"Guardar Cambios\">";
     echo "        </form>";
     echo "      </div>";

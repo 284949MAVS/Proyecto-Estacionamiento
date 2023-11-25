@@ -15,6 +15,8 @@ if (isset($_POST['actualizar'])){
     $nuevo_auto = $_POST["nuevo_auto"];
     $nuevo_pago = $_POST["nuevo_pago"];
     $nueva_vigencia = $_POST["nueva_vigencia"]; 
+    $nueva_vigencia_fin = $_POST["nueva_vigencia_fin"];
+    $nueva_act = $_POST["nueva_act"];
 
     $actualizar_contrato = "UPDATE contratos SET";
 
@@ -23,12 +25,20 @@ if (isset($_POST['actualizar'])){
     }
 
     if (!empty($nuevo_pago)) {
-        $actualizar_contrato .= " pago_Cliente = '$nuevo_pago',";
+        $actualizar_contrato .= "pago_Cliente = '$nuevo_pago',";
     }
 
     if (!empty($nueva_vigencia)) {
         $actualizar_contrato .= " fechacont_Cliente = '$nueva_vigencia',";
     }
+    if (!empty($nueva_vigencia_fin)) {
+      $actualizar_contrato .= " vigCon_cliente = '$nueva_vigencia_fin',";
+    }
+    
+      $actualizar_contrato .= "cont_Act = '$nueva_act',";
+    
+
+    //echo "Consulta SQL: " . $actualizar_contrato;
 
     $actualizar_contrato = rtrim($actualizar_contrato, ',');
 
@@ -237,6 +247,10 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
                     <th>ID Cliente</th>
                     <th>Características del vehículo</th>
                     <th>Tipo de pago</th>
+                    <th>Fecha de Inicio</th>
+                    <th>Fecha de Fin</th>
+                    <th>Actividad</th>
+                    <th>Cajón</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -245,7 +259,42 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
                     <tr>
                         <td><?php echo $info_contrato['id_Cliente']; ?></td>
                         <td><?php echo $info_contrato['auto_Cliente']; ?></td>
-                        <td><?php echo $info_contrato['pago_Cliente']; ?></td>
+                        <td>
+                          <?php
+                          if ($info_contrato['pago_Cliente'] == 1) {
+                            echo "Nómina";
+                          } elseif ($info_contrato['pago_Cliente'] == 2) {
+                            echo "Depósito";
+                          } else {
+                            echo "Otro";
+                          }
+                          ?>
+                        </td>
+                        <td><?php echo $info_contrato['fechacont_Cliente']; ?></td>
+                        <td><?php echo $info_contrato['vigCon_cliente']; ?></td>
+                        <td>
+                          <?php
+                          if ($info_contrato['cont_Act'] == 1) {
+                            echo "Activo";
+                          } elseif ($info_contrato['cont_Act'] == 0) {
+                            echo "Inactivo";
+                          } else {
+                            echo "Otro";
+                          }
+                          ?>
+                        </td>
+                        <td>
+                          <?php
+                          if ($info_contrato['tipo_Cajon'] == 1) {
+                            echo "Exclusivo";
+                          } elseif ($info_contrato['tipo_Cajon'] == 2) {
+                            echo "Libre";
+                          } else {
+                            echo "Otro";
+                          }
+                          ?>
+                        </td>
+
                         <td>
                             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editarModal<?php echo $info_contrato['id_Cliente']; ?>"><i class='fas fa-edit'></i></button>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal<?php echo $info_contrato['id_Cliente']; ?>"><i class='fas fa-trash-alt'></i></button>
@@ -266,10 +315,24 @@ $resultado_contrato = $mysqli->query($consulta_contrato);
                                         <input type="text" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>" readonly><br>
                                         <label>Nuevo Auto del Cliente:</label>
                                         <input type="text" name="nuevo_auto" value="<?php echo $info_contrato['auto_Cliente']; ?>"><br>
+                                        
                                         <label>Tipo de Pago del Cliente:</label>
-                                        <input type="text" pattern="[12]" title="El tipo de pago solamente puede ser: 1 Nómina  2 Depósito" name="nuevo_pago" value="<?php echo $info_contrato['pago_Cliente']; ?> "><br>
-                                        <label>Nueva Vigencia (meses):</label>
+                                        <select name="nuevo_pago">
+                                          <option value="1" <?php echo ($info_contrato['pago_Cliente'] == 1) ? 'selected' : ''; ?>>Nómina</option>
+                                          <option value="2" <?php echo ($info_contrato['pago_Cliente'] == 2) ? 'selected' : ''; ?>>Depósito</option>
+                                        </select><br>
+
+                                        <label>Nueva Vigencia (inicio):</label>
                                         <input type="date" name="nueva_vigencia" value="<?php echo $info_contrato['fechacont_Cliente']; ?>"><br>
+                                        <label>Nueva Vigencia (fin):</label>
+                                        <input type="date" name="nueva_vigencia_fin" value="<?php echo $info_contrato['vigCon_cliente']; ?>"><br>
+                                        
+                                        <label>Actividad: </label>
+                                        <select name="nueva_act">
+                                          <option value="1" <?php echo ($info_contrato['cont_Act'] == 1) ? 'selected' : ''; ?>>Activo</option>
+                                          <option value="0" <?php echo ($info_contrato['cont_Act'] == 0) ? 'selected' : ''; ?>>Inactivo</option>
+                                        </select><br>
+
                                         <input type="hidden" name="id_contrato" value="<?php echo $info_contrato['id_Cliente']; ?>">
                                         <input type="submit" class="btn btn-primary" name="actualizar" value="Actualizar">
                                     </form>
