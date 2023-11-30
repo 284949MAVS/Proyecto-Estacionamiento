@@ -45,7 +45,7 @@
                 Contrato
               </a>
         </li>
-
+        <button class="btn btn-primary" id="open-percentages-modal">Asignar Porcentajes</button>
     </ul>
     <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
     
@@ -114,9 +114,117 @@
 </div>
 
 <!-- place navbar here -->
-
+  <!-- Percentages Modal -->
+  <div class="modal fade" id="percentages-modal" tabindex="-1" aria-labelledby="percentages-modal-label"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="percentages-modal-label">Asignar Porcentajes</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Section 1 -->
+            <div class="mb-3">
+              <h6>DUI</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="admin-percent-1">Porcentaje Administrativo:</label>
+                  <input type="text" class="form-control" id="admin-percent-1">
+                </div>
+                <div class="col-md-6">
+                  <label for="academic-percent-1">Porcentaje Académico:</label>
+                  <input type="text" class="form-control" id="academic-percent-1">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <h6>Ingeniería</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="admin-percent-2">Porcentaje Administrativo:</label>
+                  <input type="text" class="form-control" id="admin-percent-2">
+                </div>
+                <div class="col-md-6">
+                  <label for="academic-percent-2">Porcentaje Académico:</label>
+                  <input type="text" class="form-control" id="academic-percent-2">
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <h6>Habitat</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="admin-percent-3">Porcentaje Administrativo:</label>
+                  <input type="text" class="form-control" id="admin-percent-3">
+                </div>
+                <div class="col-md-6">
+                  <label for="academic-percent-1">Porcentaje Académico:</label>
+                  <input type="text" class="form-control" id="academic-percent-3">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Section 2 (similar structure as Section 1) -->
+            <div class="mb-3">
+              <!-- ... (repeat for other sections) ... -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary" id="guardar-porcentajes">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Percentages Modal -->
   </header>
   <main>
+
+    
+  <div class="container">
+        <div class="form-container">
+            <h1>Corte de caja actual</h1>
+        <form>
+            <div class="form-row">
+                <label for="num_Corte">Numero de corte:</label>
+                <input type="text" class="form-control" id="num_Corte" readonly width="100px">
+            </div>
+            <div class="form-row">
+                <label for="id_User">ID:</label>
+                <input type="text" class="form-control" id="id" readonly>
+            </div>
+            <div class="form-row">
+                <label for="inicioTurno">Inicio de Turno:</label>
+                <input type="text" class="form-control" id="inicioTurno" readonly>
+            </div>
+            <div class="form-row">
+                <label for="autosSalida">Autos Salida:</label>
+                <input type="text" class="form-control" id="autosSalida" readonly>
+            </div>
+            <div class="form-row">
+                <label for="ticketsCancelados">Tickets Cancelados:</label>
+                <input type="text" class="form-control" id="ticketsCancelados" readonly>
+            </div>
+            <div class="form-row">
+                <label for="efectivo">Efectivo:</label>
+                <input type="text" class="form-control" id="efectivo" readonly>
+            </div>
+            <div class="form-row">
+                <label for="depositos">Depósitos:</label>
+                <input type="text" class="form-control" id="depositos" readonly>
+            </div>
+            <div class="form-row">
+                <label for="totalCorte">Total de Corte:</label>
+                <input type="text" class="form-control" id="totalCorte" readonly>
+            </div>
+            <div class="form-row">
+                <label for="corteActivo">Corte Activo:</label>
+                <input type="text" class="form-control" id="corteActivo" readonly>
+            </div>
+        </form>
+    </div>
+</div>
 
   </main>
   
@@ -175,7 +283,88 @@ mostrarFechaHora();
 setInterval(mostrarFechaHora, 1000);
 </script>
 
+<script>
+    function actualizarInterfaz() {
+        $.ajax({
+            url: "mostrar_corte_caja.php",
+            method: "GET",
+            dataType: "json",
+            success: function(data) {
+                var corteActivo = data.find(function (corte) {
+                    return corte.corte_Act === "1";
+                });
 
+                if (corteActivo) {
+                    $("#num_Corte").val(corteActivo.num_Corte);
+                    $("#id").val(corteActivo.id_User);
+                    $("#inicioTurno").val(corteActivo.inicio_Turno);
+                    $("#finTurno").val(corteActivo.fin_Turno);
+                    $("#autosSalida").val(corteActivo.autos_Salida);
+                    $("#ticketsCancelados").val(corteActivo.tickets_Canc);
+                    $("#efectivo").val(corteActivo.efectivo);
+                    $("#depositos").val(corteActivo.depos);
+                    $("#totalCorte").val(corteActivo.total_Corte);
+                    $("#corteActivo").val(corteActivo.corte_Act);
+                    $("#open-percentages-modal").prop("disabled", false);
+                } else {
+                  $("#open-percentages-modal").prop("disabled", true);
+                    alert("No hay corte de caja activo en este momento.");
+                }
+            },
+            error: function() {
+                console.error("Error al obtener los datos de la base de datos.");
+            }
+        });
+    }
+
+    setInterval(actualizarInterfaz, 5000);
+    actualizarInterfaz();
+</script>
+<script>
+    $(document).ready(function () {
+      $("#open-percentages-modal").click(function () {
+        $("#percentages-modal").modal("show");
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+  // ... (otro código existente) ...
+
+  $("#guardar-porcentajes").click(function () {
+    // Obtener valores de los campos del modal
+    var adminPercent1 = $("#admin-percent-1").val();
+    var academicPercent1 = $("#academic-percent-1").val();
+    var adminPercent2 = $("#admin-percent-2").val();
+    var academicPercent2 = $("#academic-percent-2").val();
+    var adminPercent3 = $("#admin-percent-3").val();
+    var academicPercent3 = $("#academic-percent-3").val();
+
+    // Enviar datos al servidor mediante Ajax
+    $.ajax({
+      url: "guardar_porcentajes.php", // Ajusta la URL al script que manejará la lógica de guardado
+      type: "POST",
+      data: {
+        adminPercent1: adminPercent1,
+        academicPercent1: academicPercent1,
+        adminPercent2: adminPercent2,
+        academicPercent2: academicPercent2,
+        adminPercent3: adminPercent3,
+        academicPercent3: academicPercent3,
+      },
+      success: function (response) {
+        alert("Datos guardados exitosamente");
+        $("#percentages-modal").modal("hide");
+      },
+      error: function () {
+        console.error("Error al enviar los datos al servidor");
+      },
+    });
+  });
+
+});
+
+    </script>
 </body>
 
 

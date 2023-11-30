@@ -30,7 +30,8 @@ if ($idUsuario !== null) {
         $stmt = $mysqli->prepare($query);
         $stmt->bind_param("s", $fechaHora);
         $stmt->execute();
-
+        $consultaUpdate = $mysqli->prepare("UPDATE porcentajes SET num_Porc = 0 WHERE num_Porc = 1");
+        $consultaUpdate->execute();
         if ($stmt->error) {
             error_log('Error en la consulta: ' . $stmt->error);
             echo 'Error en la consulta: ' . $stmt->error;

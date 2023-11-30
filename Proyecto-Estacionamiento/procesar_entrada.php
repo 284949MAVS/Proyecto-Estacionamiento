@@ -1,5 +1,4 @@
 <?php
-
 include "conexion.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,11 +21,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $operacion = 1;
         $fechaEntrada = date("Y-m-d H:i:s");
 
-        $consultaHistorial = $mysqli->prepare("INSERT INTO historial_clientes ( nombre, tipo_cliente, fecha_entrada, clave_estacionamiento, operacion) VALUES ( ?, ?, ?, ?, ?)");
+        $consultaHistorial = $mysqli->prepare("INSERT INTO historial_clientes (nombre, tipo_cliente, fecha_entrada, clave_estacionamiento, operacion) VALUES (?, ?, ?, ?, ?)");
         $consultaHistorial->bind_param("sssii", $nomCliente, $tipoCliente, $fechaEntrada, $estacionamiento, $operacion);
         $consultaHistorial->execute();
 
+        // Realizar el UPDATE en la tabla "porcentajes" si se cumple la condición
+        if ($tipoCliente == 3) {
+            $consultaUpdate = $mysqli->prepare("UPDATE porcentajes SET cant_Admins = cant_Admins - 1 WHERE tipo_Est = ?");
+            $consultaUpdate->bind_param("i", $estacionamiento);
+            $consultaUpdate->execute();
+        } elseif ($tipoCliente == 4) {
+            $consultaUpdate = $mysqli->prepare("UPDATE porcentajes SET cant_Docs = cant_Docs - 1 WHERE tipo_Est = ?");
+            $consultaUpdate->bind_param("i", $estacionamiento);
+            $consultaUpdate->execute();
+        }
+
         $consultaCliente->close();
+        $consultaHistorial->close();
+        // Cerrar la conexión aquí o después de realizar todas las operaciones necesarias
 
         header("Location: inicio_caseta.php");
         exit();

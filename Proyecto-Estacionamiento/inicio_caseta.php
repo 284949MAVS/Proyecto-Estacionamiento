@@ -46,6 +46,9 @@
         <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
             Simulacion entrada
           </a>
+          <a class="nav-link " href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
+            Ticket
+          </a>
     </ul>
 
     <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
@@ -242,7 +245,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="duiModalBody">
                 <h6>Cajones Disponibles</h6>
                 <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
                 <p>Académicos: <span id="acadCajonesDUI">15</span></p>
@@ -279,13 +282,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"id="pozo3ModalBody">
                 <h6>Cajones Disponibles</h6>
                 <p>Administrativos: <span id="adminCajonesPozo3">10</span></p>
                 <p>Académicos: <span id="acadCajonesPozo3">15</span></p>
 
                 <h6>Entradas y Salidas</h6>
-                <table class="table" id="pozo3ModalBody">
+                <table class="table" >
                     <thead>
                         <tr>
                             <th>Fecha y Hora</th>
@@ -317,13 +320,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"  id="ingenieriaModalBody">
                 <h6>Cajones Disponibles</h6>
                 <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
                 <p>Académicos: <span id="acadCajonesDUI">15</span></p>
 
                 <h6>Entradas y Salidas</h6>
-                <table class="table"  id="ingenieriaModalBody">
+                <table class="table" >
                     <thead>
                         <tr>
                         <th>Fecha y Hora</th>
@@ -354,13 +357,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="habitatModalBody">
                 <h6>Cajones Disponibles</h6>
                 <p>Administrativos: <span id="adminCajonesDUI">10</span></p>
                 <p>Académicos: <span id="acadCajonesDUI">15</span></p>
 
                 <h6>Entradas y Salidas</h6>
-                <table class="table" id="habitatModalBody">
+                <table class="table" >
                     <thead>
                         <tr>
                         <th>Fecha y Hora</th>
@@ -624,7 +627,6 @@ $('#duiModal').on('hidden.bs.modal', function() {
             success: function(data) {
                 // Actualiza dinámicamente el contenido del cuerpo del modal
                 $('#' + modalBodyId).html('');
-
                 if (data.length > 0) {
                     $.each(data, function(index, entry) {
                         var operacionTexto = '';
@@ -653,10 +655,17 @@ $('#duiModal').on('hidden.bs.modal', function() {
                                 case '3':
                                     tipoCliente = 'Administrativo';
                                     break;
+                                case '4':
+                                    tipoCliente = 'Academico';
+                                    break;
                                 default:
                                     tipoCliente = 'Desconocido';
                             }
                         $('#' + modalBodyId).append(`
+                        <p><b>Lugares Disponibles </b></p>
+                        <p> Academicos: ${entry.cant_Docs} </p>
+                            <p> Administradores: ${entry.cant_Admins} </p>
+                            <p><b>Entradas y salidas </b></p>
                             <tr>
                                 <td>${entry.fecha_entrada}</td>
                                 <td>${entry.nombre}</td>
