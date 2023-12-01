@@ -119,7 +119,7 @@ if (!isset($_SESSION['nom_User'])) {
         <form action="nuevo_cliente.php" method="post" class="form">
           <div class="form-row">
             <label for="id_Cliente">ID Cliente:</label>
-            <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_Cliente" required>
+            <input type="text" name="id_Cliente" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_Cliente" maxlength="6" required>
           </div>
           <div class="form-row">
             <label for="nom_Cliente">Nombre(s):</label>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['nom_User'])) {
           </div>
           <div class="form-row">
             <label for="rfc_Cliente">RFC:</label>
-            <input type="text" name="rfc_Cliente" class="form-control" pattern="^[A-Z&Ñ]{4}\d{6}([A-Z\d]{3})?$" title="Proporcione un RFC válido" id="rfc_Cliente" required>
+            <input type="text" name="rfc_Cliente" class="form-control" pattern="^[A-Z&Ñ]{4}\d{6}([A-Z\d]{3})?$" title="Proporcione un RFC válido" id="rfc_Cliente" maxlength="13"  required>
           </div>
           <div class="form-row">
             <label for="dir_Cliente">Dirección:</label>
@@ -143,7 +143,7 @@ if (!isset($_SESSION['nom_User'])) {
           </div>
           <div class="form-row">
             <label for="tel_Cliente">Teléfono:</label>
-            <input type="text" name="tel_Cliente" pattern="\d{10}" title="El número debe contener 10 dígitos" class="form-control" id="tel_Cliente" required>
+            <input type="text" name="tel_Cliente" pattern="\d{10}" title="El número debe contener 10 dígitos" class="form-control" id="tel_Cliente" maxlength="10" required>
           </div>
           <div class="form-row">
             <label for="correo_Cliente">Correo:</label>
@@ -151,7 +151,7 @@ if (!isset($_SESSION['nom_User'])) {
           </div>
           <div class="form-row">
             <label for="id_Credencial">ID Credencial:</label>
-            <input type="text" name="id_Credencial" class="form-control" id="id_Credencial" required>
+            <input type="text" name="id_Credencial" class="form-control" id="id_Credencial" maxlength="7" required>
           </div>
           <div class="form-row">
             <label for="tipo_Cliente">Tipo de cliente:</label>

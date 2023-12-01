@@ -2,6 +2,12 @@
 include("conexion.php");
 session_start();
 
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+
 if (isset($_SESSION['id_User'])) {
     $id_User = $_SESSION['id_User'];
 
@@ -117,21 +123,21 @@ unset($_SESSION['formulario_enviado']);
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
       <ul class="navbar-nav me-auto mt-2 mt-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+            <a class="nav-link " href="inicio_caseta.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Corte de caja
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja actual</a></li> 
+            <li><a class="dropdown-item" href="mostrar_corte.php">Corte de caja actual</a></li> 
             <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
           </ul>
         </li>
         <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
              Simulación entrada
           </a>
-          <a class="nav-link " href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
+          <a class="nav-link active" href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
             Ticket
           </a>
     </ul>

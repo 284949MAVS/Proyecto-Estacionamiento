@@ -120,7 +120,7 @@ integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+f
     <form class="form" action="nuevo_usuario.php" method="post">
       <div class="form-row">
         <label for="id_User">ID de usuario</label>
-        <input type="text" name="id_User" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_User" required>
+        <input type="text" name="id_User" pattern="[0-9]{6}" title="Proporcione un identificador único de 6 dígitos" class="form-control" id="id_User" maxlength="6" required>
       </div>
       <div class="form-row">
         <label for="nom_User">Nombre(s)</label>
@@ -147,7 +147,7 @@ integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+f
       </div>
       <div class="form-row">
         <label for="tel_User">Teléfono</label>
-        <input type="text" name="tel_User" title="El número debe contener 10 dígitos" pattern="\d{10}" class="form-control" id="tel_User" required>
+        <input type="text" name="tel_User" title="El número debe contener 10 dígitos"  class="form-control" id="tel_User"  maxlength="10" pattern="[0-9]{10}" required>
       </div>
       <div class="form-row">
         <label for="act_User">Estado de actividad</label>

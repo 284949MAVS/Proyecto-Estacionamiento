@@ -39,7 +39,7 @@
             Corte de caja
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja actual</a></li> 
+            <li><a class="dropdown-item" href="mostrar_corte.php">Corte de caja actual</a></li> 
             <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
           </ul>
         </li>
@@ -51,11 +51,7 @@
           </a>
     </ul>
 
-    <a class="navbar-brand" href="#" id="open-modal"><?php session_start();
-      require "conexion.php";
-      echo $_SESSION['nom_User'];
-    ?>
-    </a>
+    <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
     
     </div>
    
@@ -116,7 +112,7 @@
 <div class="modal-content">
     <h2>Cerrar Sesión</h2>
     <p>¿Estás seguro de que deseas cerrar sesión?</p>
-    <button id="confirm-logout">Cerrar Sesión</button>
+    <button class="btn btn-primary"id="confirm-logout">Cerrar Sesión</button>
     <button id="cancel-logout">Cancelar</button>
 </div>
 </div>
@@ -449,7 +445,7 @@ setInterval(mostrarFechaHora, 1000);
 </script>
 <script>
 $(document).ready(function () {
-
+    var turnoActivo = false;
     function abrirModal(modalId) {
         $("#" + modalId).modal("show");
     }
@@ -459,10 +455,14 @@ $(document).ready(function () {
     }
 
     $("#iniciarTurno").click(function () {
+    if (!turnoActivo) {
         var horaActual = new Date().toLocaleTimeString();
         $("#hora-accion").text(horaActual);
 
         abrirModal("confirmacionModal");
+    } else {
+        alert("Ya hay un turno activo. No puedes iniciar otro turno.");
+    }
     });
 
     $("#confirmarAccion").click(function () {
@@ -482,7 +482,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log('Registro de inicio de turno insertado correctamente.');
-            
+                turnoActivo = true;
                 cerrarModal("confirmacionModal");
             },
             error: function (error) {
@@ -492,10 +492,14 @@ $(document).ready(function () {
     });
 
     $("#terminarTurno").click(function () {
+    if (turnoActivo) {
         var horaActual = new Date().toLocaleTimeString();
         $("#hora-accion").text(horaActual);
- 
+
         abrirModal("confirmacionModal2");
+    } else {
+        alert("No hay un turno activo para cerrar.");
+    }
     });
 
     $("#confirmarAccion2").click(function () {
@@ -513,7 +517,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log('Registro de terminar turno insertado correctamente.');
-
+                turnoActivo = false;
                 cerrarModal("confirmacionModal2");
             },
             error: function (error) {

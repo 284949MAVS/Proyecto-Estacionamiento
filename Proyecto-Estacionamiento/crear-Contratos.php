@@ -28,7 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $act_Cli = $info_contrato['act_Cli'];
     }
     else{
-        // Puedes manejar el caso donde no hay resultados (contrato no encontrado)
+        echo "<script>
+                alert('¡Error! El id de cliente que ingreso no esta registrado en la base.');
+                window.location.href = 'crear-Contratos.php';
+             </script>";
     }
 }
     
@@ -115,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
         <div class="mb-3">
             <label for="idCliente" class="form-label">ID de cliente</label>
-            <input input type="" name="id_Cliente" value="<?php echo htmlspecialchars($id_cliente); ?>" pattern="[0-9]{6}" title="Proporcione un identificador de 6 dígitos" class="form-control" id="idCliente" required>
+            <input input type="" name="id_Cliente" value="<?php echo htmlspecialchars($id_cliente); ?>" pattern="[0-9]{6}" title="Proporcione un identificador de 6 dígitos" class="form-control" id="idCliente" maxlength="6" required>
         </div>
         <!-- Mensaje de error para ID de cliente -->
         <div id="mensajeErrorID" style="color: red; display: none;">Debe ingresar un ID válido</div>
