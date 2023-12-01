@@ -44,7 +44,7 @@
           </ul>
         </li>
         <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
-            Simulacion entrada
+            Simulación entrada
           </a>
           <a class="nav-link " href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
             Ticket
@@ -126,7 +126,7 @@
 </header>
   <main>
     <br>
-    <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de zona universitaria</h1>
+    <h1 style="font-weight: bold; text-align: center;">Sistema de estacionamiento de Zona Universitaria</h1>
     <div class="row row-cols-1 row-cols-md-4 g-6">
 
 
@@ -138,16 +138,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-  ¿Hola <?php echo $_SESSION['nom_User']; ?> Estás seguro de que quieres iniciar turno a las <span id="hora-accion"></span>?
+  Hola <?php echo $_SESSION['nom_User']; ?>, ¿Estás seguro de que quieres iniciar turno a las <span id="hora-accion"></span>?
 </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelar">Cancelar</button>
         <button type="button" class="btn btn-primary" id="confirmarAccion">Confirmar</button>
       </div>
     </div>
@@ -159,16 +157,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="confirmacionModalLabel">Confirmación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close2">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ¿Hola <?php echo $_SESSION['nom_User'] ;
-    ?> Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
+        Hola <?php echo $_SESSION['nom_User'] ;
+    ?>, ¿Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar2">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelar2">Cancelar</button>
         <button type="button" class="btn btn-primary" id="confirmarAccion2">Confirmar</button>
       </div>
     </div>
@@ -185,8 +181,19 @@
         </p>
     </div>
     <div class="container text-center mt-3">
-        <button class="btn btn-primary" id="iniciarTurno">Iniciar Turno</button>
-        <button class="btn btn-danger" id="terminarTurno">Terminar Turno</button>
+        <button class="btn btn-primary" id="iniciarTurno">Iniciar turno</button>
+        <button class="btn btn-danger" id="terminarTurno">Terminar turno</button>
+    </div>
+
+    <br>
+     <!-- Tarjeta "Estacionamientos"  -->
+     <div class="container text-center mt-3">
+        <div class="card" style="background-color: #f5f5f5;">
+            <div class="card-body">
+                <h5 class="card-title">Estacionamientos</h5>
+                <div><i class="fas fa-car fa-2x"></i></div>
+            </div>
+        </div>
     </div>
 
 <!-- Tarjeta "Estacionamientos Activos" con ícono de coche -->
@@ -216,7 +223,7 @@
         <div class="col-md-3">
             <div class="card" style="background-color: #f5f5f5;">
                 <div class="card-body">
-                    <h5 class="card-title">Ingenieria</h5>
+                    <h5 class="card-title">Ingeniería</h5>
                     <button class="btn btn-primary" id="ingenieriaModalBtn"data-toggle="modal" data-target="#ingenieriaModal">Ver Estacionamiento</button>
                 </div>
             </div>
@@ -226,7 +233,7 @@
         <div class="col-md-3">
             <div class="card" style="background-color: #f5f5f5;">
                 <div class="card-body">
-                    <h5 class="card-title">Habitad</h5>
+                    <h5 class="card-title">Hábitat</h5>
                     <button class="btn btn-primary" id="habitadModalBtn"data-toggle="modal" data-target="#habitatModal">Ver Estacionamiento</button>
                 </div>
             </div>
@@ -384,18 +391,6 @@
     </div>
 </div>
 
-
-    <!-- Tarjeta "Tarifas" con ícono de tarifa -->
-    <div class="container text-center mt-3">
-        <div class="card" style="background-color: #f5f5f5;">
-            <div class="card-body">
-                <h5 class="card-title">Tarifas</h5>
-                <p class="card-text">Tarifa por hora: $5.00</p>
-                <i class="fas fa-dollar-sign fa-2x" style="margin-right: 10px;"></i> <!-- Ícono de tarifa de Font Awesome más pequeño (2x) -->
-                <i class="fas fa-dollar-sign fa-2x"></i> <!-- Segundo ícono de tarifa -->
-            </div>
-        </div>
-    </div>
   
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"

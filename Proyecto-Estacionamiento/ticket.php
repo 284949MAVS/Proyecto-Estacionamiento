@@ -53,6 +53,7 @@ unset($_SESSION['formulario_enviado']);
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
   
 <!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -62,6 +63,14 @@ unset($_SESSION['formulario_enviado']);
             width: 700px;
             height: auto;
             background-color: whitesmoke;
+            text-align: center;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        .form-container2 {
+            width: 700px;
+            height: auto;
             text-align: center;
             padding: 20px;
             margin: 0 auto;
@@ -84,36 +93,95 @@ unset($_SESSION['formulario_enviado']);
         .form-row select {
             flex: 2;
         }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .card {
+            margin: 10px;
+        }
+
     </style>
 </head>
 
 <body>
 <header>
     <!-- place navbar here -->
-    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #042E5D;">
-        <a href=""><img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU"
-                    class="img" alt="..." style="width: 60px ;" style="border: 0cm;"></a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
-                aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+    <nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #042E5D;"> 
+        <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img" alt="..." style="width: 60px ;" style="border: 0cm;"></a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
         <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
-            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio <span
-                                class="visually-hidden">(current)</span></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio <span class="visually-hidden">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Corte de caja
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="mostrar_corte.html">Corte de caja actual</a></li> 
+            <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
+          </ul>
+        </li>
+        <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
+             Simulación entrada
+          </a>
+          <a class="nav-link " href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
+            Ticket
+          </a>
+    </ul>
+
+   
+    <br>
+</nav>
 </header>
 <main>
-    <div class="form-container">
-    <form id="ticketForm" method="POST">
-    <button name="registrar_ticket" class="btn btn-primary" onclick="registrarTicket()">Registrar Ticket</button>
-</form>
-<button  name="cobro" class="btn btn-success" id="cobro" data-toggle="modal" data-target="#cobroModal" >Consultar ticket</button>
+
+<div class="form-container2">
+    <h1>Registro y Consulta de Ticket</h1>
+</div>
+
+
+<div class="container text-center mt-3">
+<div class="card-container">
+    <div class="card" style="background-color: #f5f5f5;">
+         <div class="card-body">
+            <form id="ticketForm" method="POST">
+                <div><i class="fas fa-file-alt fa-2x"></i></div>
+                <br>
+                <button name="registrar_ticket" class="btn btn-primary" onclick="registrarTicket()">Registrar Ticket</button>
+            </form>
+        </div>
     </div>
+
+    <div class="card" style="background-color: #f5f5f5;">
+        <div class="card-body">
+            <div><i class="fas fa-check-circle fa-2x"></i></div>
+            <br>
+            <button name="cobro" class="btn btn-success" id="cobro" data-toggle="modal" data-target="#cobroModal">Consultar ticket</button>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="container text-center mt-3">
+        <div class="card" style="background-color: #f5f5f5;">
+            <div class="card-body">
+                <h5 class="card-title">Tarifas</h5>
+                <p class="card-text">Comunidad Universitaria: $10 la hora y $5 subsecuentes</p>
+                <p class="card-text">Público en general: $12 la hora </p>
+                <i class="fas fa-dollar-sign fa-2x" style="margin-right: 10px;"></i> <!-- Ícono de tarifa de Font Awesome más pequeño (2x) -->
+                <i class="fas fa-dollar-sign fa-2x"></i> <!-- Segundo ícono de tarifa -->
+            </div>
+        </div>
+    </div>
+
+
 </main>
 
 <div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="ticketModalLabel"
@@ -145,9 +213,7 @@ unset($_SESSION['formulario_enviado']);
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cobroModalLabel">Registrar Cobro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="cobroForm">
@@ -175,7 +241,39 @@ unset($_SESSION['formulario_enviado']);
     </div>
 </div>
 
+
 <div id="informacionContainer"></div>
+
+<!-- Agrega este bloque de código en tu HTML, fuera del contenedor principal -->
+<div class="modal fade" id="informacionModal" tabindex="-1" role="dialog" aria-labelledby="informacionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="informacionModalLabel">Información del Ticket</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="informacionModalBody">
+                <!-- Aquí se insertará la información -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="errorText">No se encontró la información o el ticket ya fue pagado.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
         function registrarTicket() {
@@ -234,22 +332,25 @@ unset($_SESSION['formulario_enviado']);
 function obtenerInformacionTicket() {
     var idTicket = $("#idInput").val();
     var claveCliente = $("#claveUsuario").val();
-    var tipo_Cliente = $("#optionsSelect").val();
-    if(!claveCliente && tipo_Cliente==4){
-      claveCliente=999999;
-    }else if(!claveCliente && tipo_Cliente==3){
-      claveCliente=555555;
+    var tipoCliente = $("#optionsSelect").val();
+
+    if (!claveCliente && tipoCliente == 4) {
+        claveCliente = 999999;
+    } else if (!claveCliente && tipoCliente == 3) {
+        claveCliente = 555555;
     }
+
     $.ajax({
         type: "POST",
-        url: "registrar_pago.php", 
-        data: { idTicket: idTicket, claveCliente: claveCliente }, 
+        url: "registrar_pago.php",
+        data: { idTicket: idTicket, claveCliente: claveCliente },
         dataType: 'json',
         success: function (response) {
             if (response.success) {
                 mostrarInformacionTicket(response.ticket);
             } else {
-                console.log(response.message);
+                // Mostrar el modal de error
+                $("#errorModal").modal("show");
             }
         },
         error: function (error) {
@@ -257,6 +358,7 @@ function obtenerInformacionTicket() {
         }
     });
 }
+
 
 
 function calcularHorasTranscurridas(horaEntrada) {
@@ -288,15 +390,21 @@ function mostrarInformacionTicket(ticket) {
     }
 
     var informacionHTML = `
-        <div>ID Ticket: ${ticket.id_Ticket}</div>
-        <div>Hora Entrada: ${ticket.hr_Ent}</div>
-        <div>Lugar asignado: ${ticket.num_Cajon}</div>
-        <div>Total a Pagar: $${totalPagar}</div>
-        <button name="confirmarPago" class="btn btn-danger" onclick="pagarTicket(${ticket.id_Ticket}, ${ticket.id_Cliente}, ${totalPagar})">Pagar</button>
+    <div class="mb-3"><strong>ID del Ticket:</strong> ${ticket.id_Ticket}</div>
+        <div class="mb-3"><strong>Hora de Entrada:</strong> ${ticket.hr_Ent}</div>
+        <div class="mb-3"><strong>Lugar Asignado:</strong> ${ticket.num_Cajon}</div>
+        <div class="mb-3"><strong>Total a Pagar:</strong> $${totalPagar}</div>
+        <br>
+        <button name="confirmarPago" class="btn btn-danger float-end" onclick="pagarTicket(${ticket.id_Ticket}, ${ticket.id_Cliente}, ${totalPagar})">Pagar</button>
     `;
 
-    $("#informacionContainer").html(informacionHTML);
+    // Insertar el contenido en el modal
+    $("#informacionModalBody").html(informacionHTML);
+
+    // Mostrar el modal
+    $("#informacionModal").modal("show");
 }
+
 </script>
 <script>
 function pagarTicket(idTicket, idCliente, totalPagar) {
@@ -308,16 +416,38 @@ function pagarTicket(idTicket, idCliente, totalPagar) {
         success: function (response) {
             if (response.success) {
                 console.log('Pago confirmado. Actualización exitosa.');
+
+                // Cerrar el modal actual
+                $("#informacionModal").modal("hide");
+
+                // Abrir un nuevo modal con el mensaje de pago exitoso
+                Swal.fire({
+                    title: 'Pago Exitoso',
+                    text: 'El pago se ha procesado correctamente.',
+                    icon: 'success'
+                });
             } else {
                 console.log('Error al confirmar el pago: ' + response.message);
-                      }
+            }
         },
         error: function (error) {
             console.log('Error en la solicitud AJAX: ' + error);
-                 }
+        }
     });
 }
+
 </script>
+
+ <!-- Bootstrap JavaScript Libraries -->
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 </body>
 
