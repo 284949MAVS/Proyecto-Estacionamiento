@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+
 require("conexion.php");
 
 $corteData = null;
@@ -127,7 +135,6 @@ if (isset($_GET["num_Corte"])) {
                     echo "<p>Autos salida: " . $corteData["autos_Salida"] . "</p>";
                     echo "<p>Tickets Cancelados: " . $corteData["tickets_Canc"] . "</p>";
                     echo "<p>Efectivo: $" . $corteData["efectivo"] . "</p>";
-                    echo "<p>Depósitos: $" . $corteData["depos"] . "</p>";
                     echo "<p>Total: $" . $corteData["total_Corte"] . "</p>";
                 } else {
                     echo "<p>Este corte de caja está activo aún. </p>";

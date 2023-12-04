@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,20 +17,51 @@
     <title>Simulación de Entrada</title>
 </head>
 <body>
+    
+<nav class="navbar navbar-expand-sm navbar-dark " style="background-color: #042E5D;"> 
+        <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIV7jNuxG7PQhpl_uAbWUzB5UrDGk66CbSUIGoUh4JEQBCNhqi2CWj5eIQNQEXIIctIuk&usqp=CAU" class="img" alt="..." style="width: 60px ;" style="border: 0cm;"></a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation" style="background-color: aliceblue;"></button>
+        <div class="collapse navbar-collapse d-flex justify-content-evenly" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" href="inicio_caseta.php" aria-current="page">Inicio </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Corte de caja
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="mostrar_corte.php">Corte de caja actual</a></li> 
+            <li><a class="dropdown-item" href="consultar_corte.php">Consulta corte</a></li>
+          </ul>
+        </li>
+        <a class="nav-link " href="simulacion_entrada.php" id="navbarDropdown" role="button"  aria-expanded="false">
+            Simulación entrada
+          </a>
+          <a class="nav-link " href="ticket.php" id="navbarDropdown" role="button"  aria-expanded="false">
+            Ticket
+          </a>
+    </ul>
 
+
+    </div>
+   
+    <br>
+</nav>
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-3">
-            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento1">Estacionamiento 1</button>
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento1">DUI</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento2">Estacionamiento 2</button>
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento2">Pozo 3</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento3">Estacionamiento 3</button>
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento3">Ingeniería</button>
         </div>
         <div class="col-md-3">
-            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento4">Estacionamiento 4</button>
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalEstacionamiento4">Hábitat</button>
         </div>
     </div>
 </div>

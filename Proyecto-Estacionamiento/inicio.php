@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -47,7 +57,7 @@
         </li>
         <button class="btn btn-primary" id="open-percentages-modal">Asignar Porcentajes</button>
     </ul>
-    <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
+    <a class="navbar-brand" href="#" id="open-modal"><?php  echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
     
     </div>
    
@@ -152,7 +162,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <h6>Habitat</h6>
+              <h6>Hábitat</h6>
               <div class="row">
                 <div class="col-md-6">
                   <label for="admin-percent-3">Porcentaje Administrativo:</label>
@@ -198,10 +208,7 @@
                 <label for="inicioTurno">Inicio de Turno:</label>
                 <input type="text" class="form-control" id="inicioTurno" readonly>
             </div>
-            <div class="form-row">
-                <label for="autosSalida">Autos Salida:</label>
-                <input type="text" class="form-control" id="autosSalida" readonly>
-            </div>
+ 
             <div class="form-row">
                 <label for="ticketsCancelados">Tickets Cancelados:</label>
                 <input type="text" class="form-control" id="ticketsCancelados" readonly>
@@ -210,10 +217,7 @@
                 <label for="efectivo">Efectivo:</label>
                 <input type="text" class="form-control" id="efectivo" readonly>
             </div>
-            <div class="form-row">
-                <label for="depositos">Depósitos:</label>
-                <input type="text" class="form-control" id="depositos" readonly>
-            </div>
+  
             <div class="form-row">
                 <label for="totalCorte">Total de Corte:</label>
                 <input type="text" class="form-control" id="totalCorte" readonly>
@@ -342,7 +346,7 @@ setInterval(mostrarFechaHora, 1000);
 
     // Enviar datos al servidor mediante Ajax
     $.ajax({
-      url: "guardar_porcentajes.php", // Ajusta la URL al script que manejará la lógica de guardado
+      url: "guardar_porcentajes.php",
       type: "POST",
       data: {
         adminPercent1: adminPercent1,

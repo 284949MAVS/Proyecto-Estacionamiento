@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verificar si la sesión no está activa
+if (!isset($_SESSION['nom_User'])) {
+    // Redireccionar a la pantalla de error o a otra página
+    header("Location: pagueErrorlogin.php");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -51,7 +61,7 @@
           </a>
     </ul>
 
-    <a class="navbar-brand" href="#" id="open-modal"><?php session_start(); require "conexion.php"; echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
+    <a class="navbar-brand" href="#" id="open-modal"><?php  echo isset($_SESSION['nom_User']) ? $_SESSION['nom_User'] : header("Location: pagueErrorlogin.php"); ?></a>
     
     </div>
    
@@ -157,7 +167,7 @@
       </div>
       <div class="modal-body">
         Hola <?php echo $_SESSION['nom_User'] ;
-    ?>, ¿Estás seguro de que quieres terminar el turno a las <span id="hora-accion"></span> ?
+    ?>, ¿Estás seguro de que quieres terminar el turno ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancelar2">Cancelar</button>
@@ -446,6 +456,7 @@ setInterval(mostrarFechaHora, 1000);
 <script>
 $(document).ready(function () {
     var turnoActivo = false;
+
     function abrirModal(modalId) {
         $("#" + modalId).modal("show");
     }
@@ -454,25 +465,44 @@ $(document).ready(function () {
         $("#" + modalId).modal("hide");
     }
 
-    $("#iniciarTurno").click(function () {
-    if (!turnoActivo) {
-        var horaActual = new Date().toLocaleTimeString();
-        $("#hora-accion").text(horaActual);
-
-        abrirModal("confirmacionModal");
-    } else {
-        alert("Ya hay un turno activo. No puedes iniciar otro turno.");
+    function verificarEstadoTurno() {
+        $.ajax({
+            url: 'verificarEstadoTurno.php',
+            type: 'GET',
+            success: function (response) {
+               
+                turnoActivo = (response === 'true');
+              
+                actualizarEstadoBotones();
+            },
+            error: function (error) {
+                console.log('Error al verificar el estado del turno: ', error);
+            }
+        });
     }
+
+    function actualizarEstadoBotones() {
+        $("#iniciarTurno").prop("disabled", turnoActivo);
+        $("#terminarTurno").prop("disabled", !turnoActivo);
+    }
+
+    verificarEstadoTurno();
+
+    $("#iniciarTurno").click(function () {
+        if (!turnoActivo) {
+            var horaActual = new Date().toLocaleTimeString();
+            $("#hora-accion").text(horaActual);
+
+            abrirModal("confirmacionModal");
+        } else {
+            alert("Ya hay un turno activo. No puedes iniciar otro turno.");
+        }
     });
 
     $("#confirmarAccion").click(function () {
-      
         var idUsuario = <?php echo $_SESSION['id_User']; ?>;
-
-        
         var fechaHora = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-      
         $.ajax({
             url: 'iniciofecha.php',
             type: 'POST',
@@ -484,6 +514,8 @@ $(document).ready(function () {
                 console.log('Registro de inicio de turno insertado correctamente.');
                 turnoActivo = true;
                 cerrarModal("confirmacionModal");
+                $("#iniciarTurno").prop("disabled", true);
+                $("#terminarTurno").prop("disabled", false);
             },
             error: function (error) {
                 console.log('Error al insertar el registro de inicio de turno: ', error);
@@ -492,20 +524,18 @@ $(document).ready(function () {
     });
 
     $("#terminarTurno").click(function () {
-    if (turnoActivo) {
-        var horaActual = new Date().toLocaleTimeString();
-        $("#hora-accion").text(horaActual);
+        if (turnoActivo) {
+            var horaActual = new Date().toLocaleTimeString();
+            $("#hora-accion").text(horaActual);
 
-        abrirModal("confirmacionModal2");
-    } else {
-        alert("No hay un turno activo para cerrar.");
-    }
+            abrirModal("confirmacionModal2");
+        } else {
+            alert("No hay un turno activo para cerrar.");
+        }
     });
 
     $("#confirmarAccion2").click(function () {
-
         var idUsuario = <?php echo $_SESSION['id_User']; ?>;
-
         var fechaHora = new Date().toISOString().slice(0, 19).replace("T", " ");
 
         $.ajax({
@@ -519,6 +549,10 @@ $(document).ready(function () {
                 console.log('Registro de terminar turno insertado correctamente.');
                 turnoActivo = false;
                 cerrarModal("confirmacionModal2");
+                
+                $("#iniciarTurno").prop("disabled", false);
+    
+                $("#terminarTurno").prop("disabled", true);
             },
             error: function (error) {
                 console.log('Error al insertar el registro de terminar turno: ', error);
@@ -526,9 +560,7 @@ $(document).ready(function () {
         });
     });
 });
-
 </script>
-
 
     <!-- Agregar enlaces a los archivos JavaScript de Bootstrap y jQuery -->
     

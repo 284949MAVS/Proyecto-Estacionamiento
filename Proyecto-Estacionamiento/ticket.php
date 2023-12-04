@@ -3,7 +3,7 @@ include("conexion.php");
 session_start();
 
 if (!isset($_SESSION['nom_User'])) {
-    // Redireccionar a la pantalla de error o a otra página
+
     header("Location: pagueErrorlogin.php");
     exit();
 }
